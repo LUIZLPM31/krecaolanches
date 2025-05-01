@@ -34,6 +34,12 @@ export function Hero() {
               Pedir no iFood
             </Button>
             <Button 
+              className="bg-green-600 hover:bg-green-700 text-white rounded-full px-8 py-6 text-lg"
+              onClick={() => window.open('https://wa.me/5551981580205?text=Olá! Gostaria de fazer um pedido no K-recão Lanches.', '_blank')}
+            >
+              Pedir no WhatsApp
+            </Button>
+            <Button 
               variant="outline" 
               className="border-krecao-yellow text-krecao-yellow hover:bg-krecao-yellow/10 rounded-full px-8 py-6 text-lg"
               onClick={() => {

@@ -1,5 +1,5 @@
 
-import { Instagram, Facebook, Twitter } from "lucide-react";
+import { Instagram, Facebook, Twitter, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function Footer() {
@@ -44,6 +44,14 @@ export function Footer() {
               >
                 <Twitter size={18} />
               </a>
+              <a 
+                href="https://wa.me/5551981580205" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="bg-gray-800 hover:bg-green-600 transition-colors rounded-full p-3"
+              >
+                <Phone size={18} />
+              </a>
             </div>
           </div>
           
@@ -62,9 +70,9 @@ export function Footer() {
           <div>
             <h3 className="text-lg font-bold mb-4 text-krecao-yellow">Contato</h3>
             <ul className="space-y-2">
-              <li className="text-gray-400">Telefone: (21) 99999-9999</li>
+              <li className="text-gray-400">Telefone: (51) 98158-0205</li>
               <li className="text-gray-400">Email: contato@krecaolanches.com.br</li>
-              <li className="text-gray-400">Endereço: Avenida das Américas, 15000 - Recreio, Rio de Janeiro</li>
+              <li className="text-gray-400">Endereço: Rua Coronel Massot 649, Cristal, Porto Alegre, RS</li>
             </ul>
           </div>
           
@@ -72,14 +80,22 @@ export function Footer() {
           <div>
             <h3 className="text-lg font-bold mb-4 text-krecao-yellow">Peça Agora</h3>
             <p className="text-gray-400 mb-4">
-              Faça seu pedido diretamente pelo iFood e receba no conforto da sua casa.
+              Faça seu pedido diretamente pelo iFood ou WhatsApp e receba no conforto da sua casa.
             </p>
-            <Button 
-              className="bg-krecao-red hover:bg-krecao-red/90 text-white w-full"
-              onClick={() => window.open('https://www.ifood.com.br/', '_blank')}
-            >
-              Pedir no iFood
-            </Button>
+            <div className="space-y-3">
+              <Button 
+                className="bg-krecao-red hover:bg-krecao-red/90 text-white w-full"
+                onClick={() => window.open('https://www.ifood.com.br/', '_blank')}
+              >
+                Pedir no iFood
+              </Button>
+              <Button 
+                className="bg-green-600 hover:bg-green-700 text-white w-full"
+                onClick={() => window.open('https://wa.me/5551981580205?text=Olá! Gostaria de fazer um pedido no K-recão Lanches.', '_blank')}
+              >
+                Pedir pelo WhatsApp
+              </Button>
+            </div>
           </div>
         </div>
         

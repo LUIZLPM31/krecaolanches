@@ -29,6 +29,10 @@ export function AboutUs() {
               Cada hambúrguer é preparado na hora, com carinho e dedicação por nossa equipe de profissionais.
             </p>
             
+            <p className="text-gray-300 mb-6">
+              Nossa equipe é formada por especialistas apaixonados pela culinária, sempre prontos para preparar os melhores lanches para você e sua família.
+            </p>
+            
             <p className="text-gray-300 font-semibold">
               Venha conhecer o <span className="text-krecao-red">K-recão Lanches</span> e descubra por que somos a escolha preferida dos amantes de hambúrgueres!
             </p>

@@ -18,7 +18,7 @@ export function Location() {
         <div className="flex flex-col lg:flex-row gap-8">
           <div className="lg:w-1/2">
             <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3675.3043180525814!2d-43.335646225202244!3d-22.90364857847804!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9bd8d76d36e94d%3A0x73c4d1e7db679b49!2sK-Rec%C3%A3o%20Lanches!5e0!3m2!1spt-BR!2sbr!4v1714917335809!5m2!1spt-BR!2sbr" 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.9430835761774!2d-51.22992492391836!3d-30.05098553385249!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95197830e3b1a887%3A0x1ba748b30a3ac31f!2sR.%20Cel.%20Massot%2C%20649%20-%20Cristal%2C%20Porto%20Alegre%20-%20RS!5e0!3m2!1spt-BR!2sbr!4v1746073602621!5m2!1spt-BR!2sbr" 
               width="100%" 
               height="450" 
               style={{ border: 0 }}
@@ -38,7 +38,7 @@ export function Location() {
                   <MapPin className="text-krecao-red mt-1 mr-4" />
                   <div>
                     <h4 className="text-krecao-yellow font-semibold mb-1">Endereço:</h4>
-                    <p className="text-gray-300">Avenida das Américas, 15000 - Recreio dos Bandeirantes, Rio de Janeiro, RJ</p>
+                    <p className="text-gray-300">Rua Coronel Massot 649, Cristal, Porto Alegre, RS</p>
                   </div>
                 </div>
                 
@@ -55,7 +55,7 @@ export function Location() {
                   <Phone className="text-krecao-red mt-1 mr-4" />
                   <div>
                     <h4 className="text-krecao-yellow font-semibold mb-1">Telefone:</h4>
-                    <p className="text-gray-300">(21) 99999-9999</p>
+                    <p className="text-gray-300">(51) 98158-0205</p>
                   </div>
                 </div>
               </div>
