@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 export function Hero() {
   return <section id="inicio" className="relative min-h-screen flex items-center justify-center bg-black overflow-hidden" style={{
@@ -10,8 +11,14 @@ export function Hero() {
       
       <div className="container relative z-10 mx-auto px-6 py-32 md:py-0">
         <div className="flex flex-col items-center text-center md:items-start md:text-left max-w-3xl animate-fade-in">
+          <img 
+            src="/lovable-uploads/92641e43-c92a-4a0e-afcd-6e233c81adde.png" 
+            alt="K-recão Lanches Logo" 
+            className="h-32 md:h-40 mb-6" 
+          />
+          
           <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight">
-            <span className="text-krecao-yellow">Sabor</span> e <span className="text-krecao-red">Qualidade</span> em cada mordida
+            <span className="text-krecao-yellow">Melhor</span> lanche da <span className="text-krecao-red">zona sul</span>
           </h1>
           
           <p className="mt-6 text-xl text-gray-300 max-w-xl">
@@ -23,7 +30,7 @@ export function Hero() {
             <Button className="bg-krecao-red hover:bg-krecao-red/90 text-white rounded-full px-8 py-6 text-lg" onClick={() => window.open('https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOoqBB8HG_-HUE2-8McvH9CSGuQ2QuLsGlnnVCPGkDYm0kNCNCdZi', '_blank')}>
               Pedir no iFood
             </Button>
-            <Button className="bg-green-600 hover:bg-green-700 text-white rounded-full px-8 py-6 text-lg" onClick={() => window.open('https://wa.me/5551981580205?text=Olá! Gostaria de fazer um pedido no K-recão Lanches.', '_blank')}>
+            <Button className="bg-green-600 hover:bg-green-700 text-white rounded-full px-8 py-6 text-lg" onClick={() => window.open('https://wa.me/5132422047?text=Olá! Gostaria de fazer um pedido no K-recão Lanches.', '_blank')}>
               Pedir no WhatsApp
             </Button>
             

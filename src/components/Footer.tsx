@@ -10,7 +10,7 @@ export function Footer() {
           {/* Logo and Description */}
           <div className="md:col-span-2 lg:col-span-1">
             <img 
-              src="/lovable-uploads/369cbff8-45a9-4e10-bb26-ffb7772c9445.png" 
+              src="/lovable-uploads/92641e43-c92a-4a0e-afcd-6e233c81adde.png" 
               alt="K-recão Lanches" 
               className="h-16 mb-4" 
             />
@@ -45,7 +45,7 @@ export function Footer() {
                 <Twitter size={18} />
               </a>
               <a 
-                href="https://wa.me/5551981580205" 
+                href="https://wa.me/5132422047" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="bg-gray-800 hover:bg-green-600 transition-colors rounded-full p-3"
@@ -70,7 +70,7 @@ export function Footer() {
           <div>
             <h3 className="text-lg font-bold mb-4 text-krecao-yellow">Contato</h3>
             <ul className="space-y-2">
-              <li className="text-gray-400">Telefone: (51) 98158-0205</li>
+              <li className="text-gray-400">Telefone: (51) 3242-2047</li>
               <li className="text-gray-400">Email: contato@krecaolanches.com.br</li>
               <li className="text-gray-400">Endereço: Rua Coronel Massot 649, Cristal, Porto Alegre, RS</li>
             </ul>
@@ -91,7 +91,7 @@ export function Footer() {
               </Button>
               <Button 
                 className="bg-green-600 hover:bg-green-700 text-white w-full"
-                onClick={() => window.open('https://wa.me/5551981580205?text=Olá! Gostaria de fazer um pedido no K-recão Lanches.', '_blank')}
+                onClick={() => window.open('https://wa.me/5132422047?text=Olá! Gostaria de fazer um pedido no K-recão Lanches.', '_blank')}
               >
                 Pedir pelo WhatsApp
               </Button>
