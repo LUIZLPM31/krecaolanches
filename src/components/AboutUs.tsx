@@ -1,9 +1,14 @@
+
 export function AboutUs() {
   return <section id="sobre" className="py-24 bg-gradient-to-b from-black to-gray-900">
       <div className="container mx-auto px-6">
         <div className="flex flex-col lg:flex-row items-center gap-12">
           <div className="lg:w-1/2">
-            <img alt="Equipe K-recão Lanches" src="https://www.google.com/imgres?q=krecao%20laanches&imgurl=https%3A%2F%2Flookaside.instagram.com%2Fseo%2Fgoogle_widget%2Fcrawler%2F%3Fmedia_id%3D3489062165456377712&imgrefurl=https%3A%2F%2Fwww.instagram.com%2Fkrecao_lanches%2F&docid=yxcNd89G7J7kuM&tbnid=6KlnS0S2W5aRwM&vet=12ahUKEwjF_fyCt4GNAxVpALkGHf9wBZUQM3oECBIQAA..i&w=1080&h=1080&hcb=2&ved=2ahUKEwjF_fyCt4GNAxVpALkGHf9wBZUQM3oECBIQAA" className="rounded-lg shadow-2xl w-full h-[400px] object-contain" />
+            <img 
+              alt="Equipe K-recão Lanches" 
+              src="https://images.unsplash.com/photo-1552566626-52f8b828add9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80" 
+              className="rounded-lg shadow-2xl w-full h-[400px] object-cover" 
+            />
           </div>
           
           <div className="lg:w-1/2">

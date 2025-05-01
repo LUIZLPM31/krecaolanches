@@ -72,7 +72,7 @@ export function MenuHighlights() {
                     <span className="text-krecao-yellow font-bold text-xl">{item.price}</span>
                     <button 
                       className="text-krecao-red hover:text-krecao-yellow transition-colors text-sm font-semibold"
-                      onClick={() => window.open('https://www.ifood.com.br/', '_blank')}
+                      onClick={() => window.open('https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOoqBB8HG_-HUE2-8McvH9CSGuQ2QuLsGlnnVCPGkDYm0kNCNCdZi', '_blank')}
                     >
                       Pedir Agora
                     </button>
@@ -86,7 +86,7 @@ export function MenuHighlights() {
         <div className="text-center mt-12">
           <Button 
             className="bg-krecao-red hover:bg-krecao-red/90 text-white rounded-full px-8 py-6 text-lg"
-            onClick={() => window.open('https://www.ifood.com.br/', '_blank')}
+            onClick={() => window.open('https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOoqBB8HG_-HUE2-8McvH9CSGuQ2QuLsGlnnVCPGkDYm0kNCNCdZi', '_blank')}
           >
             Ver Cardápio Completo
           </Button>

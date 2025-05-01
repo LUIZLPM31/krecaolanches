@@ -29,7 +29,7 @@ export function Hero() {
           <div className="mt-10 flex flex-col sm:flex-row gap-4">
             <Button 
               className="bg-krecao-red hover:bg-krecao-red/90 text-white rounded-full px-8 py-6 text-lg"
-              onClick={() => window.open('https://www.ifood.com.br/', '_blank')}
+              onClick={() => window.open('https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOoqBB8HG_-HUE2-8McvH9CSGuQ2QuLsGlnnVCPGkDYm0kNCNCdZi', '_blank')}
             >
               Pedir no iFood
             </Button>

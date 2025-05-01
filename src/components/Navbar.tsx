@@ -42,7 +42,7 @@ export function Navbar() {
             <NavLink href="#contato">Contato</NavLink>
             <Button 
               className="bg-krecao-red hover:bg-krecao-red/90 text-white rounded-full px-6"
-              onClick={() => window.open('https://www.ifood.com.br/', '_blank')}
+              onClick={() => window.open('https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOoqBB8HG_-HUE2-8McvH9CSGuQ2QuLsGlnnVCPGkDYm0kNCNCdZi', '_blank')}
             >
               Pedir Agora
             </Button>
@@ -70,7 +70,7 @@ export function Navbar() {
             <Button 
               className="bg-krecao-red hover:bg-krecao-red/90 text-white w-full"
               onClick={() => {
-                window.open('https://www.ifood.com.br/', '_blank');
+                window.open('https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOoqBB8HG_-HUE2-8McvH9CSGuQ2QuLsGlnnVCPGkDYm0kNCNCdZi', '_blank');
                 setIsMenuOpen(false);
               }}
             >

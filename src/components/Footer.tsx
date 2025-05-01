@@ -85,7 +85,7 @@ export function Footer() {
             <div className="space-y-3">
               <Button 
                 className="bg-krecao-red hover:bg-krecao-red/90 text-white w-full"
-                onClick={() => window.open('https://www.ifood.com.br/', '_blank')}
+                onClick={() => window.open('https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOoqBB8HG_-HUE2-8McvH9CSGuQ2QuLsGlnnVCPGkDYm0kNCNCdZi', '_blank')}
               >
                 Pedir no iFood
               </Button>
