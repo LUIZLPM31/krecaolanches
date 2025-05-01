@@ -14,49 +14,49 @@ const menuItems: MenuItem[] = [
     name: "K-recão Classic",
     description: "Hambúrguer artesanal, queijo cheddar, bacon crocante, alface e tomate.",
     price: "R$ 29,90",
-    image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80"
+    image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80"
   },
   {
     name: "K-recão Duplo Bacon",
     description: "Dois hambúrgueres artesanais, queijo duplo, muito bacon e molho especial.",
     price: "R$ 34,90",
-    image: "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80"
+    image: "https://images.unsplash.com/photo-1553979459-d2229ba7433b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80"
   },
   {
     name: "K-recão Monster",
     description: "Três hambúrgueres artesanais, queijo, bacon, cebola caramelizada e molho da casa.",
     price: "R$ 39,90",
-    image: "https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80"
+    image: "https://images.unsplash.com/photo-1513185041617-8ab03f83d6c5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80"
   },
   {
     name: "K-recão Vegetariano",
     description: "Hambúrguer de grão de bico, queijo, alface, tomate e molho especial.",
     price: "R$ 27,90",
-    image: "https://images.unsplash.com/photo-1550317138-10000687a72b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80"
+    image: "https://images.unsplash.com/photo-1520072959219-c595dc870360?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80"
   },
   {
     name: "K-recão Frango Crocante",
     description: "Filé de frango empanado, queijo, alface, tomate e molho especial.",
     price: "R$ 31,90",
-    image: "https://images.unsplash.com/photo-1615297363985-f115b325d756?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80"
+    image: "https://images.unsplash.com/photo-1606755962773-d324e0a13086?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80"
   },
   {
     name: "Super Dog K-recão",
     description: "Cachorro-quente completo com molho, queijo, bacon, batata palha e ervilha.",
     price: "R$ 25,90",
-    image: "https://images.unsplash.com/photo-1619740455993-a8d1258678e3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80"
+    image: "https://images.unsplash.com/photo-1619994121345-b61cd21de54b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80"
   },
   {
     name: "Combo Família",
     description: "4 hambúrgueres Classic, 2 porções de batata frita e 2 refrigerantes.",
     price: "R$ 99,90",
-    image: "https://images.unsplash.com/photo-1610614819513-58e34989e371?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80"
+    image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80"
   },
   {
     name: "Batata Frita K-recão",
     description: "Porção de batata frita crocante com queijo cheddar e bacon.",
     price: "R$ 19,90",
-    image: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80"
+    image: "https://images.unsplash.com/photo-1585109649139-366815a0d713?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80"
   },
 ];
 
