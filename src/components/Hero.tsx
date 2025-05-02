@@ -1,5 +1,6 @@
 
 import { Button } from "@/components/ui/button";
+
 export function Hero() {
   return <section id="inicio" className="relative min-h-screen flex items-center justify-center bg-black overflow-hidden" style={{
     backgroundImage: "url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&h=1300&q=80')",
@@ -12,11 +13,13 @@ export function Hero() {
       <div className="container relative z-10 mx-auto px-6 py-32 md:py-0">
         <div className="flex flex-col items-center text-center max-w-3xl mx-auto animate-fade-in">
           <div className="mb-8 relative">
-            <div className="absolute -inset-1 bg-gradient-to-r from-krecao-yellow via-krecao-red to-krecao-yellow rounded-full opacity-75 blur-sm animate-pulse"></div>
+            {/* New effect with spin and shadow */}
+            <div className="absolute -inset-1 bg-krecao-red rounded-full opacity-60 blur-md animate-[spin_8s_linear_infinite]"></div>
+            <div className="absolute -inset-2 bg-krecao-yellow rounded-full opacity-40 blur-md animate-[spin_12s_linear_infinite]"></div>
             <img 
               src="/lovable-uploads/92641e43-c92a-4a0e-afcd-6e233c81adde.png" 
               alt="K-recão Lanches Logo" 
-              className="h-32 md:h-40 relative animate-[pulse_3s_ease-in-out_infinite] hover:scale-110 transition-transform duration-300"
+              className="h-32 md:h-40 relative drop-shadow-[0_0_10px_rgba(253,212,15,0.5)] hover:drop-shadow-[0_0_15px_rgba(234,56,76,0.8)] transition-all duration-500 hover:rotate-6"
             />
           </div>
           
