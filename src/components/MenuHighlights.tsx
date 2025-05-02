@@ -1,4 +1,3 @@
-
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -11,45 +10,45 @@ interface MenuItem {
 
 const menuItems: MenuItem[] = [
   {
-    name: "K-recão Classic",
+    name: "Xis Salada",
     description: "Hambúrguer artesanal, queijo cheddar, bacon crocante, alface e tomate.",
     price: "R$ 29,90",
     image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80"
   },
   {
-    name: "K-recão Duplo Bacon",
-    description: "Dois hambúrgueres artesanais, queijo duplo, muito bacon e molho especial.",
+    name: "Xis Calabresa",
+    description: "Dois hambúrgueres artesanais, queijo duplo, calabresa e molho especial.",
     price: "R$ 34,90",
     image: "https://images.unsplash.com/photo-1553979459-d2229ba7433b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80"
   },
   {
-    name: "K-recão Monster",
-    description: "Três hambúrgueres artesanais, queijo, bacon, cebola caramelizada e molho da casa.",
-    price: "R$ 39,90",
+    name: "Xis Frango",
+    description: "Filé de frango grelhado, queijo, bacon, cebola caramelizada e molho da casa.",
+    price: "R$ 32,90",
     image: "https://images.unsplash.com/photo-1513185041617-8ab03f83d6c5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80"
   },
   {
-    name: "K-recão Vegetariano",
-    description: "Hambúrguer de grão de bico, queijo, alface, tomate e molho especial.",
-    price: "R$ 27,90",
+    name: "Xis Coração",
+    description: "Coração de frango grelhado, queijo, alface, tomate e molho especial.",
+    price: "R$ 33,90",
     image: "https://images.unsplash.com/photo-1520072959219-c595dc870360?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80"
   },
   {
-    name: "K-recão Frango Crocante",
-    description: "Filé de frango empanado, queijo, alface, tomate e molho especial.",
+    name: "Xis Acebolado",
+    description: "Filé de frango empanado, queijo, cebola caramelizada, alface e molho especial.",
     price: "R$ 31,90",
     image: "https://images.unsplash.com/photo-1606755962773-d324e0a13086?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80"
   },
   {
-    name: "Super Dog K-recão",
-    description: "Cachorro-quente completo com molho, queijo, bacon, batata palha e ervilha.",
-    price: "R$ 25,90",
+    name: "Xis 4 Queijos",
+    description: "Hambúrguer artesanal com blend de 4 queijos, bacon e molho especial.",
+    price: "R$ 32,90",
     image: "https://images.unsplash.com/photo-1619994121345-b61cd21de54b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80"
   },
   {
-    name: "Combo Família",
-    description: "4 hambúrgueres Classic, 2 porções de batata frita e 2 refrigerantes.",
-    price: "R$ 99,90",
+    name: "Xis K-recão",
+    description: "O xis especial da casa com hambúrguer duplo, queijo, bacon, ovo e molho K-recão.",
+    price: "R$ 36,90",
     image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80"
   },
   {
