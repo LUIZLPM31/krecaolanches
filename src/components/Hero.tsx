@@ -10,12 +10,15 @@ export function Hero() {
       <div className="absolute inset-0 bg-black/70"></div>
       
       <div className="container relative z-10 mx-auto px-6 py-32 md:py-0">
-        <div className="flex flex-col items-center text-center md:items-start md:text-left max-w-3xl animate-fade-in">
-          <img 
-            src="/lovable-uploads/92641e43-c92a-4a0e-afcd-6e233c81adde.png" 
-            alt="K-recão Lanches Logo" 
-            className="h-32 md:h-40 mb-6" 
-          />
+        <div className="flex flex-col items-center text-center max-w-3xl mx-auto animate-fade-in">
+          <div className="mb-8 relative">
+            <div className="absolute -inset-1 bg-gradient-to-r from-krecao-yellow via-krecao-red to-krecao-yellow rounded-full opacity-75 blur-sm animate-pulse"></div>
+            <img 
+              src="/lovable-uploads/92641e43-c92a-4a0e-afcd-6e233c81adde.png" 
+              alt="K-recão Lanches Logo" 
+              className="h-32 md:h-40 relative animate-[pulse_3s_ease-in-out_infinite] hover:scale-110 transition-transform duration-300"
+            />
+          </div>
           
           <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight">
             <span className="text-krecao-yellow">Melhor</span> lanche da <span className="text-krecao-red">zona sul</span>
