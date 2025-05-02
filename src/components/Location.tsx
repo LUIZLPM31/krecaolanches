@@ -1,9 +1,6 @@
-
 import { MapPin, Clock, Phone } from "lucide-react";
-
 export function Location() {
-  return (
-    <section id="localizacao" className="py-24 bg-black">
+  return <section id="localizacao" className="py-24 bg-black">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
@@ -17,16 +14,9 @@ export function Location() {
         
         <div className="flex flex-col lg:flex-row gap-8">
           <div className="lg:w-1/2">
-            <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.9430835761774!2d-51.22992492391836!3d-30.05098553385249!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95197830e3b1a887%3A0x1ba748b30a3ac31f!2sR.%20Cel.%20Massot%2C%20649%20-%20Cristal%2C%20Porto%20Alegre%20-%20RS!5e0!3m2!1spt-BR!2sbr!4v1746073602621!5m2!1spt-BR!2sbr" 
-              width="100%" 
-              height="450" 
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy" 
-              referrerPolicy="no-referrer-when-downgrade"
-              className="rounded-lg shadow-lg"
-            ></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.9430835761774!2d-51.22992492391836!3d-30.05098553385249!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95197830e3b1a887%3A0x1ba748b30a3ac31f!2sR.%20Cel.%20Massot%2C%20649%20-%20Cristal%2C%20Porto%20Alegre%20-%20RS!5e0!3m2!1spt-BR!2sbr!4v1746073602621!5m2!1spt-BR!2sbr" width="100%" height="450" style={{
+            border: 0
+          }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" className="rounded-lg shadow-lg"></iframe>
           </div>
           
           <div className="lg:w-1/2 flex flex-col justify-center">
@@ -55,7 +45,7 @@ export function Location() {
                   <Phone className="text-krecao-red mt-1 mr-4" />
                   <div>
                     <h4 className="text-krecao-yellow font-semibold mb-1">Telefone:</h4>
-                    <p className="text-gray-300">(51) 98158-0205</p>
+                    <p className="text-gray-300">(51) 32422047</p>
                   </div>
                 </div>
               </div>
@@ -63,6 +53,5 @@ export function Location() {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 }
