@@ -32,7 +32,7 @@ const menuItems: MenuItem[] = [
     name: "Xis Coração",
     description: "Coração de frango grelhado, queijo, alface, tomate e molho especial.",
     price: "R$ 33,90",
-    image: "https://images.unsplash.com/photo-1520072959219-c595dc870360?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80"
+    image: "/lovable-uploads/93c3515b-97af-4030-bac5-6b5295450e52.png"
   },
   {
     name: "Xis Acebolado",
