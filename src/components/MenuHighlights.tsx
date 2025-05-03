@@ -58,6 +58,12 @@ const menuItems: MenuItem[] = [
     price: "R$ 19,90",
     image: "https://images.unsplash.com/photo-1585109649139-366815a0d713?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80"
   },
+  {
+    name: "Cobertura de Strogonoff com Batata Palha",
+    description: "Acompanha maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo. Serve 2 pessoas (1100g).",
+    price: "R$ 68,00",
+    image: "/lovable-uploads/3e4940e8-4ca9-4e75-b31a-11ac288705cd.png"
+  },
 ];
 
 export function MenuHighlights() {
