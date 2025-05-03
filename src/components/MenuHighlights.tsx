@@ -26,7 +26,7 @@ const menuItems: MenuItem[] = [
     name: "Xis Frango",
     description: "Filé de frango grelhado, queijo, bacon, cebola caramelizada e molho da casa.",
     price: "R$ 32,90",
-    image: "https://images.unsplash.com/photo-1513185041617-8ab03f83d6c5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80"
+    image: "/lovable-uploads/237a70a4-42a7-450d-8a50-41b539516fea.png"
   },
   {
     name: "Xis Coração",
