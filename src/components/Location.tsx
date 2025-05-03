@@ -36,7 +36,7 @@ export function Location() {
                   <Clock className="text-krecao-red mt-1 mr-4" />
                   <div>
                     <h4 className="text-krecao-yellow font-semibold mb-1">Horário de Funcionamento:</h4>
-                    <p className="text-gray-300">Segunda a Sexta: 11:15h às 23:15h</p>
+                    <p className="text-gray-300">Segunda a Sabado: 11:15h às 23:15h</p>
                     
                   </div>
                 </div>
