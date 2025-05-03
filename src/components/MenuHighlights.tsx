@@ -1,3 +1,4 @@
+
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -37,7 +38,7 @@ const menuItems: MenuItem[] = [
     name: "Xis Acebolado",
     description: "Filé de frango empanado, queijo, cebola caramelizada, alface e molho especial.",
     price: "R$ 31,90",
-    image: "https://images.unsplash.com/photo-1606755962773-d324e0a13086?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80"
+    image: "/lovable-uploads/0ca95bf4-e833-45e8-b142-e074365f0d95.png"
   },
   {
     name: "Xis 4 Queijos",
