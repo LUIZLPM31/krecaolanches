@@ -1,4 +1,3 @@
-
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -20,7 +19,7 @@ const menuItems: MenuItem[] = [
     name: "Xis Calabresa",
     description: "Dois hambúrgueres artesanais, queijo duplo, calabresa e molho especial.",
     price: "R$ 34,90",
-    image: "https://images.unsplash.com/photo-1553979459-d2229ba7433b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80"
+    image: "/lovable-uploads/e8979a79-1dfc-4ed6-ae36-59940dc39802.png"
   },
   {
     name: "Xis Frango",
