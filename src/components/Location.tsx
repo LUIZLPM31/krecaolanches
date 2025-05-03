@@ -36,8 +36,8 @@ export function Location() {
                   <Clock className="text-krecao-red mt-1 mr-4" />
                   <div>
                     <h4 className="text-krecao-yellow font-semibold mb-1">Horário de Funcionamento:</h4>
-                    <p className="text-gray-300">Segunda a Sexta: 11h às 23h</p>
-                    <p className="text-gray-300">Sábados e Domingos: 11h às 00h</p>
+                    <p className="text-gray-300">Segunda a Sexta: 11:15h às 23:15h</p>
+                    
                   </div>
                 </div>
                 
@@ -45,7 +45,7 @@ export function Location() {
                   <Phone className="text-krecao-red mt-1 mr-4" />
                   <div>
                     <h4 className="text-krecao-yellow font-semibold mb-1">Telefone:</h4>
-                    <p className="text-gray-300">(51) 32422047</p>
+                    <p className="text-gray-300">(51) </p>
                   </div>
                 </div>
               </div>
