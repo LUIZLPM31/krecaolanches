@@ -76,9 +76,7 @@ export function Navbar() {
             {filteredNavLinks.map(link => <Link key={link.name} to={link.href} className="font-medium text-gray-300 hover:text-white transition-colors">
                 {link.name}
               </Link>)}
-            <Button onClick={() => navigate("/menu")} className="bg-krecao-red hover:bg-krecao-red/90 text-white">
-              <ShoppingCart className="mr-2 h-4 w-4" /> Pedir Agora
-            </Button>
+            
             <Button variant="outline" onClick={handleAuthAction} className="border-gray-700 text-stone-50 bg-red-600 hover:bg-red-500">
               <User className="mr-2 h-4 w-4" />
               {user ? "Sair" : "Entrar"}
