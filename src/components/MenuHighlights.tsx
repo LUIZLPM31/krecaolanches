@@ -12,43 +12,43 @@ interface MenuItem {
 const menuItems: MenuItem[] = [
   {
     name: "Xis Salada",
-    description: "Hambúrguer artesanal, queijo cheddar, bacon crocante, alface e tomate.",
+    description: "Hambúrguer artesanal, queijo cheddar, bacon crocante, alface e tomate. Acompanha maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo.",
     price: "R$ 29,90",
     image: "/lovable-uploads/d936da9b-59e0-4c24-9293-8e6340fe127a.png"
   },
   {
     name: "Xis Calabresa",
-    description: "Dois hambúrgueres artesanais, queijo duplo, calabresa e molho especial.",
+    description: "Dois hambúrgueres artesanais, queijo duplo, calabresa e molho especial. Acompanha maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo.",
     price: "R$ 34,90",
     image: "/lovable-uploads/e8979a79-1dfc-4ed6-ae36-59940dc39802.png"
   },
   {
     name: "Xis Frango",
-    description: "Filé de frango grelhado, queijo, bacon, cebola caramelizada e molho da casa.",
+    description: "Filé de frango grelhado, queijo, bacon, cebola caramelizada e molho da casa. Acompanha maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo.",
     price: "R$ 32,90",
     image: "/lovable-uploads/237a70a4-42a7-450d-8a50-41b539516fea.png"
   },
   {
     name: "Xis Coração",
-    description: "Coração de frango grelhado, queijo, alface, tomate e molho especial.",
+    description: "Coração de frango grelhado, queijo, alface, tomate e molho especial. Acompanha maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo.",
     price: "R$ 33,90",
     image: "/lovable-uploads/93c3515b-97af-4030-bac5-6b5295450e52.png"
   },
   {
     name: "Xis Acebolado",
-    description: "Filé de frango empanado, queijo, cebola caramelizada, alface e molho especial.",
+    description: "Filé de frango empanado, queijo, cebola caramelizada, alface e molho especial. Acompanha maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo.",
     price: "R$ 31,90",
     image: "/lovable-uploads/0ca95bf4-e833-45e8-b142-e074365f0d95.png"
   },
   {
     name: "Xis 4 Queijos",
-    description: "Hambúrguer artesanal com blend de 4 queijos, bacon e molho especial.",
+    description: "Hambúrguer artesanal com blend de 4 queijos, bacon e molho especial. Acompanha maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo.",
     price: "R$ 32,90",
     image: "https://images.unsplash.com/photo-1619994121345-b61cd21de54b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80"
   },
   {
     name: "Xis K-recão",
-    description: "O xis especial da casa com hambúrguer duplo, queijo, bacon, ovo e molho K-recão.",
+    description: "O xis especial da casa com hambúrguer duplo, queijo, bacon, ovo e molho K-recão. Acompanha maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo.",
     price: "R$ 36,90",
     image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80"
   },
