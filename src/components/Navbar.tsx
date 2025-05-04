@@ -1,107 +1,159 @@
 
-import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { useMobile } from "@/hooks/use-mobile";
+import { Menu, ShoppingCart, User } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
+
+interface NavLink {
+  name: string;
+  href: string;
+  isExternal?: boolean;
+  adminOnly?: boolean;
+}
 
 export function Navbar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const isMobile = useMobile();
+  const navigate = useNavigate();
+  const { user, signOut } = useAuth();
+  const [isAdmin, setIsAdmin] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  
+  const navLinks: NavLink[] = [
+    { name: "Início", href: "/" },
+    { name: "Cardápio", href: "/menu" },
+    { name: "Admin", href: "/admin", adminOnly: true },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+      if (window.scrollY > 10) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
     };
-    
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    // Check if user is admin
+    const checkAdminStatus = async () => {
+      if (user) {
+        // This is a simple check - in a real app, you might want to query the database
+        const isUserAdmin = user?.app_metadata?.role === "admin";
+        setIsAdmin(isUserAdmin);
+      }
+    };
+
+    checkAdminStatus();
+  }, [user]);
+
+  const handleAuthAction = () => {
+    if (user) {
+      signOut();
+    } else {
+      navigate("/auth");
+    }
+  };
+
+  // Filter links based on user's admin status
+  const filteredNavLinks = navLinks.filter(link => 
+    !link.adminOnly || (link.adminOnly && isAdmin)
+  );
+
   return (
-    <nav className={cn(
-      'fixed top-0 w-full z-50 transition-all duration-300',
-      isScrolled ? 'bg-black/90 shadow-md backdrop-blur-sm py-2' : 'bg-transparent py-4'
-    )}>
-      <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center">
-          {/* Logo */}
-          <a href="#" className="flex items-center">
-            <img 
-              src="/lovable-uploads/369cbff8-45a9-4e10-bb26-ffb7772c9445.png" 
-              alt="K-recão Lanches" 
-              className="h-12 md:h-16" 
-            />
-          </a>
-
-          {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-8 items-center">
-            <NavLink href="#inicio">Início</NavLink>
-            <NavLink href="#cardapio">Cardápio</NavLink>
-            <NavLink href="#sobre">Sobre</NavLink>
-            <NavLink href="#localizacao">Localização</NavLink>
-            <NavLink href="#contato">Contato</NavLink>
-            <Button 
-              className="bg-krecao-red hover:bg-krecao-red/90 text-white rounded-full px-6"
-              onClick={() => window.open('https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOoqBB8HG_-HUE2-8McvH9CSGuQ2QuLsGlnnVCPGkDYm0kNCNCdZi', '_blank')}
-            >
-              Pedir Agora
-            </Button>
+    <header 
+      className={`fixed w-full z-50 transition-all duration-300 ${
+        isScrolled 
+          ? "bg-black/90 backdrop-blur-sm py-4 shadow-lg" 
+          : "bg-transparent py-6"
+      }`}
+    >
+      <div className="container mx-auto px-6 flex justify-between items-center">
+        <Link to="/" className="flex items-center">
+          <div className="font-bold text-2xl text-white">
+            <span className="text-krecao-red">K-recão</span> Lanches
           </div>
+        </Link>
 
-          {/* Mobile Menu Button */}
-          <button 
-            className="md:hidden text-white"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
+        {/* Desktop Navigation */}
+        {!isMobile && (
+          <nav className="flex items-center gap-6">
+            {filteredNavLinks.map((link) => (
+              <Link
+                key={link.name}
+                to={link.href}
+                className="font-medium text-gray-300 hover:text-white transition-colors"
+              >
+                {link.name}
+              </Link>
+            ))}
+            <Button 
+              onClick={() => navigate("/menu")}
+              className="bg-krecao-red hover:bg-krecao-red/90 text-white"
+            >
+              <ShoppingCart className="mr-2 h-4 w-4" /> Pedir Agora
+            </Button>
+            <Button 
+              variant="outline" 
+              onClick={handleAuthAction}
+              className="border-gray-700 text-white hover:bg-gray-800"
+            >
+              <User className="mr-2 h-4 w-4" />
+              {user ? "Sair" : "Entrar"}
+            </Button>
+          </nav>
+        )}
+
+        {/* Mobile Navigation */}
+        {isMobile && (
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="text-white hover:bg-gray-800"
+              >
+                <Menu className="h-6 w-6" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent className="bg-black/95 text-white border-gray-800">
+              <nav className="flex flex-col gap-6 mt-12">
+                {filteredNavLinks.map((link) => (
+                  <Link
+                    key={link.name}
+                    to={link.href}
+                    className="text-xl font-medium text-gray-300 hover:text-white transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+                <div className="space-y-4 mt-6">
+                  <Button 
+                    onClick={() => navigate("/menu")}
+                    className="w-full bg-krecao-red hover:bg-krecao-red/90 text-white"
+                  >
+                    <ShoppingCart className="mr-2 h-4 w-4" /> Pedir Agora
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    onClick={handleAuthAction}
+                    className="w-full border-gray-700 text-white hover:bg-gray-800"
+                  >
+                    <User className="mr-2 h-4 w-4" />
+                    {user ? "Sair" : "Entrar"}
+                  </Button>
+                </div>
+              </nav>
+            </SheetContent>
+          </Sheet>
+        )}
       </div>
-
-      {/* Mobile Menu Dropdown */}
-      {isMenuOpen && (
-        <div className="md:hidden bg-black/95 shadow-xl backdrop-blur-md">
-          <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
-            <MobileNavLink href="#inicio" onClick={() => setIsMenuOpen(false)}>Início</MobileNavLink>
-            <MobileNavLink href="#cardapio" onClick={() => setIsMenuOpen(false)}>Cardápio</MobileNavLink>
-            <MobileNavLink href="#sobre" onClick={() => setIsMenuOpen(false)}>Sobre</MobileNavLink>
-            <MobileNavLink href="#localizacao" onClick={() => setIsMenuOpen(false)}>Localização</MobileNavLink>
-            <MobileNavLink href="#contato" onClick={() => setIsMenuOpen(false)}>Contato</MobileNavLink>
-            <Button 
-              className="bg-krecao-red hover:bg-krecao-red/90 text-white w-full"
-              onClick={() => {
-                window.open('https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOoqBB8HG_-HUE2-8McvH9CSGuQ2QuLsGlnnVCPGkDYm0kNCNCdZi', '_blank');
-                setIsMenuOpen(false);
-              }}
-            >
-              Pedir Agora
-            </Button>
-          </div>
-        </div>
-      )}
-    </nav>
-  );
-}
-
-function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
-  return (
-    <a 
-      href={href} 
-      className="text-white font-medium hover:text-krecao-yellow transition-colors"
-    >
-      {children}
-    </a>
-  );
-}
-
-function MobileNavLink({ href, onClick, children }: { href: string; onClick?: () => void; children: React.ReactNode }) {
-  return (
-    <a 
-      href={href} 
-      className="text-white text-lg font-medium hover:text-krecao-yellow transition-colors py-2 border-b border-gray-800"
-      onClick={onClick}
-    >
-      {children}
-    </a>
+    </header>
   );
 }
