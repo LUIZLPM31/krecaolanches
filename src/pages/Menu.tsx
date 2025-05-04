@@ -8,7 +8,8 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
-import { ShoppingCart, Plus } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ShoppingCart, Plus, Pizza, Sandwich, Utensils, Filter, Search } from "lucide-react";
 
 interface Product {
   id: string;
@@ -28,6 +29,7 @@ const Menu = () => {
   const [categories, setCategories] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>("Todos");
   const [searchQuery, setSearchQuery] = useState("");
+  const [isSearchVisible, setIsSearchVisible] = useState(false);
 
   useEffect(() => {
     fetchProducts();
@@ -89,6 +91,15 @@ const Menu = () => {
       (product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         product.description.toLowerCase().includes(searchQuery.toLowerCase()))
   );
+
+  // Get icon for category
+  const getCategoryIcon = (category: string) => {
+    switch(category?.toLowerCase()) {
+      case 'xis': return <Sandwich className="h-4 w-4 mr-2" />;
+      case 'porções': return <Utensils className="h-4 w-4 mr-2" />;
+      default: return <Pizza className="h-4 w-4 mr-2" />;
+    }
+  };
 
   // Load menu items from MenuHighlights to seed products if none exist
   useEffect(() => {
@@ -155,113 +166,151 @@ const Menu = () => {
     <div className="min-h-screen bg-black text-white py-16">
       <div className="container mx-auto px-4">
         <div className="mb-8 text-center pt-12">
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">
-            Cardápio <span className="text-krecao-red">K-recão</span>
+          <h1 className="text-4xl md:text-5xl font-bold mb-2">
+            <span className="text-krecao-yellow">Car</span>
+            <span className="text-white">dá</span>
+            <span className="text-krecao-red">pio</span>
           </h1>
-          <p className="text-gray-400 mb-6">
-            Escolha seus lanches favoritos e adicione ao carrinho
+          <p className="text-gray-400 mb-8 max-w-md mx-auto">
+            Escolha seus lanches favoritos preparados com ingredientes frescos e de qualidade
           </p>
           
-          <div className="flex flex-col md:flex-row justify-center items-center gap-4 mb-8">
-            <Input
-              type="text"
-              placeholder="Buscar produtos..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="max-w-xs bg-gray-800 border-gray-700"
-            />
-            
-            <div className="flex flex-wrap gap-2 justify-center">
-              {categories.map((category) => (
-                <Button
-                  key={category}
-                  variant={selectedCategory === category ? "default" : "outline"}
-                  className={
-                    selectedCategory === category
-                      ? "bg-krecao-red hover:bg-krecao-red/90"
-                      : "text-white border-gray-700 hover:bg-gray-800"
-                  }
-                  onClick={() => setSelectedCategory(category)}
+          <div className="flex justify-center mb-6">
+            {isSearchVisible ? (
+              <div className="relative w-full max-w-md">
+                <Input
+                  type="text"
+                  placeholder="Buscar produtos..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="bg-gray-800 border-gray-700 pl-10 pr-4"
+                  autoFocus
+                />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                <button 
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white"
+                  onClick={() => setIsSearchVisible(false)}
                 >
-                  {category}
-                </Button>
-              ))}
+                  ✕
+                </button>
+              </div>
+            ) : (
+              <Button
+                variant="outline"
+                className="border-gray-700 text-gray-300 hover:bg-gray-800"
+                onClick={() => setIsSearchVisible(true)}
+              >
+                <Search className="mr-2 h-4 w-4" /> Buscar
+              </Button>
+            )}
+          </div>
+
+          <Tabs defaultValue="Todos" className="w-full max-w-3xl mx-auto">
+            <div className="relative">
+              <TabsList className="w-full h-12 bg-gray-900 border border-gray-800 overflow-x-auto flex items-center scrollbar-hide">
+                {categories.map((category) => (
+                  <TabsTrigger 
+                    key={category} 
+                    value={category}
+                    onClick={() => setSelectedCategory(category)}
+                    className="flex items-center px-4 py-2 data-[state=active]:bg-krecao-red data-[state=active]:text-white"
+                  >
+                    {getCategoryIcon(category)}
+                    {category}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+            </div>
+
+            {categories.map((category) => (
+              <TabsContent key={category} value={category} className="mt-6">
+                {loading ? (
+                  <div className="flex justify-center items-center py-12">
+                    <div className="animate-pulse flex space-x-2">
+                      <div className="h-3 w-3 bg-krecao-red rounded-full"></div>
+                      <div className="h-3 w-3 bg-krecao-yellow rounded-full"></div>
+                      <div className="h-3 w-3 bg-krecao-red rounded-full"></div>
+                    </div>
+                  </div>
+                ) : filteredProducts.length > 0 ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20">
+                    {filteredProducts.map((product) => (
+                      <Card
+                        key={product.id}
+                        className="bg-gray-900 border border-gray-800 overflow-hidden hover:border-krecao-yellow transition-all duration-300 group"
+                      >
+                        <div className="flex flex-col md:flex-row h-full">
+                          <div className="md:w-1/3 relative">
+                            <img
+                              src={product.image_url}
+                              alt={product.name}
+                              className="w-full h-48 md:h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            />
+                            <div className="absolute top-0 left-0 bg-krecao-red px-2 py-1 text-xs font-bold">
+                              {product.category}
+                            </div>
+                          </div>
+                          <div className="p-6 md:w-2/3 flex flex-col justify-between">
+                            <div>
+                              <div className="flex justify-between items-start mb-2">
+                                <h3 className="text-xl font-bold text-white group-hover:text-krecao-yellow transition-colors">
+                                  {product.name}
+                                </h3>
+                                <span className="bg-krecao-yellow text-black px-2 py-1 rounded text-sm font-bold">
+                                  R$ {product.price.toFixed(2)}
+                                </span>
+                              </div>
+                              <p className="text-gray-400 mb-4">{product.description}</p>
+                            </div>
+                            <Button
+                              onClick={() => handleAddToCart(product)}
+                              className="bg-krecao-red hover:bg-krecao-red/90 group-hover:bg-krecao-yellow group-hover:text-black transition-colors"
+                            >
+                              <Plus className="mr-2 h-4 w-4" /> Adicionar ao Carrinho
+                            </Button>
+                          </div>
+                        </div>
+                      </Card>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-12">
+                    <p className="text-gray-400">Nenhum produto encontrado</p>
+                  </div>
+                )}
+              </TabsContent>
+            ))}
+          </Tabs>
+        </div>
+      </div>
+
+      {cart.length > 0 && (
+        <div className="fixed bottom-0 left-0 right-0 bg-gray-900 border-t border-gray-800 p-4 animate-fade-in">
+          <div className="container mx-auto">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+              <div className="flex items-center">
+                <ShoppingCart className="mr-2 h-5 w-5 text-krecao-yellow" />
+                <div>
+                  <span className="text-sm md:text-base">
+                    {getTotalItems()}{" "}
+                    {getTotalItems() === 1 ? "item" : "itens"}{" "}
+                    no carrinho
+                  </span>
+                  <p className="text-krecao-yellow font-bold">
+                    Total: R$ {getTotalPrice().toFixed(2)}
+                  </p>
+                </div>
+              </div>
+              <Button
+                onClick={proceedToCheckout}
+                className="bg-krecao-yellow text-black hover:bg-krecao-yellow/90 w-full md:w-auto"
+              >
+                <ShoppingCart className="mr-2 h-4 w-4" /> Finalizar Pedido
+              </Button>
             </div>
           </div>
         </div>
-
-        {loading ? (
-          <div className="text-center py-12">
-            <p>Carregando produtos...</p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
-            {filteredProducts.map((product) => (
-              <Card
-                key={product.id}
-                className="bg-gray-900 border border-gray-800 overflow-hidden hover:border-krecao-yellow transition-all duration-300"
-              >
-                <div className="flex flex-col md:flex-row h-full">
-                  <div className="md:w-1/3">
-                    <img
-                      src={product.image_url}
-                      alt={product.name}
-                      className="w-full h-48 md:h-full object-cover"
-                    />
-                  </div>
-                  <div className="p-6 md:w-2/3 flex flex-col justify-between">
-                    <div>
-                      <div className="flex justify-between items-start mb-2">
-                        <h3 className="text-xl font-bold text-white">
-                          {product.name}
-                        </h3>
-                        <span className="bg-krecao-yellow text-black px-2 py-1 rounded text-sm font-bold">
-                          R$ {product.price.toFixed(2)}
-                        </span>
-                      </div>
-                      <p className="text-gray-400 mb-4">{product.description}</p>
-                    </div>
-                    <Button
-                      onClick={() => handleAddToCart(product)}
-                      className="bg-krecao-red hover:bg-krecao-red/90"
-                    >
-                      <Plus className="mr-2 h-4 w-4" /> Adicionar ao Carrinho
-                    </Button>
-                  </div>
-                </div>
-              </Card>
-            ))}
-          </div>
-        )}
-
-        {cart.length > 0 && (
-          <div className="fixed bottom-0 left-0 right-0 bg-gray-900 border-t border-gray-800 p-4">
-            <div className="container mx-auto">
-              <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-                <div className="flex items-center">
-                  <ShoppingCart className="mr-2 h-5 w-5 text-krecao-yellow" />
-                  <div>
-                    <span className="text-sm md:text-base">
-                      {getTotalItems()}{" "}
-                      {getTotalItems() === 1 ? "item" : "itens"}{" "}
-                      no carrinho
-                    </span>
-                    <p className="text-krecao-yellow font-bold">
-                      Total: R$ {getTotalPrice().toFixed(2)}
-                    </p>
-                  </div>
-                </div>
-                <Button
-                  onClick={proceedToCheckout}
-                  className="bg-krecao-yellow text-black hover:bg-krecao-yellow/90"
-                >
-                  Finalizar Pedido
-                </Button>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
+      )}
     </div>
   );
 };
