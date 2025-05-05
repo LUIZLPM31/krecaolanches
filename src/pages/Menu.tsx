@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ShoppingCart, Plus, Pizza, Sandwich, Utensils, Filter, Search } from "lucide-react";
+import { menuItems } from "@/components/MenuHighlights";
 
 interface Product {
   id: string;
@@ -41,7 +42,8 @@ const Menu = () => {
       
       if (error) throw error;
       
-      if (data) {
+      // If we got data from Supabase, use it, otherwise import from menuItems
+      if (data && data.length > 0) {
         setProducts(data);
         
         // Extract unique categories
@@ -50,15 +52,80 @@ const Menu = () => {
         ).filter(Boolean);
         
         setCategories(["Todos", ...uniqueCategories]);
+      } else {
+        // Convert menuItems to Product format
+        const convertedMenuItems = menuItems.map((item, index) => ({
+          id: `menu-item-${index}`,
+          name: item.name,
+          description: item.description,
+          price: parseFloat(item.price.replace('R$ ', '').replace(',', '.')),
+          image_url: item.image,
+          category: item.category || "Outros"
+        }));
+        
+        setProducts(convertedMenuItems);
+        
+        // Extract unique categories
+        const uniqueCategories = Array.from(
+          new Set(convertedMenuItems.map((product) => product.category))
+        ).filter(Boolean);
+        
+        setCategories(["Todos", ...uniqueCategories]);
+        
+        // Save to Supabase if connected
+        seedProductsToSupabase(convertedMenuItems);
       }
     } catch (error: any) {
+      console.error("Error fetching products:", error);
+      
+      // Fallback to menuItems if Supabase fails
+      const convertedMenuItems = menuItems.map((item, index) => ({
+        id: `menu-item-${index}`,
+        name: item.name,
+        description: item.description,
+        price: parseFloat(item.price.replace('R$ ', '').replace(',', '.')),
+        image_url: item.image,
+        category: item.category || "Outros"
+      }));
+      
+      setProducts(convertedMenuItems);
+      
+      // Extract unique categories
+      const uniqueCategories = Array.from(
+        new Set(convertedMenuItems.map((product) => product.category))
+      ).filter(Boolean);
+      
+      setCategories(["Todos", ...uniqueCategories]);
+      
       toast({
         title: "Erro ao carregar produtos",
-        description: error.message,
+        description: "Usando dados locais em vez de dados do banco",
         variant: "destructive",
       });
     } finally {
       setLoading(false);
+    }
+  };
+
+  const seedProductsToSupabase = async (products: Product[]) => {
+    try {
+      for (const product of products) {
+        const { error } = await supabase.from("products").insert([
+          {
+            name: product.name,
+            description: product.description,
+            price: product.price,
+            image_url: product.image_url,
+            category: product.category
+          }
+        ]);
+        
+        if (error) {
+          console.error("Error seeding product:", error);
+        }
+      }
+    } catch (error) {
+      console.error("Failed to seed products:", error);
     }
   };
 
@@ -257,7 +324,7 @@ const Menu = () => {
                                   {product.name}
                                 </h3>
                                 <span className="bg-krecao-yellow text-black px-2 py-1 rounded text-sm font-bold">
-                                  R$ {product.price.toFixed(2)}
+                                  R$ {product.price.toFixed(2).replace('.', ',')}
                                 </span>
                               </div>
                               <p className="text-gray-400 mb-4">{product.description}</p>
@@ -297,7 +364,7 @@ const Menu = () => {
                     no carrinho
                   </span>
                   <p className="text-krecao-yellow font-bold">
-                    Total: R$ {getTotalPrice().toFixed(2)}
+                    Total: R$ {getTotalPrice().toFixed(2).replace('.', ',')}
                   </p>
                 </div>
               </div>
