@@ -1,11 +1,14 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
+
 interface MenuItem {
   name: string;
   description: string;
   price: string;
   image: string;
 }
+
 const menuItems: MenuItem[] = [{
   name: "Xis Salada",
   description: "Hambúrguer artesanal, queijo cheddar, bacon crocante, alface e tomate. Acompanha maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo.",
@@ -52,7 +55,14 @@ const menuItems: MenuItem[] = [{
   price: "R$ 68,00",
   image: "/lovable-uploads/3e4940e8-4ca9-4e75-b31a-11ac288705cd.png"
 }];
+
 export function MenuHighlights() {
+  const navigate = useNavigate();
+
+  const handleViewFullMenu = () => {
+    navigate('/menu');
+  };
+
   return <section id="cardapio" className="py-24 bg-black">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
@@ -88,7 +98,10 @@ export function MenuHighlights() {
         </div>
         
         <div className="text-center mt-12">
-          <Button className="bg-krecao-red hover:bg-krecao-red/90 text-white rounded-full px-8 py-6 text-lg" onClick={() => window.open('https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOoqBB8HG_-HUE2-8McvH9CSGuQ2QuLsGlnnVCPGkDYm0kNCNCdZi', '_blank')}>
+          <Button 
+            className="bg-krecao-red hover:bg-krecao-red/90 text-white rounded-full px-8 py-6 text-lg"
+            onClick={handleViewFullMenu}
+          >
             Ver Cardápio Completo
           </Button>
         </div>

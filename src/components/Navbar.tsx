@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -17,6 +17,7 @@ interface NavLink {
 export function Navbar() {
   const isMobile = useIsMobile();
   const navigate = useNavigate();
+  const location = useLocation();
   const {
     user,
     signOut
@@ -72,6 +73,10 @@ export function Navbar() {
     }
   };
 
+  const handleNavigation = (path: string) => {
+    navigate(path);
+  };
+
   // Filter links based on user's admin status
   const filteredNavLinks = navLinks.filter(link => !link.adminOnly || (link.adminOnly && isAdmin));
   
@@ -90,13 +95,18 @@ export function Navbar() {
         {!isMobile && (
           <nav className="flex items-center gap-6">
             {filteredNavLinks.map(link => (
-              <Link 
+              <Button 
                 key={link.name} 
-                to={link.href} 
-                className="font-medium text-gray-300 hover:text-white transition-colors"
+                variant="ghost"
+                onClick={() => handleNavigation(link.href)}
+                className={`font-medium hover:text-white transition-colors ${
+                  location.pathname === link.href 
+                    ? "text-white" 
+                    : "text-gray-300"
+                }`}
               >
                 {link.name}
-              </Link>
+              </Button>
             ))}
             
             <Button 
@@ -128,13 +138,20 @@ export function Navbar() {
               </div>
               <nav className="flex flex-col gap-6">
                 {filteredNavLinks.map(link => (
-                  <Link 
+                  <Button 
                     key={link.name} 
-                    to={link.href} 
-                    className="text-xl font-medium text-gray-300 hover:text-white transition-colors"
+                    variant="ghost"
+                    onClick={() => {
+                      handleNavigation(link.href);
+                    }}
+                    className={`text-xl font-medium hover:text-white transition-colors justify-start ${
+                      location.pathname === link.href 
+                        ? "text-white" 
+                        : "text-gray-300"
+                    }`}
                   >
                     {link.name}
-                  </Link>
+                  </Button>
                 ))}
                 <div className="space-y-4 mt-6">
                   <Button 
