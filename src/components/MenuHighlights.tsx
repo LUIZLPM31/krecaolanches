@@ -1,7 +1,7 @@
-
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { ExternalLink } from "lucide-react";
 
 export interface MenuItem {
   name: string;
@@ -9,6 +9,7 @@ export interface MenuItem {
   price: string;
   image: string;
   category?: string;
+  ifoodUrl?: string;
 }
 
 export const menuItems: MenuItem[] = [{
@@ -16,7 +17,8 @@ export const menuItems: MenuItem[] = [{
   description: "Hambúrguer artesanal, queijo cheddar, bacon crocante, alface e tomate. Acompanha maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo.",
   price: "R$ 29,90",
   image: "/lovable-uploads/d936da9b-59e0-4c24-9293-8e6340fe127a.png",
-  category: "Xis"
+  category: "Xis",
+  ifoodUrl: "https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?prato=5eb6dfbb-e4c3-461a-ad19-ee6e04be31c3"
 }, {
   name: "Xis Calabresa",
   description: "Dois hambúrgueres artesanais, queijo duplo, calabresa e molho especial. Acompanha maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo.",
@@ -99,8 +101,11 @@ export function MenuHighlights() {
                   </div>
                   <div className="flex items-center justify-between mt-4">
                     <span className="text-krecao-yellow font-bold text-xl">{item.price}</span>
-                    <button onClick={() => window.open('https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOoqBB8HG_-HUE2-8McvH9CSGuQ2QuLsGlnnVCPGkDYm0kNCNCdZi', '_blank')} className="transition-colors text-lg font-bold rounded-none text-krecao-red">
-                      Pedir Agora
+                    <button 
+                      onClick={() => window.open(item.ifoodUrl || 'https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOoqBB8HG_-HUE2-8McvH9CSGuQ2QuLsGlnnVCPGkDYm0kNCNCdZi', '_blank')} 
+                      className="transition-colors text-lg font-bold rounded-none flex items-center gap-1 text-krecao-red hover:text-krecao-yellow"
+                    >
+                      Pedir Agora <ExternalLink className="h-4 w-4" />
                     </button>
                   </div>
                 </div>
