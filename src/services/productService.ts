@@ -111,7 +111,7 @@ export const seedSpecificProducts = async () => {
       name: "Xis Salada",
       description: "Hambúrguer artesanal, queijo cheddar, bacon crocante, alface e tomate. Acompanha maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo.",
       price: "29.90",
-      image_url: "/lovable-uploads/d936da9b-59e0-4c24-9293-8e6340fe127a.png",
+      image_url: "/lovable-uploads/c7c76be9-f6aa-4af8-9787-3ba84363461b.png",
       category: "Xis"
     },
     {
@@ -127,6 +127,20 @@ export const seedSpecificProducts = async () => {
       price: "32.90",
       image_url: "/lovable-uploads/237a70a4-42a7-450d-8a50-41b539516fea.png",
       category: "Xis"
+    },
+    {
+      name: "Xis K-recão",
+      description: "O xis especial da casa com hambúrguer duplo, queijo, bacon, ovo e molho K-recão. Acompanha maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo.",
+      price: "36.90",
+      image_url: "/lovable-uploads/6d4d9c64-03db-4cb5-a0d4-598ba5b8f318.png",
+      category: "Xis"
+    },
+    {
+      name: "Cobertura de Strogonoff com Batata Palha",
+      description: "Acompanha maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo. Serve 2 pessoas (1100g).",
+      price: "68.00",
+      image_url: "/lovable-uploads/d30c2f4e-8dc0-4554-9550-d0547408b74b.png",
+      category: "Porções"
     },
     {
       name: "Batata Frita K-recão",

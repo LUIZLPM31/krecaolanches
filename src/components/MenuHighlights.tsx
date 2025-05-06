@@ -1,3 +1,4 @@
+
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
@@ -14,7 +15,7 @@ export const menuItems: MenuItem[] = [{
   name: "Xis Salada",
   description: "Hambúrguer artesanal, queijo cheddar, bacon crocante, alface e tomate. Acompanha maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo.",
   price: "R$ 29,90",
-  image: "/lovable-uploads/d936da9b-59e0-4c24-9293-8e6340fe127a.png",
+  image: "/lovable-uploads/c7c76be9-f6aa-4af8-9787-3ba84363461b.png",
   category: "Xis",
   ifoodUrl: "https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?prato=5eb6dfbb-e4c3-461a-ad19-ee6e04be31c3"
 }, {
@@ -51,7 +52,7 @@ export const menuItems: MenuItem[] = [{
   name: "Xis K-recão",
   description: "O xis especial da casa com hambúrguer duplo, queijo, bacon, ovo e molho K-recão. Acompanha maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo.",
   price: "R$ 36,90",
-  image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80",
+  image: "/lovable-uploads/6d4d9c64-03db-4cb5-a0d4-598ba5b8f318.png",
   category: "Xis"
 }, {
   name: "Batata Frita K-recão",
@@ -63,7 +64,7 @@ export const menuItems: MenuItem[] = [{
   name: "Cobertura de Strogonoff com Batata Palha",
   description: "Acompanha maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo. Serve 2 pessoas (1100g).",
   price: "R$ 68,00",
-  image: "/lovable-uploads/3e4940e8-4ca9-4e75-b31a-11ac288705cd.png",
+  image: "/lovable-uploads/d30c2f4e-8dc0-4554-9550-d0547408b74b.png",
   category: "Porções"
 }];
 export function MenuHighlights() {
