@@ -10,6 +10,14 @@ interface CartSummaryProps {
 }
 
 const CartSummary = ({ totalItems, totalPrice, onCheckout }: CartSummaryProps) => {
+  // Format price according to Brazilian standards
+  const formatPrice = (price: number) => {
+    return price.toLocaleString('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+    });
+  };
+
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-gray-900 border-t border-gray-800 p-4 animate-fade-in">
       <div className="container mx-auto">
@@ -23,7 +31,7 @@ const CartSummary = ({ totalItems, totalPrice, onCheckout }: CartSummaryProps) =
                 no carrinho
               </span>
               <p className="text-krecao-yellow font-bold">
-                Total: R$ {totalPrice.toFixed(2).replace('.', ',')}
+                Total: {formatPrice(totalPrice)}
               </p>
             </div>
           </div>
