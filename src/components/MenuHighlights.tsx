@@ -96,7 +96,7 @@ export function MenuHighlights() {
                   </div>
                   <div className="flex items-center justify-between mt-4">
                     <span className="text-krecao-yellow font-bold text-xl">{item.price}</span>
-                    <button onClick={() => window.open(item.ifoodUrl || 'https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOoqBB8HG_-HUE2-8McvH9CSGuQ2QuLsGlnnVCPGkDYm0kNCNCdZi', '_blank')} className="transition-colors text-lg font-bold flex items-center gap-1 bg-krecao-red rounded text-white">
+                    <button onClick={() => window.open(item.ifoodUrl || 'https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOoqBB8HG_-HUE2-8McvH9CSGuQ2QuLsGlnnVCPGkDYm0kNCNCdZi', '_blank')} className="transition-colors text-lg flex items-center gap-1 bg-krecao-red rounded text-white font-medium">
                       Pedir Agora <ExternalLink className="h-4 w-4 bg-transparent" />
                     </button>
                   </div>
