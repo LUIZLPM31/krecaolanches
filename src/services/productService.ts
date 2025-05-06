@@ -149,6 +149,27 @@ export const seedSpecificProducts = async () => {
       image_url: "https://images.unsplash.com/photo-1585109649139-366815a0d713?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80",
       category: "Porções"
     },
+    {
+      name: "Bauru De Alcatra Com Fritas",
+      description: "Pão Cervejinha, Bife De Alcatra, Maionese, Tomate Em Rodelas, Folhas De Alface, Queijo, Ovo E Fritas. Serve 2 pessoas.",
+      price: "59.00",
+      image_url: "/lovable-uploads/a5f32f77-8219-4d5b-beb5-b163c604f4e5.png",
+      category: "Lanches"
+    },
+    {
+      name: "Dog Simples",
+      description: "1 Salsicha, Maionese, Tomate, Alface, Milho, Mostarda, Catchup, Molho, Queijo Mussarela. Serve 1 pessoa.",
+      price: "23.00",
+      image_url: "/lovable-uploads/abd68998-91bc-4cb4-a7a2-dbb5366adcf2.png",
+      category: "Lanches"
+    },
+    {
+      name: "Ala Minuta De Bife Na Chapa Promo",
+      description: "Bife (Coxão De Dentro), arroz, ovo e batatas fritas. Serve 1 pessoa.",
+      price: "36.50",
+      image_url: "/lovable-uploads/9b68fa7a-09c7-457c-bbe8-d6c68da3dff5.png",
+      category: "Pratos"
+    }
   ];
 
   try {
