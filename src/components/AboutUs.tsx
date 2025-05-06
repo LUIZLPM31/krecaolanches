@@ -3,7 +3,7 @@ export function AboutUs() {
       <div className="container mx-auto px-6">
         <div className="flex flex-col lg:flex-row items-center gap-12">
           <div className="lg:w-1/2">
-            <img alt="Equipe K-recão Lanches" src="/lovable-uploads/3917bd94-56ee-422b-8d4d-10072c509f3b.png" className="rounded-lg shadow-2xl w-full h-[400px] object-cover" />
+            <img alt="Equipe K-recão Lanches" src="/lovable-uploads/3917bd94-56ee-422b-8d4d-10072c509f3b.png" className="rounded-lg shadow-2xl w-full h-[400px] object-contain" />
           </div>
           
           <div className="lg:w-1/2">
