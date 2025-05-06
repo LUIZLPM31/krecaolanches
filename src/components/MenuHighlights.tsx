@@ -2,7 +2,6 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { ExternalLink } from "lucide-react";
-
 export interface MenuItem {
   name: string;
   description: string;
@@ -11,7 +10,6 @@ export interface MenuItem {
   category?: string;
   ifoodUrl?: string;
 }
-
 export const menuItems: MenuItem[] = [{
   name: "Xis Salada",
   description: "Hambúrguer artesanal, queijo cheddar, bacon crocante, alface e tomate. Acompanha maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo.",
@@ -68,14 +66,11 @@ export const menuItems: MenuItem[] = [{
   image: "/lovable-uploads/3e4940e8-4ca9-4e75-b31a-11ac288705cd.png",
   category: "Porções"
 }];
-
 export function MenuHighlights() {
   const navigate = useNavigate();
-
   const handleViewFullMenu = () => {
     navigate('/menu');
   };
-
   return <section id="cardapio" className="py-24 bg-black">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
@@ -101,11 +96,8 @@ export function MenuHighlights() {
                   </div>
                   <div className="flex items-center justify-between mt-4">
                     <span className="text-krecao-yellow font-bold text-xl">{item.price}</span>
-                    <button 
-                      onClick={() => window.open(item.ifoodUrl || 'https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOoqBB8HG_-HUE2-8McvH9CSGuQ2QuLsGlnnVCPGkDYm0kNCNCdZi', '_blank')} 
-                      className="transition-colors text-lg font-bold rounded-none flex items-center gap-1 text-krecao-red hover:text-krecao-yellow"
-                    >
-                      Pedir Agora <ExternalLink className="h-4 w-4" />
+                    <button onClick={() => window.open(item.ifoodUrl || 'https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOoqBB8HG_-HUE2-8McvH9CSGuQ2QuLsGlnnVCPGkDYm0kNCNCdZi', '_blank')} className="transition-colors text-lg font-bold flex items-center gap-1 bg-krecao-red rounded text-white">
+                      Pedir Agora <ExternalLink className="h-4 w-4 bg-transparent" />
                     </button>
                   </div>
                 </div>
@@ -114,10 +106,7 @@ export function MenuHighlights() {
         </div>
         
         <div className="text-center mt-12">
-          <Button 
-            className="bg-krecao-red hover:bg-krecao-red/90 text-white rounded-full px-8 py-6 text-lg"
-            onClick={handleViewFullMenu}
-          >
+          <Button className="bg-krecao-red hover:bg-krecao-red/90 text-white rounded-full px-8 py-6 text-lg" onClick={handleViewFullMenu}>
             Ver Cardápio Completo
           </Button>
         </div>
