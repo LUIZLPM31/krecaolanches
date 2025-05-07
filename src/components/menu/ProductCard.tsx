@@ -48,7 +48,7 @@ const ProductCard = ({ product, onAddToCart }: ProductCardProps) => {
           </div>
           <Button
             onClick={() => onAddToCart(product)}
-            className="bg-krecao-red hover:bg-krecao-red/90 group-hover:bg-krecao-yellow group-hover:text-black transition-colors"
+            className="bg-krecao-red hover:bg-krecao-red/90 group-hover:bg-krecao-yellow group-hover:text-black transition-all duration-300 transform hover:scale-105 rounded-full shadow-lg hover:shadow-krecao-yellow/30"
           >
             <Plus className="mr-2 h-4 w-4" /> Adicionar ao Carrinho
           </Button>

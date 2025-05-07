@@ -1,4 +1,3 @@
-
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
@@ -137,7 +136,10 @@ export function MenuHighlights() {
                   </div>
                   <div className="flex items-center justify-between mt-4">
                     <span className="text-krecao-yellow font-bold text-xl">{item.price}</span>
-                    <button onClick={() => window.open(item.ifoodUrl || 'https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOoqBB8HG_-HUE2-8McvH9CSGuQ2QuLsGlnnVCPGkDYm0kNCNCdZi', '_blank')} className="transition-colors text-lg flex items-center gap-1 bg-krecao-red rounded text-white font-medium">
+                    <button 
+                      onClick={() => window.open(item.ifoodUrl || 'https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOoqBB8HG_-HUE2-8McvH9CSGuQ2QuLsGlnnVCPGkDYm0kNCNCdZi', '_blank')} 
+                      className="bg-krecao-red hover:bg-krecao-red/90 text-white font-medium px-4 py-2 rounded-full flex items-center gap-1.5 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-krecao-red/30"
+                    >
                       Pedir <ExternalLink className="h-4 w-4 bg-transparent" />
                     </button>
                   </div>
@@ -147,7 +149,7 @@ export function MenuHighlights() {
         </div>
         
         <div className="text-center mt-12">
-          <Button className="bg-krecao-red hover:bg-krecao-red/90 text-white rounded-full px-8 py-6 text-lg" onClick={handleViewFullMenu}>
+          <Button className="bg-krecao-red hover:bg-krecao-red/90 text-white rounded-full px-8 py-6 text-lg shadow-lg hover:shadow-krecao-red/30 transition-all duration-300 transform hover:scale-105" onClick={handleViewFullMenu}>
             Ver Cardápio Completo
           </Button>
         </div>
