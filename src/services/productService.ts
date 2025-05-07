@@ -169,6 +169,13 @@ export const seedSpecificProducts = async () => {
       price: "36.50",
       image_url: "/lovable-uploads/9b68fa7a-09c7-457c-bbe8-d6c68da3dff5.png",
       category: "Pratos"
+    },
+    {
+      name: "Iscas De Tilápia",
+      description: "Iscas De Tilápia Empanadas 500g, Acompanha Ovos De Codorna, Pepino Conserva, Azeitonas, Limão",
+      price: "75.00",
+      image_url: "https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80",
+      category: "Porções"
     }
   ];
 

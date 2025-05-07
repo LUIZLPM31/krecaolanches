@@ -93,6 +93,13 @@ export const menuItems: MenuItem[] = [{
   price: "R$ 36,50",
   image: "/lovable-uploads/9b68fa7a-09c7-457c-bbe8-d6c68da3dff5.png",
   category: "Pratos"
+}, {
+  name: "Iscas De Tilápia",
+  description: "Iscas De Tilápia Empanadas 500g, Acompanha Ovos De Codorna, Pepino Conserva, Azeitonas, Limão",
+  price: "R$ 75,00",
+  image: "https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80",
+  category: "Porções",
+  ifoodUrl: "https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?prato=ace9aae0-c588-4c1f-8486-c15b28f9d0e3"
 }];
 export function MenuHighlights() {
   const navigate = useNavigate();
