@@ -19,28 +19,28 @@ export const menuItems: MenuItem[] = [{
   ifoodUrl: "https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?prato=5eb6dfbb-e4c3-461a-ad19-ee6e04be31c3"
 }, {
   name: "Xis Calabresa",
-  description: "Dois hambúrgueres artesanais, queijo duplo, calabresa e molho especial. Acompanha maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo.",
+  description: " Acompanha maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo.",
   price: "R$ 34,90",
   image: "/lovable-uploads/e8979a79-1dfc-4ed6-ae36-59940dc39802.png",
   category: "Xis",
   ifoodUrl: "https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?prato=5a73aae8-1a96-4b0f-948d-cca9c082fd5c"
 }, {
   name: "Xis Frango",
-  description: "Filé de frango grelhado, queijo, bacon, cebola caramelizada e molho da casa. Acompanha maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo.",
+  description: "Acompanha maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo.",
   price: "R$ 32,90",
   image: "/lovable-uploads/237a70a4-42a7-450d-8a50-41b539516fea.png",
   category: "Xis",
   ifoodUrl: "https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?prato=60222e84-34f0-4fa4-8941-3a4bccd3f98f"
 }, {
   name: "Xis Coração",
-  description: "Coração de frango grelhado, queijo, alface, tomate e molho especial. Acompanha maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo.",
+  description: "Acompanha maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo.",
   price: "R$ 33,90",
   image: "/lovable-uploads/93c3515b-97af-4030-bac5-6b5295450e52.png",
   category: "Xis",
   ifoodUrl: "https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?prato=78139c90-c746-45ec-b544-b4078b87ff3a"
 }, {
   name: "Xis Acebolado",
-  description: "Filé de frango empanado, queijo, cebola caramelizada, alface e molho especial. Acompanha maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo.",
+  description: "Acompanha maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo.",
   price: "R$ 31,90",
   image: "/lovable-uploads/0ca95bf4-e833-45e8-b142-e074365f0d95.png",
   category: "Xis",
@@ -54,15 +54,15 @@ export const menuItems: MenuItem[] = [{
   ifoodUrl: "https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?prato=5c6786e3-98e1-4a63-81fc-a2417f45d0b4"
 }, {
   name: "Xis K-recão",
-  description: "O xis especial da casa com hambúrguer duplo, queijo, bacon, ovo e molho K-recão. Acompanha maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo.",
+  description: "Acompanha frango,coração, calabresa, bacon, carne, maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo.",
   price: "R$ 36,90",
   image: "/lovable-uploads/6d4d9c64-03db-4cb5-a0d4-598ba5b8f318.png",
   category: "Xis",
   ifoodUrl: "https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?prato=47e56877-8690-4573-b568-0a45da6ffbfc"
 }, {
-  name: "Batata Frita P,M,G",
+  name: "Batata Frita G",
   description: "Porção de batata frita crocante com queijo cheddar e bacon.",
-  price: "R$ 21,00 26,00 37,00",
+  price: "R$ 37,00",
   image: "https://images.unsplash.com/photo-1585109649139-366815a0d713?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80",
   category: "Porções",
   ifoodUrl: "https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?prato=3612fbe3-44cf-4bd6-b0e1-e0d538828057"
