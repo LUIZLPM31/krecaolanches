@@ -71,7 +71,7 @@ export const menuItems: MenuItem[] = [{
   name: "Stogonoff especial ",
   description: "Acompanha maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo. Serve 2 pessoas (1100g).",
   price: "R$ 68,00",
-  image: "/lovable-uploads/d30c2f4e-8dc0-4554-9550-d0547408b74b.png",
+  image: "/lovable-uploads/f4ef723c-4098-49f8-a54c-ad4af8303f1f.png",
   category: "Porções",
   ifoodUrl:"https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?prato=88dbbcd0-4958-40c4-b50a-84bbfbb96039"
 }, {
@@ -100,6 +100,12 @@ export const menuItems: MenuItem[] = [{
   image: "https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80",
   category: "Porções",
   ifoodUrl: "https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?prato=ace9aae0-c588-4c1f-8486-c15b28f9d0e3"
+}, {
+  name: "Prensado",
+  description: "Maionese, tomate, alface, presunto, queijo e ovo. Serve 1 pessoa.",
+  price: "R$ 22,60",
+  image: "/lovable-uploads/67740c08-faea-4884-a10e-2bca132fd95c.png",
+  category: "Lanches"
 }];
 export function MenuHighlights() {
   const navigate = useNavigate();
@@ -132,7 +138,7 @@ export function MenuHighlights() {
                   <div className="flex items-center justify-between mt-4">
                     <span className="text-krecao-yellow font-bold text-xl">{item.price}</span>
                     <button onClick={() => window.open(item.ifoodUrl || 'https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOoqBB8HG_-HUE2-8McvH9CSGuQ2QuLsGlnnVCPGkDYm0kNCNCdZi', '_blank')} className="transition-colors text-lg flex items-center gap-1 bg-krecao-red rounded text-white font-medium">
-                      Pedir Agora <ExternalLink className="h-4 w-4 bg-transparent" />
+                      Pedir <ExternalLink className="h-4 w-4 bg-transparent" />
                     </button>
                   </div>
                 </div>

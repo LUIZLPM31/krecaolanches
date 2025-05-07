@@ -139,7 +139,7 @@ export const seedSpecificProducts = async () => {
       name: "Cobertura de Strogonoff com Batata Palha",
       description: "Acompanha maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo. Serve 2 pessoas (1100g).",
       price: "68.00",
-      image_url: "/lovable-uploads/d30c2f4e-8dc0-4554-9550-d0547408b74b.png",
+      image_url: "/lovable-uploads/f4ef723c-4098-49f8-a54c-ad4af8303f1f.png",
       category: "Porções"
     },
     {
@@ -176,6 +176,13 @@ export const seedSpecificProducts = async () => {
       price: "75.00",
       image_url: "https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80",
       category: "Porções"
+    },
+    {
+      name: "Prensado",
+      description: "Maionese, tomate, alface, presunto, queijo e ovo. Serve 1 pessoa.",
+      price: "22.60",
+      image_url: "/lovable-uploads/67740c08-faea-4884-a10e-2bca132fd95c.png",
+      category: "Lanches"
     }
   ];
 
