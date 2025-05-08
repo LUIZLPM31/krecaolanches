@@ -82,7 +82,7 @@ export const menuItems: MenuItem[] = [{
   ifoodUrl: "https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?prato=b3e26e55-7bcb-4fd4-9dc7-44010294891a"
 }, {
   name: "Dog especial",
-  description: "1 Salsicha, Maionese, Tomate, Alface, Milho, Mostarda, Catchup, Molho, Queijo Mussarela. Serve 1 pessoa.",
+  description: "2 Salsicha, Maionese, Tomate, Alface, Milho, Mostarda, Catchup, Molho, Queijo Mussarela. Serve 1 pessoa.",
   price: "R$ 23,00",
   image: "/lovable-uploads/abd68998-91bc-4cb4-a7a2-dbb5366adcf2.png",
   category: "Lanches"
@@ -104,6 +104,12 @@ export const menuItems: MenuItem[] = [{
   description: "Maionese, tomate, alface, presunto, queijo e ovo. Serve 1 pessoa.",
   price: "R$ 22,60",
   image: "/lovable-uploads/67740c08-faea-4884-a10e-2bca132fd95c.png",
+  category: "Lanches"
+}, {
+  name: "Dog simples",
+  description: "1 Salsicha, Maionese, Tomate, Alface, Milho, Mostarda, Catchup, Molho, Queijo Mussarela. Serve 1 pessoa.",
+  price: "R$ 22,60",
+  image: "/lovable-uploads/abd68998-91bc-4cb4-a7a2-dbb5366adcf2.png",
   category: "Lanches"
 }];
 export function MenuHighlights() {
