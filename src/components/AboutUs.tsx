@@ -28,7 +28,7 @@ export function AboutUs() {
             </p>
             
             <p className="text-gray-300 font-semibold">
-              Venha conhecer o <span className="text-krecao-red">K-recão Lanches</span> e descubra por que somos a escolha preferida dos amantes de hambúrgueres!
+              Venha conhecer o <span className="text-krecao-red">K-recão Lanches</span> e descubra por que somos a escolha preferida dos amantes de boa comida!
             </p>
           </div>
         </div>

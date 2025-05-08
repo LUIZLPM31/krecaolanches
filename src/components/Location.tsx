@@ -45,7 +45,7 @@ export function Location() {
                   <Phone className="text-krecao-red mt-1 mr-4" />
                   <div>
                     <h4 className="text-krecao-yellow font-semibold mb-1">Telefone:</h4>
-                    <p className="text-gray-300">(51) </p>
+                    <p className="text-gray-300">(51)32422047</p>
                   </div>
                 </div>
               </div>

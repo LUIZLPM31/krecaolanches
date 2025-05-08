@@ -49,7 +49,7 @@ export const menuItems: MenuItem[] = [{
   name: "Xis 4 Queijos",
   description: "Hambúrguer artesanal com blend de 4 queijos, bacon e molho especial. Acompanha maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo.",
   price: "R$ 32,90",
-  image: "https://images.unsplash.com/photo-1619994121345-b61cd21de54b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80",
+  image: "https://postimg.cc/mtKsN0T0",
   category: "Xis",
   ifoodUrl: "https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?prato=5c6786e3-98e1-4a63-81fc-a2417f45d0b4"
 }, {
