@@ -39,7 +39,7 @@ const CartSummary = ({ totalItems, totalPrice, onCheckout }: CartSummaryProps) =
             onClick={onCheckout}
             className="bg-krecao-yellow text-black hover:bg-krecao-yellow/90 w-full md:w-auto"
           >
-            <ShoppingCart className="mr-2 h-4 w-4" /> Finalizar Pedido
+            <ShoppingCart className="mr-2 h-4 w-4" /> Pedir via WhatsApp
           </Button>
         </div>
       </div>
