@@ -87,7 +87,7 @@ export const menuItems: MenuItem[] = [{
   image: "/lovable-uploads/abd68998-91bc-4cb4-a7a2-dbb5366adcf2.png",
   category: "Lanches"
 }, {
-  name: "Ala Minuta De Bife Na Chapa Promo",
+  name: "Ala Minuta De Bife Na Chapa",
   description: "Bife (Coxão De Dentro), arroz, ovo e batatas fritas. Serve 1 pessoa.",
   price: "R$ 36,50",
   image: "/lovable-uploads/9b68fa7a-09c7-457c-bbe8-d6c68da3dff5.png",

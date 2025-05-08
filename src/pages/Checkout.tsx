@@ -160,7 +160,7 @@ const Checkout = () => {
         <Button
           variant="outline"
           onClick={() => navigate("/menu")}
-          className="mb-8 mt-12 border-gray-700 text-red hover:bg-gray-800"
+          className="mb-8 mt-12 border-red text-red hover:bg-gray-800"
         >
           <ChevronLeft className="mr-2 h-4 w-4" /> Voltar 
         </Button>
