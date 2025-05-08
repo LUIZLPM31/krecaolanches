@@ -26,7 +26,7 @@ export function Hero() {
           </div>
           
           <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight">
-            <span className="text-krecao-yellow">Melhor</span> lanche da <span className="text-krecao-red">zona sul</span>
+            <span className="text-krecao-red">O Melhor</span> lanche da <span className="text-krecao-red">zona sul</span>
           </h1>
           
           <p className="mt-6 text-xl text-gray-300 max-w-xl">

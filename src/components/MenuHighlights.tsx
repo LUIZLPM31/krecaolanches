@@ -12,7 +12,7 @@ export interface MenuItem {
 }
 export const menuItems: MenuItem[] = [{
   name: "Xis Salada",
-  description: "Hamburguer Artesanal,Maionese,Tomate,Alface,Milho,Mostarda,Catchup,Queijo,Ovo",
+  description: "Hamburguer Artesanal, Maionese, Tomate, Alface, Milho, Mostarda, Catchup, Queijo, Ovo",
   price: "R$ 31,00",
   image: "/lovable-uploads/c7c76be9-f6aa-4af8-9787-3ba84363461b.png",
   category: "Xis",
