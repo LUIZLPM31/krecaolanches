@@ -49,7 +49,7 @@ export const menuItems: MenuItem[] = [{
   name: "Xis 4 Queijos",
   description: "Hambúrguer artesanal com blend de 4 queijos, bacon e molho especial. Acompanha maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo.",
   price: "R$ 32,90",
-  image: "https://postimg.cc/mtKsN0T0",
+  image: "https://i.postimg.cc/BbBX8F44/images.jpg",
   category: "Xis",
   ifoodUrl: "https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?prato=5c6786e3-98e1-4a63-81fc-a2417f45d0b4"
 }, {
@@ -96,7 +96,7 @@ export const menuItems: MenuItem[] = [{
   name: "Iscas De Tilápia",
   description: "Iscas De Tilápia Empanadas 500g, Acompanha Ovos De Codorna, Pepino Conserva, Azeitonas, Limão",
   price: "R$ 75,00",
-  image: "https://postimg.cc/KkpbPx0r",
+  image: "https://i.postimg.cc/wMgBdBJP/download.jpg",
   category: "Porções",
   ifoodUrl: "https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?prato=ace9aae0-c588-4c1f-8486-c15b28f9d0e3"
 }, {
