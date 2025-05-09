@@ -21,7 +21,7 @@ export function Footer() {
             {/* Social Media */}
             <div className="flex space-x-4">
               <a 
-                href="https://www.instagram.com/krecaolanches/" 
+                href="https://www.instagram.com/krecao_lanches/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="bg-gray-800 hover:bg-krecao-red transition-colors rounded-full p-3"
@@ -29,7 +29,7 @@ export function Footer() {
                 <Instagram size={25} />
               </a>
               <a 
-                href="https://www.facebook.com/krecao_lanches/" 
+                href="https://www.facebook.com/krecaolanches/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="bg-gray-800 hover:bg-krecao-red transition-colors rounded-full p-3"
