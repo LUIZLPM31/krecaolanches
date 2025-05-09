@@ -26,15 +26,15 @@ export function Footer() {
                 rel="noopener noreferrer"
                 className="bg-gray-800 hover:bg-krecao-red transition-colors rounded-full p-3"
               >
-                <Instagram size={18} />
+                <Instagram size={25} />
               </a>
               <a 
-                href="https://www.facebook.com/krecaolanches/" 
+                href="https://www.facebook.com/krecao_lanches/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="bg-gray-800 hover:bg-krecao-red transition-colors rounded-full p-3"
               >
-                <Facebook size={18} />
+                <Facebook size={25} />
               </a>
               <a 
                 href="https://twitter.com/krecaolanches" 
@@ -42,7 +42,7 @@ export function Footer() {
                 rel="noopener noreferrer"
                 className="bg-gray-800 hover:bg-krecao-red transition-colors rounded-full p-3"
               >
-                <Twitter size={18} />
+                <Twitter size={25} />
               </a>
               <a 
                 href="https://wa.me/5132422047" 
@@ -50,7 +50,7 @@ export function Footer() {
                 rel="noopener noreferrer"
                 className="bg-gray-800 hover:bg-green-600 transition-colors rounded-full p-3"
               >
-                <Phone size={18} />
+                <Phone size={25} />
               </a>
             </div>
           </div>

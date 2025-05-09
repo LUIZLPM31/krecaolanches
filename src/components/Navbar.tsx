@@ -79,7 +79,7 @@ export function Navbar() {
                 {link.name}
               </Button>)}
             
-            <Button variant="outline" onClick={handleAuthAction} className="border-gray-700 text-stone-50 bg-red-600 hover:bg-red-500">
+            <Button variant="outline" onClick={handleAuthAction} className="border-gray-700 text-stone-50 bg-krecao-red">
               <User className="mr-2 h-4 w-4" />
               {user ? "Sair" : "Entrar"}
             </Button>

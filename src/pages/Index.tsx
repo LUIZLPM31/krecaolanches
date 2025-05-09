@@ -4,13 +4,11 @@ import { Hero } from "@/components/Hero";
 import { MenuHighlights } from "@/components/MenuHighlights";
 import { AboutUs } from "@/components/AboutUs";
 import { Location } from "@/components/Location";
+import { FAQ } from "@/components/FAQ";
 import { ContactForm } from "@/components/ContactForm";
 import { Footer } from "@/components/Footer";
-import { useNavigate } from "react-router-dom";
 
 const Index = () => {
-  const navigate = useNavigate();
-  
   return (
     <div className="min-h-screen bg-black text-white">
       <Navbar />
@@ -18,6 +16,7 @@ const Index = () => {
       <MenuHighlights />
       <AboutUs />
       <Location />
+      <FAQ />
       <ContactForm />
       <Footer />
     </div>

@@ -1,8 +1,8 @@
 
 import { supabase } from "@/integrations/supabase/client";
-import { menuItems } from "@/components/MenuHighlights";
 import { Product } from "@/types/product";
 import { seedProductsToSupabase, seedSpecificProducts } from "./productSeeder";
+import { homeMenuItems } from "@/data/homeMenuItems";
 
 export type { Product } from "@/types/product";
 
@@ -28,8 +28,9 @@ export const fetchProducts = async (): Promise<{
         categories: ["Todos", ...uniqueCategories]
       };
     } else {
-      // Convert menuItems to Product format
-      const convertedMenuItems = convertMenuItemsToProducts(menuItems);
+      // Convert homeMenuItems to Product format for initial data
+      // Note: This will only be used for initial seeding if no products in DB
+      const convertedMenuItems = convertMenuItemsToProducts(homeMenuItems);
       
       // Extract unique categories
       const uniqueCategories = extractUniqueCategories(convertedMenuItems);
@@ -43,8 +44,8 @@ export const fetchProducts = async (): Promise<{
       };
     }
   } catch (error: any) {
-    // Fallback to menuItems if Supabase fails
-    const convertedMenuItems = convertMenuItemsToProducts(menuItems);
+    // Fallback to homeMenuItems if Supabase fails
+    const convertedMenuItems = convertMenuItemsToProducts(homeMenuItems);
     
     // Extract unique categories
     const uniqueCategories = extractUniqueCategories(convertedMenuItems);
@@ -65,7 +66,7 @@ const extractUniqueCategories = (products: Product[]): string[] => {
 };
 
 // Helper function to convert menu items to product format
-const convertMenuItemsToProducts = (items: typeof menuItems): Product[] => {
+const convertMenuItemsToProducts = (items: typeof homeMenuItems): Product[] => {
   return items.map((item, index) => ({
     id: `menu-item-${index}`,
     name: item.name,

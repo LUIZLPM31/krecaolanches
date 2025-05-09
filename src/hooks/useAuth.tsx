@@ -4,40 +4,46 @@ import { supabase } from "@/integrations/supabase/client";
 import { Session, User } from "@supabase/supabase-js";
 import { toast } from "@/hooks/use-toast";
 
-type AuthContextType = {
+// Define types for our auth context
+interface AuthState {
   session: Session | null;
   user: User | null;
   isLoading: boolean;
-  signOut: () => Promise<void>;
-};
+}
 
+interface AuthContextType extends AuthState {
+  signOut: () => Promise<void>;
+  refreshSession: () => Promise<void>;
+}
+
+// Create the auth context
 const AuthContext = createContext<AuthContextType | null>(null);
 
-export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
-  const [session, setSession] = useState<Session | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+// Custom hook for auth provider
+const useAuthProvider = (): AuthContextType => {
+  const [authState, setAuthState] = useState<AuthState>({
+    user: null,
+    session: null,
+    isLoading: true,
+  });
 
-  useEffect(() => {
-    // Set up auth state listener FIRST
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, session) => {
-        setSession(session);
-        setUser(session?.user ?? null);
-        setIsLoading(false);
-      }
-    );
+  // Function to refresh the session
+  const refreshSession = async () => {
+    try {
+      const { data } = await supabase.auth.getSession();
+      setAuthState(prevState => ({
+        ...prevState,
+        session: data.session,
+        user: data.session?.user ?? null,
+        isLoading: false,
+      }));
+    } catch (error) {
+      console.error("Error refreshing session:", error);
+      setAuthState(prevState => ({ ...prevState, isLoading: false }));
+    }
+  };
 
-    // THEN check for existing session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-      setIsLoading(false);
-    });
-
-    return () => subscription.unsubscribe();
-  }, []);
-
+  // Sign out function
   const signOut = async () => {
     try {
       await supabase.auth.signOut();
@@ -54,13 +60,44 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  useEffect(() => {
+    // Initial session check
+    refreshSession();
+
+    // Set up auth state listener
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setAuthState({
+          session,
+          user: session?.user ?? null,
+          isLoading: false,
+        });
+      }
+    );
+
+    // Cleanup subscription on unmount
+    return () => subscription.unsubscribe();
+  }, []);
+
+  return {
+    ...authState,
+    signOut,
+    refreshSession,
+  };
+};
+
+// Auth Provider component
+export function AuthProvider({ children }: { children: React.ReactNode }) {
+  const auth = useAuthProvider();
+  
   return (
-    <AuthContext.Provider value={{ session, user, isLoading, signOut }}>
+    <AuthContext.Provider value={auth}>
       {children}
     </AuthContext.Provider>
   );
 }
 
+// Custom hook to use auth context
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {

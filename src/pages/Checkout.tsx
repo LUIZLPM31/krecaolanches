@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -10,17 +9,24 @@ import { toast } from "@/hooks/use-toast";
 import CheckoutForm from "@/components/checkout/CheckoutForm";
 import CartSummaryDetail from "@/components/checkout/CartSummaryDetail";
 import { processWhatsAppOrder } from "@/utils/checkout";
-
 const Checkout = () => {
   const navigate = useNavigate();
-  const { user } = useAuth();
-  const { cart, updateQuantity, removeFromCart, updateNotes, clearCart, getTotalPrice } = useCart();
+  const {
+    user
+  } = useAuth();
+  const {
+    cart,
+    updateQuantity,
+    removeFromCart,
+    updateNotes,
+    clearCart,
+    getTotalPrice
+  } = useCart();
   const [customerName, setCustomerName] = useState("");
   const [customerPhone, setCustomerPhone] = useState("");
   const [deliveryAddress, setDeliveryAddress] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("dinheiro");
   const [loading, setLoading] = useState(false);
-
   useEffect(() => {
     // Redirect to menu if cart is empty
     if (cart.length === 0) {
@@ -32,17 +38,13 @@ const Checkout = () => {
       fetchUserProfile();
     }
   }, [user, cart]);
-
   const fetchUserProfile = async () => {
     try {
-      const { data, error } = await supabase
-        .from("profiles")
-        .select("*")
-        .eq("id", user!.id)
-        .single();
-
+      const {
+        data,
+        error
+      } = await supabase.from("profiles").select("*").eq("id", user!.id).single();
       if (error) throw error;
-
       if (data) {
         setCustomerName(data.name || "");
         setCustomerPhone(data.phone || "");
@@ -52,33 +54,26 @@ const Checkout = () => {
       console.error("Error fetching profile:", error.message);
     }
   };
-
   const handleSubmitOrder = async (e: React.FormEvent) => {
     e.preventDefault();
-    
     if (cart.length === 0) {
       toast({
         title: "Carrinho vazio",
         description: "Adicione produtos ao carrinho antes de finalizar o pedido",
-        variant: "destructive",
+        variant: "destructive"
       });
       navigate("/menu");
       return;
     }
-    
     setLoading(true);
-
     try {
       // Save user profile if logged in
       if (user) {
-        await supabase
-          .from("profiles")
-          .update({
-            name: customerName,
-            phone: customerPhone,
-            address: deliveryAddress,
-          })
-          .eq("id", user.id);
+        await supabase.from("profiles").update({
+          name: customerName,
+          phone: customerPhone,
+          address: deliveryAddress
+        }).eq("id", user.id);
       }
 
       // Process order via WhatsApp
@@ -90,31 +85,25 @@ const Checkout = () => {
         cart,
         totalPrice: getTotalPrice()
       });
-      
+
       // Clear cart
       clearCart();
-      
+
       // Navigate back to menu
       navigate("/menu");
     } catch (error: any) {
       toast({
         title: "Erro ao processar pedido",
         description: error.message,
-        variant: "destructive",
+        variant: "destructive"
       });
     } finally {
       setLoading(false);
     }
   };
-
-  return (
-    <div className="min-h-screen bg-black text-white py-16">
+  return <div className="min-h-screen bg-black text-white py-16">
       <div className="container mx-auto px-4">
-        <Button
-          variant="outline"
-          onClick={() => navigate("/menu")}
-          className="mb-8 mt-12 border-red text-red hover:bg-gray-800"
-        >
+        <Button variant="outline" onClick={() => navigate("/menu")} className="mb-8 mt-12 border-red bg-krecao-red text-white">
           <ChevronLeft className="mr-2 h-4 w-4" /> Voltar 
         </Button>
 
@@ -126,30 +115,11 @@ const Checkout = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <CartSummaryDetail 
-            cart={cart}
-            updateQuantity={updateQuantity}
-            removeFromCart={removeFromCart}
-            updateNotes={updateNotes}
-            getTotalPrice={getTotalPrice}
-          />
+          <CartSummaryDetail cart={cart} updateQuantity={updateQuantity} removeFromCart={removeFromCart} updateNotes={updateNotes} getTotalPrice={getTotalPrice} />
           
-          <CheckoutForm
-            customerName={customerName}
-            setCustomerName={setCustomerName}
-            customerPhone={customerPhone}
-            setCustomerPhone={setCustomerPhone}
-            deliveryAddress={deliveryAddress}
-            setDeliveryAddress={setDeliveryAddress}
-            paymentMethod={paymentMethod}
-            setPaymentMethod={setPaymentMethod}
-            onSubmit={handleSubmitOrder}
-            loading={loading}
-          />
+          <CheckoutForm customerName={customerName} setCustomerName={setCustomerName} customerPhone={customerPhone} setCustomerPhone={setCustomerPhone} deliveryAddress={deliveryAddress} setDeliveryAddress={setDeliveryAddress} paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod} onSubmit={handleSubmitOrder} loading={loading} />
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Checkout;
