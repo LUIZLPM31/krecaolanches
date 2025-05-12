@@ -9,26 +9,22 @@ import { ArrowLeft } from "lucide-react";
 import SearchBar from "@/components/menu/SearchBar";
 import MenuCategoryTabs from "@/components/menu/MenuCategoryTabs";
 import CartSummary from "@/components/menu/CartSummary";
+
 const Menu = () => {
   const navigate = useNavigate();
-  const {
-    user
-  } = useAuth();
-  const {
-    cart,
-    addToCart,
-    getTotalPrice,
-    getTotalItems
-  } = useCart();
+  const { user } = useAuth();
+  const { cart, addToCart, getTotalPrice, getTotalItems } = useCart();
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [categories, setCategories] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>("Todos");
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearchVisible, setIsSearchVisible] = useState(false);
+
   useEffect(() => {
     loadProducts();
   }, []);
+
   const loadProducts = async () => {
     setLoading(true);
     try {
@@ -56,6 +52,7 @@ const Menu = () => {
 
   // Filter products by category and search query
   const filteredProducts = products.filter(product => (selectedCategory === "Todos" || product.category === selectedCategory) && (product.name.toLowerCase().includes(searchQuery.toLowerCase()) || product.description.toLowerCase().includes(searchQuery.toLowerCase())));
+  
   const handleAddToCart = (product: Product) => {
     addToCart(product);
     toast({
@@ -63,6 +60,7 @@ const Menu = () => {
       description: `${product.name} adicionado ao carrinho`
     });
   };
+
   const proceedToCheckout = () => {
     if (cart.length === 0) {
       toast({
@@ -87,9 +85,19 @@ const Menu = () => {
       seedProducts();
     }
   }, [products, loading]);
+
+  // Fix for back button - go directly to home page instead of browser history
+  const handleBackButton = () => {
+    navigate("/");
+  };
+
   return <div className="min-h-screen bg-black text-white py-16">
       <div className="container mx-auto px-4">
-        <Button variant="ghost" onClick={() => navigate(-1)} className="mt-12 text-white hover:text-krecao-yellow flex items-center gap-1 bg-krecao-red">
+        <Button 
+          variant="ghost" 
+          onClick={handleBackButton} 
+          className="mt-12 text-white hover:text-krecao-yellow flex items-center gap-1 bg-krecao-red"
+        >
           <ArrowLeft size={16} />
           Voltar
         </Button>
@@ -113,4 +121,5 @@ const Menu = () => {
       {cart.length > 0 && <CartSummary totalItems={getTotalItems()} totalPrice={getTotalPrice()} onCheckout={proceedToCheckout} />}
     </div>;
 };
+
 export default Menu;

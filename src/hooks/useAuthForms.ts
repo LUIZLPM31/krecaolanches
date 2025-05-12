@@ -36,33 +36,42 @@ export function useAuthForms() {
     }
   };
 
-  // Added explicit return type to fix the TypeScript error
+  // Função simplificada para verificar a existência de email
   const checkEmailExists = async (email: string): Promise<boolean> => {
     try {
-      // First check if email exists in profiles table
-      const { data } = await supabase
+      // Consulta direta na tabela de perfis
+      const { data: profileData } = await supabase
         .from('profiles')
-        .select('id')
-        .eq('email', email);
-      
-      if (data && data.length > 0) {
+        .select('email')
+        .eq('email', email)
+        .maybeSingle();
+        
+      if (profileData) {
+        console.log("Email encontrado na tabela profiles", profileData);
         return true;
       }
-    
-      // Adding explicit type annotations to help TypeScript
-      const dummyPassword = `dummy-password-${Date.now()}`;
       
-      // Simplifying the logic to avoid deep type inference
-      const signInResult = await supabase.auth.signInWithPassword({
-        email,
-        password: dummyPassword,
+      // Consulta para verificar usuários existentes pelo email na auth
+      const { data, error } = await supabase.auth.admin.listUsers({
+        filters: {
+          email: email
+        }
       });
       
-      // Check if error message contains "Invalid login credentials"
-      return Boolean(signInResult.error?.message?.includes('Invalid login credentials'));
+      // Se houver erro na API admin ou não tivermos acesso, assumimos que o email não existe
+      if (error) {
+        console.log("Erro ao verificar usuários:", error);
+        return false;
+      }
+      
+      // Verifica se encontrou algum usuário com esse email
+      const exists = data && data.users && data.users.length > 0;
+      console.log("Resultado da verificação de email:", exists);
+      
+      return exists;
     } catch (err) {
-      console.error("Error checking email:", err);
-      return false;
+      console.error("Erro ao verificar email:", err);
+      return false; // Em caso de erro, permitir o cadastro
     }
   };
 
@@ -70,7 +79,9 @@ export function useAuthForms() {
     setLoading(true);
 
     try {
-      const emailExists = await checkEmailExists(email);
+      // Desativando temporariamente a verificação de email para debug
+      // const emailExists = await checkEmailExists(email);
+      const emailExists = false;
       
       if (emailExists) {
         toast({

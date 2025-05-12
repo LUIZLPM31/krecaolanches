@@ -13,8 +13,17 @@ interface OrderData {
 
 const WHATSAPP_NUMBER = "5132422047";
 
+// Calculate discount (15% off)
+const applyDiscount = (price: number): number => {
+  const discount = 0.15; // 15% discount
+  return price * (1 - discount);
+};
+
 export const processWhatsAppOrder = (orderData: OrderData): void => {
   const { customerName, customerPhone, deliveryAddress, paymentMethod, cart, totalPrice } = orderData;
+  
+  // Apply 15% discount
+  const discountedTotal = applyDiscount(totalPrice);
   
   // Format cart items for WhatsApp
   const orderItems = cart.map(item => 
@@ -22,13 +31,15 @@ export const processWhatsAppOrder = (orderData: OrderData): void => {
   ).join('\n');
   
   // Create WhatsApp message
-  let message = `*Pedido K-recão Lanches*\n\n`;
+  let message = `*Pedido *\n\n`;
   message += `*Cliente:* ${customerName}\n`;
   message += `*Telefone:* ${customerPhone}\n`;
   message += `*Endereço:* ${deliveryAddress}\n`;
   message += `*Forma de Pagamento:* ${paymentMethod === 'dinheiro' ? 'Dinheiro' : 'Cartão'}\n\n`;
   message += `*Itens do pedido:*\n${orderItems}\n\n`;
-  message += `*Total:* R$${totalPrice.toFixed(2)}`;
+  message += `*Subtotal:* R$${totalPrice.toFixed(2)}\n`;
+  message += `*Desconto (15%):* R$${(totalPrice - discountedTotal).toFixed(2)}\n`;
+  message += `*Total com desconto:* R$${discountedTotal.toFixed(2)}`;
   
   // Encode message for URL
   const encodedMessage = encodeURIComponent(message);
@@ -38,8 +49,8 @@ export const processWhatsAppOrder = (orderData: OrderData): void => {
   
   // Notify user
   toast({
-    title: "Redirecionando para WhatsApp",
-    description: "Você será redirecionado para finalizar seu pedido pelo WhatsApp",
+    title: "Desconto aplicado!",
+    description: "Você ganhou 15% de desconto no seu pedido via WhatsApp!",
   });
 
   // Open WhatsApp in new tab

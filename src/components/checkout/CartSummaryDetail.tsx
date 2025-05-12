@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { CartItem } from "@/hooks/useCart";
@@ -16,6 +17,15 @@ const CartSummaryDetail = ({
   updateNotes,
   getTotalPrice
 }: CartSummaryDetailProps) => {
+  // Calculate the original total price
+  const originalTotal = getTotalPrice();
+  
+  // Calculate the discounted total (15% off)
+  const discountedTotal = originalTotal * 0.85;
+  
+  // Calculate the discount amount
+  const discountAmount = originalTotal - discountedTotal;
+  
   return <div className="bg-gray-900 p-6 rounded-lg border border-gray-800">
       <h2 className="text-xl font-bold mb-4 flex items-center">Seu Carrinho</h2>
 
@@ -54,16 +64,19 @@ const CartSummaryDetail = ({
       <div className="border-t border-gray-800 pt-4">
         <div className="flex justify-between mb-2">
           <span>Subtotal:</span>
-          <span>R$ {getTotalPrice().toFixed(2)}</span>
+          <span>R$ {originalTotal.toFixed(2)}</span>
+        </div>
+        <div className="flex justify-between mb-2 text-green-500">
+          <span>Desconto (15%):</span>
+          <span>- R$ {discountAmount.toFixed(2)}</span>
         </div>
         <div className="flex justify-between mb-2">
           <span>Taxa de entrega:</span>
-          <span>Consulte
-        </span>
+          <span>Consulte</span>
         </div>
         <div className="flex justify-between font-bold text-xl text-krecao-yellow mt-4">
-          <span>Total:</span>
-          <span>R$ {getTotalPrice().toFixed(2)}</span>
+          <span>Total com desconto:</span>
+          <span>R$ {discountedTotal.toFixed(2)}</span>
         </div>
       </div>
     </div>;
