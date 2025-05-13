@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { ExternalLink, Plus } from "lucide-react";
 import { homeMenuItems } from "@/data/homeMenuItems";
-
 export function MenuHighlights() {
   const navigate = useNavigate();
   const handleViewFullMenu = () => {
@@ -40,10 +39,7 @@ export function MenuHighlights() {
                     <p className="text-gray-400 mb-4">{item.description}</p>
                   </div>
                   <div className="flex items-center justify-between mt-4">
-                    <Button
-                      onClick={() => window.open(item.ifoodUrl || 'https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOoqBB8HG_-HUE2-8McvH9CSGuQ2QuLsGlnnVCPGkDYm0kNCNCdZi', '_blank')} 
-                      className="bg-krecao-red hover:bg-krecao-red/90 group-hover:bg-krecao-yellow group-hover:text-black transition-all duration-300 transform hover:scale-105 rounded-full shadow-lg hover:shadow-krecao-yellow/30 flex items-center gap-1.5"
-                    >
+                    <Button onClick={() => window.open(item.ifoodUrl || 'https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOoqBB8HG_-HUE2-8McvH9CSGuQ2QuLsGlnnVCPGkDYm0kNCNCdZi', '_blank')} className="bg-krecao-red hover:bg-krecao-red/90 group-hover:bg-krecao-yellow group-hover:text-black transition-all duration-300 transform hover:scale-105 rounded-full shadow-lg hover:shadow-krecao-yellow/30 flex items-center gap-1.5">
                       <Plus className="h-4 w-4" /> Pedir <ExternalLink className="h-4 w-4 ml-1" />
                     </Button>
                   </div>
@@ -53,9 +49,7 @@ export function MenuHighlights() {
         </div>
         
         <div className="text-center mt-12">
-          <Button className="bg-krecao-red hover:bg-krecao-red/90 text-white rounded-full px-8 py-6 text-lg shadow-lg hover:shadow-krecao-red/30 transition-all duration-300 transform hover:scale-105" onClick={handleViewFullMenu}>
-            Ver Cardápio Completo
-          </Button>
+          <Button onClick={handleViewFullMenu} className="bg-green-500 hover:bg-green-600 text-white rounded-full px-8 py-6 text-lg shadow-lg hover:shadow-green-500/30 transition-all duration-300 transform hover:scale-105">Cardápio promocional</Button>
         </div>
       </div>
     </section>;

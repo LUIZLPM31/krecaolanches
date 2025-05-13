@@ -36,42 +36,36 @@ export function useAuthForms() {
     }
   };
 
-  // Função simplificada para verificar a existência de email
+  // Updated function to check email existence
   const checkEmailExists = async (email: string): Promise<boolean> => {
     try {
-      // Consulta direta na tabela de perfis
+      // Check if email exists in profiles table
       const { data: profileData } = await supabase
         .from('profiles')
         .select('email')
         .eq('email', email)
         .maybeSingle();
-        
+      
       if (profileData) {
         console.log("Email encontrado na tabela profiles", profileData);
         return true;
       }
       
-      // Consulta para verificar usuários existentes pelo email na auth
-      const { data, error } = await supabase.auth.admin.listUsers({
-        filters: {
-          email: email
-        }
+      // Alternative approach: try to reset password for the email
+      // If it returns no error, the email exists
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: window.location.origin,
       });
       
-      // Se houver erro na API admin ou não tivermos acesso, assumimos que o email não existe
-      if (error) {
-        console.log("Erro ao verificar usuários:", error);
-        return false;
-      }
-      
-      // Verifica se encontrou algum usuário com esse email
-      const exists = data && data.users && data.users.length > 0;
-      console.log("Resultado da verificação de email:", exists);
+      // If there's no error, it means the email exists
+      // If there is an error, it's likely because the email doesn't exist
+      const exists = !error;
+      console.log("Resultado da verificação de email via reset:", exists);
       
       return exists;
     } catch (err) {
       console.error("Erro ao verificar email:", err);
-      return false; // Em caso de erro, permitir o cadastro
+      return false; // In case of error, allow registration
     }
   };
 
@@ -79,7 +73,7 @@ export function useAuthForms() {
     setLoading(true);
 
     try {
-      // Desativando temporariamente a verificação de email para debug
+      // Temporarily disabled email verification to allow registration
       // const emailExists = await checkEmailExists(email);
       const emailExists = false;
       

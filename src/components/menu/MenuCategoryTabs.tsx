@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { Sandwich, Utensils, Pizza } from "lucide-react";
+import { Sandwich, Utensils, Pizza, CupSoda } from "lucide-react";
 import ProductCard from "./ProductCard";
 
 interface Product {
@@ -35,6 +35,7 @@ const MenuCategoryTabs = ({
     switch(category?.toLowerCase()) {
       case 'xis': return <Sandwich className="h-4 w-4 mr-2" />;
       case 'porções': return <Utensils className="h-4 w-4 mr-2" />;
+      case 'bebidas': return <CupSoda className="h-4 w-4 mr-2" />;
       default: return <Pizza className="h-4 w-4 mr-2" />;
     }
   };

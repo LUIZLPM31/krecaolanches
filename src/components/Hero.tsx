@@ -27,7 +27,7 @@ export function Hero() {
             <Button className="bg-krecao-red hover:bg-krecao-red/90 text-white rounded-full px-8 py-6 text-lg" onClick={() => window.open('https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOoqBB8HG_-HUE2-8McvH9CSGuQ2QuLsGlnnVCPGkDYm0kNCNCdZi', '_blank')}>
               Pedir no iFood
             </Button>
-            <Button className="bg-green-600 hover:bg-green-700 text-white rounded-full px-8 py-6 text-lg" onClick={() => window.open('https://wa.me/5132422047?text=Olá! Gostaria de fazer um pedido no K-recão Lanches.', '_blank')}>
+            <Button onClick={() => window.open('https://wa.me/5132422047?text=Olá! Gostaria de fazer um pedido no K-recão Lanches.', '_blank')} className="bg-green-600 hover:bg-green-700 text-white rounded-full px-8 py-6 text-lg">
               Pedir no WhatsApp
             </Button>
           </div>

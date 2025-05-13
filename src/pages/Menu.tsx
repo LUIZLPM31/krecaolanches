@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
@@ -29,8 +30,26 @@ const Menu = () => {
     setLoading(true);
     try {
       const result = await fetchProducts();
-      setProducts(result.products);
-      setCategories(result.categories);
+      
+      // Filter out "Adicionais" category
+      const filteredProducts = result.products.filter(product => product.category !== "Adicionais");
+      setProducts(filteredProducts);
+      
+      // Ensure categories are sorted with Bebidas at the end and exclude "Adicionais"
+      const sortedCategories = ["Todos"]
+        .concat(
+          result.categories
+            .filter(c => c !== "Todos" && c !== "Adicionais")
+            .sort((a, b) => {
+              // Place "Bebidas" at the end
+              if (a === "Bebidas") return 1;
+              if (b === "Bebidas") return -1;
+              return a.localeCompare(b);
+            })
+        );
+        
+      setCategories(sortedCategories);
+      
       if (result.error) {
         toast({
           title: "Erro ao carregar produtos",
@@ -51,7 +70,11 @@ const Menu = () => {
   };
 
   // Filter products by category and search query
-  const filteredProducts = products.filter(product => (selectedCategory === "Todos" || product.category === selectedCategory) && (product.name.toLowerCase().includes(searchQuery.toLowerCase()) || product.description.toLowerCase().includes(searchQuery.toLowerCase())));
+  const filteredProducts = products.filter(product => 
+    (selectedCategory === "Todos" || product.category === selectedCategory) && 
+    (product.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+     product.description.toLowerCase().includes(searchQuery.toLowerCase()))
+  );
   
   const handleAddToCart = (product: Product) => {
     addToCart(product);
@@ -89,6 +112,15 @@ const Menu = () => {
   // Fix for back button - go directly to home page instead of browser history
   const handleBackButton = () => {
     navigate("/");
+  };
+
+  // Force a refresh of the products from the database to make sure we have the latest data
+  const handleForceRefresh = () => {
+    loadProducts();
+    toast({
+      title: "Menu atualizado",
+      description: "Os produtos foram atualizados com sucesso"
+    });
   };
 
   return <div className="min-h-screen bg-black text-white py-16">

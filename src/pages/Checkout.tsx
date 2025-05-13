@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -9,6 +10,7 @@ import { toast } from "@/hooks/use-toast";
 import CheckoutForm from "@/components/checkout/CheckoutForm";
 import CartSummaryDetail from "@/components/checkout/CartSummaryDetail";
 import { processWhatsAppOrder } from "@/utils/checkout";
+
 const Checkout = () => {
   const navigate = useNavigate();
   const {
@@ -27,6 +29,9 @@ const Checkout = () => {
   const [deliveryAddress, setDeliveryAddress] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("dinheiro");
   const [loading, setLoading] = useState(false);
+  const [needChange, setNeedChange] = useState(false);
+  const [changeAmount, setChangeAmount] = useState("");
+  
   useEffect(() => {
     // Redirect to menu if cart is empty
     if (cart.length === 0) {
@@ -38,6 +43,7 @@ const Checkout = () => {
       fetchUserProfile();
     }
   }, [user, cart]);
+  
   const fetchUserProfile = async () => {
     try {
       const {
@@ -54,6 +60,7 @@ const Checkout = () => {
       console.error("Error fetching profile:", error.message);
     }
   };
+  
   const handleSubmitOrder = async (e: React.FormEvent) => {
     e.preventDefault();
     if (cart.length === 0) {
@@ -65,6 +72,30 @@ const Checkout = () => {
       navigate("/menu");
       return;
     }
+
+    // Validate change amount when needed
+    if (paymentMethod === "dinheiro" && needChange) {
+      const changeValue = parseFloat(changeAmount.replace(",", "."));
+      if (isNaN(changeValue) || changeValue <= 0) {
+        toast({
+          title: "Valor inválido",
+          description: "Por favor, informe um valor válido para o troco",
+          variant: "destructive"
+        });
+        return;
+      }
+
+      const totalPrice = getTotalPrice() * 0.85; // Apply 15% discount
+      if (changeValue <= totalPrice) {
+        toast({
+          title: "Valor insuficiente",
+          description: "O valor para troco deve ser maior que o total do pedido",
+          variant: "destructive"
+        });
+        return;
+      }
+    }
+    
     setLoading(true);
     try {
       // Save user profile if logged in
@@ -83,7 +114,9 @@ const Checkout = () => {
         deliveryAddress,
         paymentMethod,
         cart,
-        totalPrice: getTotalPrice()
+        totalPrice: getTotalPrice(),
+        needChange: needChange && paymentMethod === "dinheiro",
+        changeAmount: needChange ? changeAmount : ""
       });
 
       // Clear cart
@@ -101,6 +134,7 @@ const Checkout = () => {
       setLoading(false);
     }
   };
+  
   return <div className="min-h-screen bg-black text-white py-16">
       <div className="container mx-auto px-4">
         <Button variant="outline" onClick={() => navigate("/menu")} className="mb-8 mt-12 border-red bg-krecao-red text-white">
@@ -115,11 +149,33 @@ const Checkout = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <CartSummaryDetail cart={cart} updateQuantity={updateQuantity} removeFromCart={removeFromCart} updateNotes={updateNotes} getTotalPrice={getTotalPrice} />
+          <CartSummaryDetail 
+            cart={cart} 
+            updateQuantity={updateQuantity} 
+            removeFromCart={removeFromCart} 
+            updateNotes={updateNotes} 
+            getTotalPrice={getTotalPrice} 
+          />
           
-          <CheckoutForm customerName={customerName} setCustomerName={setCustomerName} customerPhone={customerPhone} setCustomerPhone={setCustomerPhone} deliveryAddress={deliveryAddress} setDeliveryAddress={setDeliveryAddress} paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod} onSubmit={handleSubmitOrder} loading={loading} />
+          <CheckoutForm 
+            customerName={customerName}
+            setCustomerName={setCustomerName}
+            customerPhone={customerPhone}
+            setCustomerPhone={setCustomerPhone}
+            deliveryAddress={deliveryAddress}
+            setDeliveryAddress={setDeliveryAddress}
+            paymentMethod={paymentMethod}
+            setPaymentMethod={setPaymentMethod}
+            onSubmit={handleSubmitOrder}
+            loading={loading}
+            needChange={needChange}
+            setNeedChange={setNeedChange}
+            changeAmount={changeAmount}
+            setChangeAmount={setChangeAmount}
+          />
         </div>
       </div>
     </div>;
 };
+
 export default Checkout;

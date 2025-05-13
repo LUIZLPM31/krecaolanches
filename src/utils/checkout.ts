@@ -9,6 +9,8 @@ interface OrderData {
   paymentMethod: string;
   cart: CartItem[];
   totalPrice: number;
+  needChange?: boolean;
+  changeAmount?: string;
 }
 
 const WHATSAPP_NUMBER = "5132422047";
@@ -20,7 +22,16 @@ const applyDiscount = (price: number): number => {
 };
 
 export const processWhatsAppOrder = (orderData: OrderData): void => {
-  const { customerName, customerPhone, deliveryAddress, paymentMethod, cart, totalPrice } = orderData;
+  const { 
+    customerName, 
+    customerPhone, 
+    deliveryAddress, 
+    paymentMethod, 
+    cart, 
+    totalPrice,
+    needChange,
+    changeAmount 
+  } = orderData;
   
   // Apply 15% discount
   const discountedTotal = applyDiscount(totalPrice);
@@ -35,8 +46,14 @@ export const processWhatsAppOrder = (orderData: OrderData): void => {
   message += `*Cliente:* ${customerName}\n`;
   message += `*Telefone:* ${customerPhone}\n`;
   message += `*Endereço:* ${deliveryAddress}\n`;
-  message += `*Forma de Pagamento:* ${paymentMethod === 'dinheiro' ? 'Dinheiro' : 'Cartão'}\n\n`;
-  message += `*Itens do pedido:*\n${orderItems}\n\n`;
+  message += `*Forma de Pagamento:* ${paymentMethod === 'dinheiro' ? 'Dinheiro' : 'Cartão'}\n`;
+  
+  // Add change information if needed
+  if (paymentMethod === 'dinheiro' && needChange && changeAmount) {
+    message += `*Troco para:* R$${changeAmount}\n`;
+  }
+  
+  message += `\n*Itens do pedido:*\n${orderItems}\n\n`;
   message += `*Subtotal:* R$${totalPrice.toFixed(2)}\n`;
   message += `*Desconto (15%):* R$${(totalPrice - discountedTotal).toFixed(2)}\n`;
   message += `*Total com desconto:* R$${discountedTotal.toFixed(2)}`;

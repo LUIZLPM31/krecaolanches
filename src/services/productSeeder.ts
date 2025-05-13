@@ -1,4 +1,3 @@
-
 import { supabase } from "@/integrations/supabase/client";
 import { Product } from "@/types/product";
 
@@ -103,6 +102,87 @@ export const seedSpecificProducts = async () => {
       price: "22.60",
       image_url: "/lovable-uploads/67740c08-faea-4884-a10e-2bca132fd95c.png",
       category: "Lanches"
+    },
+    
+    // Add new drinks category
+    {
+      name: "Refrigerante Lata",
+      description: "Coca-Cola, Guaraná Antarctica, Sprite, Fanta ou Pepsi.",
+      price: 6.50,
+      image_url: "https://images.unsplash.com/photo-1581098365948-6061a61ff396?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80",
+      category: "Bebidas"
+    },
+    {
+      name: "Refrigerante 2L",
+      description: "Coca-Cola, Guaraná Antarctica, Sprite, Fanta ou Pepsi.",
+      price: 15.00,
+      image_url: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80",
+      category: "Bebidas"
+    },
+    {
+      name: "Suco Natural",
+      description: "Suco natural de laranja, abacaxi, morango ou uva.",
+      price: 8.50,
+      image_url: "https://images.unsplash.com/photo-1600271886742-f049cd451bba?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80",
+      category: "Bebidas"
+    },
+    {
+      name: "Água Mineral",
+      description: "Água mineral sem gás ou com gás.",
+      price: 4.00,
+      image_url: "https://images.unsplash.com/photo-1566724356302-cda1a94d139f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80",
+      category: "Bebidas"
+    },
+    
+    // Add new add-ons category
+    {
+      name: "Catupiry",
+      description: "Porção adicional de catupiry para o seu lanche.",
+      price: 3.50,
+      image_url: "https://images.unsplash.com/photo-1626078690577-a493cf14f282?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80",
+      category: "Adicionais"
+    },
+    {
+      name: "Cheddar",
+      description: "Porção adicional de cheddar para o seu lanche.",
+      price: 3.50,
+      image_url: "https://images.unsplash.com/photo-1625084560240-905f6ddac523?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80",
+      category: "Adicionais"
+    },
+    {
+      name: "Cebola Grelhada",
+      description: "Porção adicional de cebola grelhada para o seu lanche.",
+      price: 2.50,
+      image_url: "https://images.unsplash.com/photo-1580996378027-23040f16f157?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80",
+      category: "Adicionais"
+    },
+    {
+      name: "Picles",
+      description: "Porção adicional de picles para o seu lanche.",
+      price: 2.00,
+      image_url: "https://images.unsplash.com/photo-1593197525554-4ab5e7b34490?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80",
+      category: "Adicionais"
+    },
+    {
+      name: "4 Queijos",
+      description: "Porção adicional de mix de 4 queijos para o seu lanche.",
+      price: 4.50,
+      image_url: "https://images.unsplash.com/photo-1619860705243-39775a7baed3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80",
+      category: "Adicionais"
+    },
+    {
+      name: "Azeitona",
+      description: "Porção adicional de azeitonas para o seu lanche.",
+      price: 2.00,
+      image_url: "https://images.unsplash.com/photo-1573208957999-4f1755af9593?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80",
+      category: "Adicionais"
+    },
+    {
+      name: "Bife Adicional",
+      description: "Bife adicional para o seu lanche.",
+      price: 6.00,
+      image_url: "https://images.unsplash.com/photo-1612871689353-cccf581d667b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80",
+      category: "Adicionais"
     }
   ];
 
@@ -112,7 +192,7 @@ export const seedSpecificProducts = async () => {
         {
           name: item.name,
           description: item.description,
-          price: parseFloat(item.price),
+          price: parseFloat(item.price.toString()),
           image_url: item.image_url,
           category: item.category
         }
