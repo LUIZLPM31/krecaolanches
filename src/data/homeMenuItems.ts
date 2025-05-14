@@ -188,5 +188,4 @@ export const homeMenuItems: HomeMenuItem[] = [
     category: "Bebidas"
     ifoodUrl:"https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOoqC_7TfWLiYZRiVXiY9cAycBV9RmFkJA4-hmMMTLR_gvKm_wPPg&prato=0747a558-f347-4173-b611-503011ebb0b8"
   }
-
 ];
