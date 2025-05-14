@@ -106,7 +106,7 @@ export function Navbar() {
                   <Button onClick={() => navigate("/menu")} className="w-full bg-krecao-red hover:bg-krecao-red/90 text-white">
                     <ShoppingCart className="mr-2 h-4 w-4" /> Pedir Agora
                   </Button>
-                  <Button variant="outline" onClick={handleAuthAction} className="w-full border-gray-700 text-white hover:bg-gray-800">
+                  <Button variant="outline" onClick={handleAuthAction} className="w-full border-gray-700 text-white hover:bg-red-600">
                     <User className="mr-2 h-4 w-4" />
                     {user ? "Sair" : "Entrar"}
                   </Button>
