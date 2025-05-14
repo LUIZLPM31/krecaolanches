@@ -99,7 +99,7 @@ export function Navbar() {
               <nav className="flex flex-col gap-6">
                 {filteredNavLinks.map(link => <Button key={link.name} variant="ghost" onClick={() => {
               handleNavigation(link.href);
-            }} className={`text-xl font-medium hover:text-white transition-colors justify-start ${location.pathname === link.href ? "text-white" : "text-gray-300"}`}>
+            }} className="">
                     {link.name}
                   </Button>)}
                 <div className="space-y-4 mt-6">
