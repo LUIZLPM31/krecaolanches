@@ -153,7 +153,7 @@ export const homeMenuItems: HomeMenuItem[] = [
     description: "Coca-Cola,Sprite, Fanta.",
     price: "R$ 20,00",
     image: "https://i.postimg.cc/1tpk31nT/download.jpg",
-    category: "Bebidas"
+    category: "Bebidas",
     ifoodUrl:"https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOoqC_7TfWLiYZRiVXiY9cAycBV9RmFkJA4-hmMMTLR_gvKm_wPPg&prato=0afcae85-de1a-4439-8ffb-50b2281739f8"
   },
    {
@@ -161,7 +161,7 @@ export const homeMenuItems: HomeMenuItem[] = [
     description: "Guaraná .",
     price: "R$ 17,00",
     image: "https://i.postimg.cc/Y9Kc7C9Y/download.jpg",
-    category: "Bebidas"
+    category: "Bebidas",
     ifoodUrl:"https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOoqC_7TfWLiYZRiVXiY9cAycBV9RmFkJA4-hmMMTLR_gvKm_wPPg&prato=d5fe3f9e-1620-46fc-86b2-1cdf57a66b85"
   },
   {
@@ -169,7 +169,7 @@ export const homeMenuItems: HomeMenuItem[] = [
     description: "Coca-Cola, Guaraná, Sprite, Fanta.",
     price: "R$ 9,50",
     image: "https://i.postimg.cc/J0M9yYjh/download.jpg",
-    category: "Bebidas"
+    category: "Bebidas",
     ifoodUrl:"https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOoqC_7TfWLiYZRiVXiY9cAycBV9RmFkJA4-hmMMTLR_gvKm_wPPg&prato=f9bdcdf6-b7e6-4aa1-8ec5-a9188bec6d76"
   },
   {
@@ -177,7 +177,7 @@ export const homeMenuItems: HomeMenuItem[] = [
     description: "Amstel, Budweiser, Eisenbahn, Polar, Bohemia ou Skol.",
     price: "R$ 9,50",
     image: "https://i.postimg.cc/W4cSbFGN/download.jpg",
-    category: "Bebidas"
+    category: "Bebidas",
     ifoodUrl:"https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOoqC_7TfWLiYZRiVXiY9cAycBV9RmFkJA4-hmMMTLR_gvKm_wPPg&prato=9dc11220-454d-4795-8b39-d2c959c83a62"
   },
   {
@@ -185,7 +185,7 @@ export const homeMenuItems: HomeMenuItem[] = [
     description: "Heineken ou Stella Artois",
     price: "R$ 12,00",
     image: "https://i.postimg.cc/g2F3v9n4/images.jpg",
-    category: "Bebidas"
+    category: "Bebidas",
     ifoodUrl:"https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOoqC_7TfWLiYZRiVXiY9cAycBV9RmFkJA4-hmMMTLR_gvKm_wPPg&prato=0747a558-f347-4173-b611-503011ebb0b8"
   }
 ];
