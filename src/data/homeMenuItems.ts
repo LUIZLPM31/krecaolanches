@@ -201,7 +201,7 @@ export const homeMenuItems: HomeMenuItem[] = [
     price: "R$ 47,00",
     image: "https://i.postimg.cc/d0fKjBqn/202102151702-7v-A8.avif",
     category: "Porções",
-    ifoodUrl;"https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOoqSqJ9Ljo9DXYUuINHpJt6E2maNZ8wkgLXgh8-dDb5VM3DEsrNt&prato=74c3c0c8-be5b-42ea-97e0-01baae4a15ce"
+    ifoodUrl:"https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOoqSqJ9Ljo9DXYUuINHpJt6E2maNZ8wkgLXgh8-dDb5VM3DEsrNt&prato=74c3c0c8-be5b-42ea-97e0-01baae4a15ce"
   },
   {
     name: "Batata Frita G",
