@@ -12,7 +12,7 @@ export function MenuHighlights() {
   return <section id="cardapio" className="py-24 bg-black">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-yellow mb-4">
             Nossos <span className="text-krecao-red">Destaques</span>
           </h2>
           <div className="w-20 h-1 bg-krecao-yellow mx-auto"></div>
