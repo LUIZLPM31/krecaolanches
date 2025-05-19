@@ -2,6 +2,7 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
 
 interface CartSummaryProps {
   totalItems: number;
@@ -10,6 +11,8 @@ interface CartSummaryProps {
 }
 
 const CartSummary = ({ totalItems, totalPrice, onCheckout }: CartSummaryProps) => {
+  const { user } = useAuth();
+  
   // Format price according to Brazilian standards
   const formatPrice = (price: number) => {
     return price.toLocaleString('pt-BR', {
@@ -18,8 +21,9 @@ const CartSummary = ({ totalItems, totalPrice, onCheckout }: CartSummaryProps) =
     });
   };
 
-  // Calculate discounted price (15% off)
-  const discountedPrice = totalPrice * 0.85;
+  // Calculate discounted price based on user authentication status
+  const discountPercentage = user ? 0.13 : 0.10; // 13% for registered users, 10% for guests
+  const discountedPrice = totalPrice * (1 - discountPercentage);
 
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-gray-900 border-t border-gray-800 p-4 animate-fade-in">
@@ -47,7 +51,7 @@ const CartSummary = ({ totalItems, totalPrice, onCheckout }: CartSummaryProps) =
             onClick={onCheckout}
             className="bg-krecao-yellow text-black hover:bg-krecao-yellow/90 w-full md:w-auto"
           >
-            <ShoppingCart className="mr-2 h-4 w-4" /> Pedir via WhatsApp (-15%)
+            <ShoppingCart className="mr-2 h-4 w-4" /> Pedir via WhatsApp (-{user ? '13%' : '10%'})
           </Button>
         </div>
       </div>

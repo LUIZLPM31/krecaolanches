@@ -11,13 +11,15 @@ interface OrderData {
   totalPrice: number;
   needChange?: boolean;
   changeAmount?: string;
+  sodaFlavor?: string;
+  isLoggedIn?: boolean;
 }
 
 const WHATSAPP_NUMBER = "5132422047";
 
-// Calculate discount (15% off)
-const applyDiscount = (price: number): number => {
-  const discount = 0.15; // 15% discount
+// Calculate discount based on login status
+const applyDiscount = (price: number, isLoggedIn: boolean = false): number => {
+  const discount = isLoggedIn ? 0.13 : 0.10; // 13% for registered users, 10% for guests
   return price * (1 - discount);
 };
 
@@ -30,11 +32,14 @@ export const processWhatsAppOrder = (orderData: OrderData): void => {
     cart, 
     totalPrice,
     needChange,
-    changeAmount 
+    changeAmount,
+    sodaFlavor,
+    isLoggedIn = false
   } = orderData;
   
-  // Apply 15% discount
-  const discountedTotal = applyDiscount(totalPrice);
+  // Apply discount based on login status
+  const discountedTotal = applyDiscount(totalPrice, isLoggedIn);
+  const discountPercentage = isLoggedIn ? '13%' : '10%';
   
   // Format cart items for WhatsApp
   const orderItems = cart.map(item => 
@@ -46,7 +51,7 @@ export const processWhatsAppOrder = (orderData: OrderData): void => {
   message += `*Cliente:* ${customerName}\n`;
   message += `*Telefone:* ${customerPhone}\n`;
   message += `*Endereço:* ${deliveryAddress}\n`;
-  message += `*Forma de Pagamento:* ${paymentMethod === 'dinheiro' ? 'Dinheiro' : 'Cartão'}\n`;
+  message += `*Forma de Pagamento:* ${paymentMethod === 'dinheiro' ? 'Dinheiro' : (paymentMethod === 'cartao' ? 'Cartão' : 'PIX')}\n`;
   
   // Add change information if needed
   if (paymentMethod === 'dinheiro' && needChange && changeAmount) {
@@ -54,9 +59,13 @@ export const processWhatsAppOrder = (orderData: OrderData): void => {
   }
   
   message += `\n*Itens do pedido:*\n${orderItems}\n\n`;
-  message += `*Subtotal:* R$${totalPrice.toFixed(2)}\n`;
-  message += `*Desconto (15%):* R$${(totalPrice - discountedTotal).toFixed(2)}\n`;
-  message += `*Total com desconto:* R$${discountedTotal.toFixed(2)}`;
+  message += `*Total:* R$${discountedTotal.toFixed(2)}`;
+  
+  // Add soda flavor information if specified by a registered user
+  // but without mentioning that it's free or a benefit
+  if (isLoggedIn && sodaFlavor) {
+    message += `\n\n*Refrigerante:* ${sodaFlavor}`;
+  }
   
   // Encode message for URL
   const encodedMessage = encodeURIComponent(message);
@@ -66,8 +75,8 @@ export const processWhatsAppOrder = (orderData: OrderData): void => {
   
   // Notify user
   toast({
-    title: "Desconto aplicado!",
-    description: "Você ganhou 15% de desconto no seu pedido via WhatsApp!",
+    title: "Pedido Enviado!",
+    description: "Seu pedido está sendo enviado via WhatsApp",
   });
 
   // Open WhatsApp in new tab

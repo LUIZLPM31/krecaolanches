@@ -1,25 +1,31 @@
 
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { useAuth } from "@/hooks/useAuth";
+import { ShoppingCart } from "lucide-react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 interface CheckoutFormProps {
   customerName: string;
-  setCustomerName: (value: string) => void;
+  setCustomerName: (name: string) => void;
   customerPhone: string;
-  setCustomerPhone: (value: string) => void;
+  setCustomerPhone: (phone: string) => void;
   deliveryAddress: string;
-  setDeliveryAddress: (value: string) => void;
+  setDeliveryAddress: (address: string) => void;
   paymentMethod: string;
-  setPaymentMethod: (value: string) => void;
+  setPaymentMethod: (method: string) => void;
   onSubmit: (e: React.FormEvent) => void;
   loading: boolean;
   needChange: boolean;
-  setNeedChange: (value: boolean) => void;
+  setNeedChange: (needChange: boolean) => void;
   changeAmount: string;
-  setChangeAmount: (value: string) => void;
+  setChangeAmount: (amount: string) => void;
+  sodaFlavor?: string;
+  setSodaFlavor?: (flavor: string) => void;
 }
 
 const CheckoutForm = ({
@@ -37,132 +43,145 @@ const CheckoutForm = ({
   setNeedChange,
   changeAmount,
   setChangeAmount,
+  sodaFlavor,
+  setSodaFlavor
 }: CheckoutFormProps) => {
+  const { user } = useAuth();
+  
+  // Soda flavor options
+  const sodaOptions = [
+    "Coca-Cola",
+    "Guaraná",
+    "Sprite",
+    "Fanta Laranja",
+    "Fanta Uva",
+    "Pepsi",
+    "Outro (especificar nos detalhes do pedido)"
+  ];
+
   return (
-    <div className="bg-gray-900 p-6 rounded-lg border border-gray-800">
-      <h2 className="text-xl font-bold mb-6">Informações de Entrega</h2>
+    <div className="bg-gray-900 rounded-lg p-6 border border-gray-800">
+      <h2 className="text-xl font-semibold text-white mb-6">Detalhes da Entrega</h2>
       
-      <form onSubmit={onSubmit}>
-        <div className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="name">Nome completo</Label>
-            <Input
-              id="name"
-              value={customerName}
-              onChange={(e) => setCustomerName(e.target.value)}
-              required
-              className="bg-gray-800 border-gray-700"
-            />
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="phone">Telefone</Label>
-            <Input
-              id="phone"
-              value={customerPhone}
-              onChange={(e) => setCustomerPhone(e.target.value)}
-              required
-              className="bg-gray-800 border-gray-700"
-            />
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="address">Endereço completo</Label>
-            <Textarea
-              id="address"
-              value={deliveryAddress}
-              onChange={(e) => setDeliveryAddress(e.target.value)}
-              required
-              placeholder="Rua, número, complemento, bairro, cidade"
-              className="bg-gray-800 border-gray-700"
-            />
-          </div>
-
-          <div className="space-y-2">
-            <Label>Forma de pagamento</Label>
-            <div className="grid grid-cols-2 gap-4">
-              <div
-                className={`border rounded-lg p-4 cursor-pointer ${
-                  paymentMethod === "dinheiro"
-                    ? "border-krecao-yellow bg-gray-800"
-                    : "border-gray-700"
-                }`}
-                onClick={() => setPaymentMethod("dinheiro")}
-              >
-                <div className="flex items-center justify-between mb-2">
-                  <span className="font-bold">Dinheiro</span>
-                  {paymentMethod === "dinheiro" && (
-                    <div className="h-3 w-3 bg-krecao-yellow rounded-full"></div>
-                  )}
-                </div>
-                <p className="text-sm text-gray-400">
-                  Pague em dinheiro na entrega
-                </p>
-              </div>
-              <div
-                className={`border rounded-lg p-4 cursor-pointer ${
-                  paymentMethod === "cartao"
-                    ? "border-krecao-yellow bg-gray-800"
-                    : "border-gray-700"
-                }`}
-                onClick={() => setPaymentMethod("cartao")}
-              >
-                <div className="flex items-center justify-between mb-2">
-                  <span className="font-bold">Cartão</span>
-                  {paymentMethod === "cartao" && (
-                    <div className="h-3 w-3 bg-krecao-yellow rounded-full"></div>
-                  )}
-                </div>
-                <p className="text-sm text-gray-400">
-                  Pague com cartão na entrega
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Additional fields for cash payment with change */}
-          {paymentMethod === "dinheiro" && (
-            <div className="space-y-2 border border-gray-700 p-4 rounded-lg bg-gray-800/50 animate-fadeIn">
-              <div className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  id="needChange"
-                  checked={needChange}
-                  onChange={(e) => setNeedChange(e.target.checked)}
-                  className="h-4 w-4 accent-krecao-yellow"
-                />
-                <Label htmlFor="needChange">Precisa de troco?</Label>
-              </div>
-              
-              {needChange && (
-                <div className="space-y-2 mt-2 animate-fadeIn">
-                  <Label htmlFor="changeAmount">Troco para quanto?</Label>
-                  <div className="relative">
-                    <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
-                      R$
-                    </span>
-                    <Input
-                      id="changeAmount"
-                      type="text"
-                      value={changeAmount}
-                      onChange={(e) => setChangeAmount(e.target.value)}
-                      placeholder="0,00"
-                      className="bg-gray-800 border-gray-700 pl-10"
-                    />
-                  </div>
-                </div>
-              )}
-            </div>
-          )}
-
-          <Button
-            type="submit"
-            className="w-full mt-8 bg-krecao-red hover:bg-krecao-red/90 py-6 text-lg font-bold"
-            disabled={loading}
-          >
-            {loading ? "Processando..." : "Confirmar Pedido pelo WhatsApp"}
-          </Button>
+      <form onSubmit={onSubmit} className="space-y-4">
+        <div className="space-y-2">
+          <Label htmlFor="name">Nome Completo</Label>
+          <Input
+            id="name"
+            placeholder="Seu nome completo"
+            value={customerName}
+            onChange={(e) => setCustomerName(e.target.value)}
+            required
+            className="bg-gray-800 border-gray-700"
+          />
         </div>
+        
+        <div className="space-y-2">
+          <Label htmlFor="phone">Telefone</Label>
+          <Input
+            id="phone"
+            placeholder="Ex: (51) 99999-9999"
+            value={customerPhone}
+            onChange={(e) => setCustomerPhone(e.target.value)}
+            required
+            className="bg-gray-800 border-gray-700"
+          />
+        </div>
+        
+        <div className="space-y-2">
+          <Label htmlFor="address">Endereço de Entrega</Label>
+          <Textarea
+            id="address"
+            placeholder="Rua, número, bairro, complemento"
+            value={deliveryAddress}
+            onChange={(e) => setDeliveryAddress(e.target.value)}
+            required
+            className="bg-gray-800 border-gray-700"
+          />
+        </div>
+        
+        {/* Mini soda flavor selection for registered users */}
+        {user && setSodaFlavor && (
+          <div className="space-y-2">
+            <Label htmlFor="soda-flavor">Sabor do Mini Refrigerante (Grátis na primeira compra)</Label>
+            <Select value={sodaFlavor} onValueChange={setSodaFlavor}>
+              <SelectTrigger className="bg-gray-800 border-gray-700">
+                <SelectValue placeholder="Escolha o sabor do refrigerante" />
+              </SelectTrigger>
+              <SelectContent>
+                {sodaOptions.map((flavor) => (
+                  <SelectItem key={flavor} value={flavor}>
+                    {flavor}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <p className="text-xs text-gray-400">Benefício exclusivo para clientes cadastrados na primeira compra!</p>
+          </div>
+        )}
+        
+        <div className="space-y-3">
+          <Label>Forma de Pagamento</Label>
+          <RadioGroup value={paymentMethod} onValueChange={setPaymentMethod} className="flex flex-col space-y-2">
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="dinheiro" id="dinheiro" />
+              <Label htmlFor="dinheiro" className={`cursor-pointer ${paymentMethod === 'dinheiro' ? 'text-krecao-yellow font-bold' : ''}`}>
+                Dinheiro
+              </Label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="cartao" id="cartao" />
+              <Label htmlFor="cartao" className={`cursor-pointer ${paymentMethod === 'cartao' ? 'text-krecao-yellow font-bold' : ''}`}>
+                Cartão (na entrega)
+              </Label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="pix" id="pix" />
+              <Label htmlFor="pix" className={`cursor-pointer ${paymentMethod === 'pix' ? 'text-krecao-yellow font-bold' : ''}`}>
+                PIX (enviaremos os dados)
+              </Label>
+            </div>
+          </RadioGroup>
+        </div>
+        
+        {/* Change section */}
+        {paymentMethod === 'dinheiro' && (
+          <div className="space-y-3">
+            <div className="flex items-center space-x-2">
+              <input 
+                type="checkbox" 
+                id="need-change"
+                checked={needChange}
+                onChange={(e) => setNeedChange(e.target.checked)}
+                className="rounded border-gray-700"
+              />
+              <Label htmlFor="need-change" className="cursor-pointer">Preciso de troco</Label>
+            </div>
+            
+            {needChange && (
+              <div className="space-y-2">
+                <Label htmlFor="change-amount">Troco para quanto?</Label>
+                <Input
+                  id="change-amount"
+                  type="text"
+                  placeholder="Ex: 50,00"
+                  value={changeAmount}
+                  onChange={(e) => setChangeAmount(e.target.value)}
+                  className="bg-gray-800 border-gray-700"
+                />
+              </div>
+            )}
+          </div>
+        )}
+        
+        <Button type="submit" disabled={loading} className="w-full bg-krecao-yellow hover:bg-krecao-yellow/90 text-black mt-4">
+          <ShoppingCart className="mr-2 h-4 w-4" />
+          {loading ? "Processando..." : "Finalizar Pedido"}
+        </Button>
+        
+        <p className="text-sm text-gray-400 text-center mt-2">
+          Seu pedido será enviado para o WhatsApp do K-recão Lanches
+        </p>
       </form>
     </div>
   );

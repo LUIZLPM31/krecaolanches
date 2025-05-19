@@ -31,6 +31,7 @@ const Checkout = () => {
   const [loading, setLoading] = useState(false);
   const [needChange, setNeedChange] = useState(false);
   const [changeAmount, setChangeAmount] = useState("");
+  const [sodaFlavor, setSodaFlavor] = useState("");
   
   useEffect(() => {
     // Redirect to menu if cart is empty
@@ -85,7 +86,7 @@ const Checkout = () => {
         return;
       }
 
-      const totalPrice = getTotalPrice() * 0.85; // Apply 15% discount
+      const totalPrice = getTotalPrice() * 0.87; // Apply 13% discount
       if (changeValue <= totalPrice) {
         toast({
           title: "Valor insuficiente",
@@ -116,7 +117,8 @@ const Checkout = () => {
         cart,
         totalPrice: getTotalPrice(),
         needChange: needChange && paymentMethod === "dinheiro",
-        changeAmount: needChange ? changeAmount : ""
+        changeAmount: needChange ? changeAmount : "",
+        sodaFlavor: user ? sodaFlavor : undefined
       });
 
       // Clear cart
@@ -172,6 +174,8 @@ const Checkout = () => {
             setNeedChange={setNeedChange}
             changeAmount={changeAmount}
             setChangeAmount={setChangeAmount}
+            sodaFlavor={sodaFlavor}
+            setSodaFlavor={setSodaFlavor}
           />
         </div>
       </div>

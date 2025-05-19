@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { CartItem } from "@/hooks/useCart";
 import { Plus, Minus, Trash } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
+
 interface CartSummaryDetailProps {
   cart: CartItem[];
   updateQuantity: (productId: string, quantity: number) => void;
@@ -17,11 +19,14 @@ const CartSummaryDetail = ({
   updateNotes,
   getTotalPrice
 }: CartSummaryDetailProps) => {
+  const { user } = useAuth();
+  
   // Calculate the original total price
   const originalTotal = getTotalPrice();
   
-  // Calculate the discounted total (15% off)
-  const discountedTotal = originalTotal * 0.85;
+  // Calculate the discounted total based on user authentication status
+  const discountPercentage = user ? 0.13 : 0.10; // 13% for registered users, 10% for guests
+  const discountedTotal = originalTotal * (1 - discountPercentage);
   
   // Calculate the discount amount
   const discountAmount = originalTotal - discountedTotal;
@@ -67,7 +72,7 @@ const CartSummaryDetail = ({
           <span>R$ {originalTotal.toFixed(2)}</span>
         </div>
         <div className="flex justify-between mb-2 text-green-500">
-          <span>Desconto (15%):</span>
+          <span>Desconto ({user ? '13%' : '10%'}):</span>
           <span>- R$ {discountAmount.toFixed(2)}</span>
         </div>
         <div className="flex justify-between mb-2">

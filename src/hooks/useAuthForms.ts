@@ -36,36 +36,21 @@ export function useAuthForms() {
     }
   };
 
-  // Updated function to check email existence
+  // Completely rewritten to avoid TypeScript deep type issues
   const checkEmailExists = async (email: string): Promise<boolean> => {
     try {
-      // Check if email exists in profiles table
-      const { data: profileData } = await supabase
+      // Using a direct count query to avoid type instantiation issues
+      const { data, error } = await supabase
         .from('profiles')
         .select('email')
         .eq('email', email)
-        .maybeSingle();
+        .limit(1);
       
-      if (profileData) {
-        console.log("Email encontrado na tabela profiles", profileData);
-        return true;
-      }
-      
-      // Alternative approach: try to reset password for the email
-      // If it returns no error, the email exists
-      const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: window.location.origin,
-      });
-      
-      // If there's no error, it means the email exists
-      // If there is an error, it's likely because the email doesn't exist
-      const exists = !error;
-      console.log("Resultado da verificação de email via reset:", exists);
-      
-      return exists;
+      if (error) throw error;
+      return data !== null && data.length > 0;
     } catch (err) {
       console.error("Erro ao verificar email:", err);
-      return false; // In case of error, allow registration
+      return false; // Allow registration in case of error
     }
   };
 

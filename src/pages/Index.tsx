@@ -7,11 +7,13 @@ import { Location } from "@/components/Location";
 import { FAQ } from "@/components/FAQ";
 import { ContactForm } from "@/components/ContactForm";
 import { Footer } from "@/components/Footer";
+import { PromotionalBanner } from "@/components/PromotionalBanner";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-black text-white">
       <Navbar />
+      <PromotionalBanner />
       <Hero />
       <MenuHighlights />
       <AboutUs />

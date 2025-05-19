@@ -9,9 +9,39 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      categories: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          name: string
+          products_count: number | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name: string
+          products_count?: number | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name?: string
+          products_count?: number | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       order_items: {
         Row: {
-          created_at: string | null
+          created_at: string
           id: string
           notes: string | null
           order_id: string
@@ -20,7 +50,7 @@ export type Database = {
           quantity: number
         }
         Insert: {
-          created_at?: string | null
+          created_at?: string
           id?: string
           notes?: string | null
           order_id: string
@@ -29,7 +59,7 @@ export type Database = {
           quantity: number
         }
         Update: {
-          created_at?: string | null
+          created_at?: string
           id?: string
           notes?: string | null
           order_id?: string
@@ -56,129 +86,111 @@ export type Database = {
       }
       orders: {
         Row: {
-          created_at: string | null
+          created_at: string
           customer_name: string
           customer_phone: string
-          delivery_address: string
+          delivery_address: string | null
           id: string
           payment_method: string
           status: string
           total_price: number
+          updated_at: string
           user_id: string | null
         }
         Insert: {
-          created_at?: string | null
+          created_at?: string
           customer_name: string
           customer_phone: string
-          delivery_address: string
+          delivery_address?: string | null
           id?: string
           payment_method: string
           status?: string
           total_price: number
+          updated_at?: string
           user_id?: string | null
         }
         Update: {
-          created_at?: string | null
+          created_at?: string
           customer_name?: string
           customer_phone?: string
-          delivery_address?: string
+          delivery_address?: string | null
           id?: string
           payment_method?: string
           status?: string
           total_price?: number
+          updated_at?: string
           user_id?: string | null
         }
         Relationships: []
       }
-      product_ratings: {
-        Row: {
-          comment: string | null
-          created_at: string | null
-          id: string
-          product_id: string
-          rating: number
-          user_id: string
-        }
-        Insert: {
-          comment?: string | null
-          created_at?: string | null
-          id?: string
-          product_id: string
-          rating: number
-          user_id: string
-        }
-        Update: {
-          comment?: string | null
-          created_at?: string | null
-          id?: string
-          product_id?: string
-          rating?: number
-          user_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "product_ratings_product_id_fkey"
-            columns: ["product_id"]
-            isOneToOne: false
-            referencedRelation: "products"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       products: {
         Row: {
           category: string | null
-          created_at: string | null
+          category_id: string | null
+          created_at: string
           description: string | null
           id: string
           image_url: string | null
           name: string
           price: number
+          updated_at: string
         }
         Insert: {
           category?: string | null
-          created_at?: string | null
+          category_id?: string | null
+          created_at?: string
           description?: string | null
           id?: string
           image_url?: string | null
           name: string
           price: number
+          updated_at?: string
         }
         Update: {
           category?: string | null
-          created_at?: string | null
+          category_id?: string | null
+          created_at?: string
           description?: string | null
           id?: string
           image_url?: string | null
           name?: string
           price?: number
+          updated_at?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "products_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       profiles: {
         Row: {
           address: string | null
-          created_at: string | null
-          email: string | null
+          created_at: string
           id: string
           name: string | null
           phone: string | null
+          updated_at: string
         }
         Insert: {
           address?: string | null
-          created_at?: string | null
-          email?: string | null
+          created_at?: string
           id: string
           name?: string | null
           phone?: string | null
+          updated_at?: string
         }
         Update: {
           address?: string | null
-          created_at?: string | null
-          email?: string | null
+          created_at?: string
           id?: string
           name?: string | null
           phone?: string | null
+          updated_at?: string
         }
         Relationships: []
       }

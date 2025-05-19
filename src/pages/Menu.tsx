@@ -6,10 +6,11 @@ import { useCart } from "@/hooks/useCart";
 import { toast } from "@/hooks/use-toast";
 import { fetchProducts, seedSpecificProducts, type Product } from "@/services/productService";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Percent } from "lucide-react";
 import SearchBar from "@/components/menu/SearchBar";
 import MenuCategoryTabs from "@/components/menu/MenuCategoryTabs";
 import CartSummary from "@/components/menu/CartSummary";
+import { Badge } from "@/components/ui/badge";
 
 const Menu = () => {
   const navigate = useNavigate();
@@ -123,6 +124,9 @@ const Menu = () => {
     });
   };
 
+  // Discount information
+  const discountPercentage = user ? 13 : 10;
+
   return <div className="min-h-screen bg-black text-white py-16">
       <div className="container mx-auto px-4">
         <Button 
@@ -139,10 +143,24 @@ const Menu = () => {
             <span className="text-krecao-yellow">Car</span>
             <span className="text-white">dá</span>
             <span className="text-krecao-red">pio</span>
+            <span className="text-krecao-yellow"> Promocional</span>
           </h1>
-          <p className="text-gray-400 mb-8 max-w-md mx-auto">
+          <p className="text-gray-400 mb-4 max-w-md mx-auto">
             Escolha seus lanches favoritos preparados com ingredientes frescos e de qualidade
           </p>
+          
+          {/* Adicionar frase com descontos */}
+          <div className="flex justify-center items-center mb-6">
+            <Badge variant="outline" className="bg-krecao-red/10 text-krecao-yellow border-krecao-red px-4 py-2">
+              <Percent className="h-4 w-4 mr-2 text-krecao-yellow" />
+              <span className="text-white">
+                {user ? "Você tem " : ""}
+                <span className="font-bold">{user ? "13%" : "10%"} OFF</span> no cardápio promocional
+                {!user && " (Cadastre-se para 13% OFF + refrigerante mini grátis na primeira compra)"}
+                {user && " + refrigerante mini grátis na primeira compra!"}
+              </span>
+            </Badge>
+          </div>
           
           <SearchBar isSearchVisible={isSearchVisible} searchQuery={searchQuery} setSearchQuery={setSearchQuery} setIsSearchVisible={setIsSearchVisible} />
 
