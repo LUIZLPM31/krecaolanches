@@ -18,39 +18,39 @@ export function Footer() {
               Oferecendo os melhores hambúrgueres e lanches desde 2010. Qualidade, sabor e atendimento de excelência.
             </p>
             
-            {/* Social Media */}
+            {/* Social Media with brand colors */}
             <div className="flex space-x-4">
               <a 
                 href="https://www.instagram.com/krecao_lanches/" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="bg-gray-800 hover:bg-krecao-red transition-colors rounded-full p-3"
+                className="bg-gray-800 hover:bg-[#E1306C] transition-colors rounded-full p-3"
               >
-                <Instagram size={25} />
+                <Instagram size={25} className="text-white" />
               </a>
               <a 
                 href="https://www.facebook.com/krecaolanches/" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="bg-gray-800 hover:bg-krecao-red transition-colors rounded-full p-3"
+                className="bg-gray-800 hover:bg-[#1877F2] transition-colors rounded-full p-3"
               >
-                <Facebook size={25} />
+                <Facebook size={25} className="text-white" />
               </a>
               <a 
                 href="https://twitter.com/krecaolanches" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="bg-gray-800 hover:bg-krecao-red transition-colors rounded-full p-3"
+                className="bg-gray-800 hover:bg-[#1DA1F2] transition-colors rounded-full p-3"
               >
-                <Twitter size={25} />
+                <Twitter size={25} className="text-white" />
               </a>
               <a 
                 href="https://wa.me/5132422047" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="bg-gray-800 hover:bg-green-600 transition-colors rounded-full p-3"
+                className="bg-gray-800 hover:bg-[#25D366] transition-colors rounded-full p-3"
               >
-                <Phone size={25} />
+                <Phone size={25} className="text-white" />
               </a>
             </div>
           </div>

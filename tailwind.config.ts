@@ -54,7 +54,7 @@ export default {
 					foreground: 'hsl(var(--card-foreground))'
 				},
 				krecao: {
-					red: "#EA384C",
+					red: "#EB0101",
 					yellow: "#FDD40F",
 					black: "#000000",
 				},

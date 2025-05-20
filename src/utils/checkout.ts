@@ -13,6 +13,7 @@ interface OrderData {
   changeAmount?: string;
   sodaFlavor?: string;
   isLoggedIn?: boolean;
+  isFirstPurchase?: boolean;
 }
 
 const WHATSAPP_NUMBER = "5132422047";
@@ -34,7 +35,8 @@ export const processWhatsAppOrder = (orderData: OrderData): void => {
     needChange,
     changeAmount,
     sodaFlavor,
-    isLoggedIn = false
+    isLoggedIn = false,
+    isFirstPurchase = false
   } = orderData;
   
   // Apply discount based on login status
@@ -61,10 +63,10 @@ export const processWhatsAppOrder = (orderData: OrderData): void => {
   message += `\n*Itens do pedido:*\n${orderItems}\n\n`;
   message += `*Total:* R$${discountedTotal.toFixed(2)}`;
   
-  // Add soda flavor information if specified by a registered user
-  // but without mentioning that it's free or a benefit
-  if (isLoggedIn && sodaFlavor) {
-    message += `\n\n*Refrigerante:* ${sodaFlavor}`;
+  // Add soda flavor information if specified by a registered user on first purchase
+  // Include the mini refrigerante in the order message if user selected one
+  if (isLoggedIn && isFirstPurchase && sodaFlavor) {
+    message += `\n\n*Mini Refrigerante (Grátis na primeira compra):* ${sodaFlavor}`;
   }
   
   // Encode message for URL

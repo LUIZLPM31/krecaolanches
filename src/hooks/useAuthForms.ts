@@ -36,18 +36,21 @@ export function useAuthForms() {
     }
   };
 
-  // Completely rewritten to avoid TypeScript deep type issues
+  // Fixed the type instantiation issue by simplifying the check
   const checkEmailExists = async (email: string): Promise<boolean> => {
     try {
-      // Using a direct count query to avoid type instantiation issues
-      const { data, error } = await supabase
+      // Using a count query instead of select to avoid type issues
+      const { count, error } = await supabase
         .from('profiles')
-        .select('email')
-        .eq('email', email)
-        .limit(1);
+        .select('*', { count: 'exact', head: true })
+        .eq('email', email);
       
-      if (error) throw error;
-      return data !== null && data.length > 0;
+      if (error) {
+        console.error("Erro ao verificar email:", error);
+        return false;
+      }
+      
+      return count !== null && count > 0;
     } catch (err) {
       console.error("Erro ao verificar email:", err);
       return false; // Allow registration in case of error

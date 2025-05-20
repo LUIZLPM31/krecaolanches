@@ -32,6 +32,7 @@ const Checkout = () => {
   const [needChange, setNeedChange] = useState(false);
   const [changeAmount, setChangeAmount] = useState("");
   const [sodaFlavor, setSodaFlavor] = useState("");
+  const [isFirstPurchase, setIsFirstPurchase] = useState(false);
   
   useEffect(() => {
     // Redirect to menu if cart is empty
@@ -47,15 +48,30 @@ const Checkout = () => {
   
   const fetchUserProfile = async () => {
     try {
-      const {
-        data,
-        error
-      } = await supabase.from("profiles").select("*").eq("id", user!.id).single();
+      const { data, error } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("id", user!.id)
+        .single();
+      
       if (error) throw error;
+      
       if (data) {
         setCustomerName(data.name || "");
         setCustomerPhone(data.phone || "");
         setDeliveryAddress(data.address || "");
+        
+        // Check if user has previous orders
+        const { data: previousOrders, error: ordersError } = await supabase
+          .from("orders")
+          .select("id")
+          .eq("user_id", user!.id)
+          .limit(1);
+        
+        if (ordersError) throw ordersError;
+        
+        // User is eligible for free soda if they have no previous orders
+        setIsFirstPurchase(previousOrders.length === 0);
       }
     } catch (error: any) {
       console.error("Error fetching profile:", error.message);
@@ -118,8 +134,30 @@ const Checkout = () => {
         totalPrice: getTotalPrice(),
         needChange: needChange && paymentMethod === "dinheiro",
         changeAmount: needChange ? changeAmount : "",
-        sodaFlavor: user ? sodaFlavor : undefined
+        sodaFlavor: user && isFirstPurchase ? sodaFlavor : undefined,
+        isLoggedIn: !!user,
+        isFirstPurchase
       });
+
+      // Save order to database if user is logged in
+      if (user) {
+        const { data: orderData, error: orderError } = await supabase
+          .from("orders")
+          .insert([
+            {
+              user_id: user.id,
+              customer_name: customerName,
+              customer_phone: customerPhone,
+              delivery_address: deliveryAddress,
+              payment_method: paymentMethod,
+              total_price: getTotalPrice() * 0.87, // Apply 13% discount
+              status: "pending"
+            }
+          ])
+          .select();
+          
+        if (orderError) throw orderError;
+      }
 
       // Clear cart
       clearCart();
@@ -176,6 +214,7 @@ const Checkout = () => {
             setChangeAmount={setChangeAmount}
             sodaFlavor={sodaFlavor}
             setSodaFlavor={setSodaFlavor}
+            isFirstPurchase={isFirstPurchase}
           />
         </div>
       </div>

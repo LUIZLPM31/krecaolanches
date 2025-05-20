@@ -26,6 +26,7 @@ interface CheckoutFormProps {
   setChangeAmount: (amount: string) => void;
   sodaFlavor?: string;
   setSodaFlavor?: (flavor: string) => void;
+  isFirstPurchase?: boolean;
 }
 
 const CheckoutForm = ({
@@ -44,7 +45,8 @@ const CheckoutForm = ({
   changeAmount,
   setChangeAmount,
   sodaFlavor,
-  setSodaFlavor
+  setSodaFlavor,
+  isFirstPurchase = false
 }: CheckoutFormProps) => {
   const { user } = useAuth();
   
@@ -100,8 +102,8 @@ const CheckoutForm = ({
           />
         </div>
         
-        {/* Mini soda flavor selection for registered users */}
-        {user && setSodaFlavor && (
+        {/* Mini soda flavor selection for registered users on first purchase */}
+        {user && isFirstPurchase && setSodaFlavor && (
           <div className="space-y-2">
             <Label htmlFor="soda-flavor">Sabor do Mini Refrigerante (Grátis na primeira compra)</Label>
             <Select value={sodaFlavor} onValueChange={setSodaFlavor}>
