@@ -18,6 +18,14 @@ export const homeMenuItems: HomeMenuItem[] = [
     category: "Lanches",
     ifoodUrl: "https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?prato=5eb6dfbb-e4c3-461a-ad19-ee6e04be31c3"
   },
+   {
+    name: "Xis Bacon",
+    description: "Hamburguer Artesanal, Bacon, Maionese, Tomate, Alface, Milho, Mostarda, Catchup, Queijo, Ovo",
+    price: "R$ 38,50",
+    image: "https://i.postimg.cc/Sscdw893/IMG-20250512-223131179.jpg",
+    category: "Lanches",
+    ifoodUrl: "https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?prato=5eb6dfbb-e4c3-461a-ad19-ee6e04be31c3"
+  },
   {
     name: "Xis Calabresa",
     description: " Acompanha maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo.",
@@ -46,9 +54,33 @@ export const homeMenuItems: HomeMenuItem[] = [
     name: "Xis Acebolado",
     description: "Acompanha maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo.",
     price: "R$ 31,90",
-    image: "https://i.postimg.cc/MZcmThzs/IMG-20250515-WA0064-1.jpg",
+    image: "https://i.postimg.cc/9FSLpMVq/201902262302-03008.jpg",
     category: "Lanches",
     ifoodUrl: "https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?prato=b6176dfe-814d-44ab-81be-6fd75c5ceefb"
+  },
+   {
+    name: "Xis Strogonoff",
+    description: "Iscas De Carne, Creme De Leite, Molho, Champignon, maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo.",
+    price: "R$ 42,50",
+    image: "https://i.postimg.cc/9FSLpMVq/201902262302-03008.jpg",
+    category: "Lanches",
+    ifoodUrl: "https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOopL7eS9ZrMiPBp6zmEZNcRExevkXAjYa9BMc6nmXxslNXSueTNX&prato=1181331c-1ef6-4c29-94b5-986899a592c0"
+  },
+   {
+    name: "Xis Fricassé",
+    description: "Frango, Creme De Leite, Molho, Champignon, maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo.",
+    price: "R$ 42,50",
+    image: "https://i.postimg.cc/9FSLpMVq/201902262302-03008.jpg",
+    category: "Lanches",
+    ifoodUrl: "https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOopL7eS9ZrMiPBp6zmEZNcRExevkXAjYa9BMc6nmXxslNXSueTNX&prato=758c9e22-1658-4f7c-81b4-173f7cff7b40"
+  },
+   {
+    name: "Xis Brocolis Com Catupiry",
+    description: "Brocolis, Catupiry, maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo.",
+    price: "R$ 36,00",
+    image: "https://i.postimg.cc/h4Hb7pjK/IMG-20250515-WA0074.jpg",
+    category: "Lanches",
+    ifoodUrl: "https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOopL7eS9ZrMiPBp6zmEZNcRExevkXAjYa9BMc6nmXxslNXSueTNX&prato=fb53666b-91f6-469b-b894-bfc3dfaa826b"
   },
   {
     name: "Xis 4 Queijos",
@@ -62,7 +94,7 @@ export const homeMenuItems: HomeMenuItem[] = [
     name: "Xis K-recão",
     description: "Acompanha frango,coração, calabresa, bacon, carne, maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo.",
     price: "R$ 36,90",
-    image: "https://i.postimg.cc/pTCkBZ2W/IMG-20250516-215617052-1.jpg",
+    image: "https://i.postimg.cc/MZcmThzs/IMG-20250515-WA0064-1.jpg",
     category: "Lanches",
     ifoodUrl: "https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?prato=47e56877-8690-4573-b568-0a45da6ffbfc"
   },
@@ -99,9 +131,33 @@ export const homeMenuItems: HomeMenuItem[] = [
     ifoodUrl: "https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOoqSqJ9Ljo9DXYUuINHpJt6E2maNZ8wkgLXgh8-dDb5VM3DEsrNt&prato=4907a12a-d9f1-4166-bfab-68d72e518a51"
   },
   {
-    name: "Dog simples",
+    name: "Dog Simples",
     description: "1 Salsicha, Maionese, Tomate, Alface, Milho, Mostarda, Catchup, Molho, Queijo Mussarela. Serve 1 pessoa.",
     price: "R$ 22,60",
+    image: "/lovable-uploads/abd68998-91bc-4cb4-a7a2-dbb5366adcf2.png",
+    category: "Lanches",
+     ifoodUrl:"https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOoqSqJ9Ljo9DXYUuINHpJt6E2maNZ8wkgLXgh8-dDb5VM3DEsrNt&prato=f3d35ca0-947d-45e0-a106-3732c6f5bf35"
+  },
+   {
+    name: "Dog Linguiça",
+    description: "1 Linguiça, Maionese, Tomate, Alface, Milho, Mostarda, Catchup, Molho, Queijo Mussarela. Serve 1 pessoa.",
+    price: "R$ 27,50",
+    image: "/lovable-uploads/abd68998-91bc-4cb4-a7a2-dbb5366adcf2.png",
+    category: "Lanches",
+     ifoodUrl:"https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOoqSqJ9Ljo9DXYUuINHpJt6E2maNZ8wkgLXgh8-dDb5VM3DEsrNt&prato=f3d35ca0-947d-45e0-a106-3732c6f5bf35"
+  },
+  {
+    name: "Dog Duas Linguiça",
+    description: "2 Linguiça, Maionese, Tomate, Alface, Milho, Mostarda, Catchup, Molho, Queijo Mussarela. Serve 1 pessoa.",
+    price: "R$ 32,00",
+    image: "/lovable-uploads/abd68998-91bc-4cb4-a7a2-dbb5366adcf2.png",
+    category: "Lanches",
+     ifoodUrl:"https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOoqSqJ9Ljo9DXYUuINHpJt6E2maNZ8wkgLXgh8-dDb5VM3DEsrNt&prato=f3d35ca0-947d-45e0-a106-3732c6f5bf35"
+  },
+   {
+    name: "Dog Krecao",
+    description: "Coração de frango, Maionese, Tomate, Alface, Milho, Mostarda, Catchup, Queijo Mussarela. Serve 1 pessoa.",
+    price: "R$ 34,00",
     image: "/lovable-uploads/abd68998-91bc-4cb4-a7a2-dbb5366adcf2.png",
     category: "Lanches",
      ifoodUrl:"https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOoqSqJ9Ljo9DXYUuINHpJt6E2maNZ8wkgLXgh8-dDb5VM3DEsrNt&prato=f3d35ca0-947d-45e0-a106-3732c6f5bf35"
@@ -111,6 +167,14 @@ export const homeMenuItems: HomeMenuItem[] = [
     name: "Prensado",
     description: "Maionese, tomate, alface, presunto, queijo e ovo. Serve 1 pessoa.",
     price: "R$ 22,60",
+    image: "/lovable-uploads/67740c08-faea-4884-a10e-2bca132fd95c.png",
+    category: "Lanches",
+    ifoodUrl:"https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOoqSqJ9Ljo9DXYUuINHpJt6E2maNZ8wkgLXgh8-dDb5VM3DEsrNt&prato=c39116ca-ba02-4a1c-b179-24a728753a36"
+  },
+   {
+    name: "Torrada Americana",
+    description: "Pão De Forma, Tomate, Alface, Pepino Conserva, Batata Palha, Presunto, Queijo, Ovo, Maionese.",
+    price: "R$ 25,00",
     image: "/lovable-uploads/67740c08-faea-4884-a10e-2bca132fd95c.png",
     category: "Lanches",
     ifoodUrl:"https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOoqSqJ9Ljo9DXYUuINHpJt6E2maNZ8wkgLXgh8-dDb5VM3DEsrNt&prato=c39116ca-ba02-4a1c-b179-24a728753a36"
@@ -141,7 +205,7 @@ export const homeMenuItems: HomeMenuItem[] = [
   },
   {
     name: "Ala Minuta A Parmeggiana",
-    description: "Bife, Arroz, Ovo e Batatas ou Polemta ou Aipin. Serve 2 pessoa.",
+    description: "Bife, Arroz, Feijão, Ovo e Batatas ou Polemta ou Aipin. Serve 2 pessoa.",
     price: "R$ 56,00",
     image: "https://i.postimg.cc/PxnjVx1L/Screenshot-20250516-124402-851.png",
     category: "Pratos",
@@ -149,7 +213,7 @@ export const homeMenuItems: HomeMenuItem[] = [
   },
    {
     name: "Ala Minuta De Frango",
-    description: "Bife, Arroz, Ovo e Batatas ou Polemta ou Aipin. Serve 2 pessoa.",
+    description: "Bife, Arroz, Feijão, Ovo e Batatas ou Polemta ou Aipin. Serve 2 pessoa.",
     price: "R$ 41,00",
     image: "https://i.postimg.cc/cLdpTxpd/IMG-20250520-204133939-2.jpg",
     category: "Pratos",
@@ -157,7 +221,31 @@ export const homeMenuItems: HomeMenuItem[] = [
   },
   {
     name: "Ala Minuta De Bife Acebolado",
-    description: "Bife, Arroz, Ovo e Batatas ou Polemta ou Aipin. Serve 2 pessoa.",
+    description: "Bife, Arroz, Feijão, Ovo e Batatas ou Polemta ou Aipin. Serve 2 pessoa.",
+    price: "R$ 43,50",
+    image: "https://i.postimg.cc/J0JXqCnM/IMG-20250515-WA0067.jpg",
+    category: "Pratos",
+    ifoodUrl:"https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOoqSqJ9Ljo9DXYUuINHpJt6E2maNZ8wkgLXgh8-dDb5VM3DEsrNt&prato=fd337db4-6c4e-4f57-ad60-89b9f8985b21"
+  },
+  {
+    name: "Ala Minuta De Frango A Milanesa",
+    description: "Bife, Arroz, Feijão, Ovo e Batatas ou Polemta ou Aipin. Serve 2 pessoa.",
+    price: "R$ 43,50",
+    image: "https://i.postimg.cc/J0JXqCnM/IMG-20250515-WA0067.jpg",
+    category: "Pratos",
+    ifoodUrl:"https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOoqSqJ9Ljo9DXYUuINHpJt6E2maNZ8wkgLXgh8-dDb5VM3DEsrNt&prato=fd337db4-6c4e-4f57-ad60-89b9f8985b21"
+  },
+  {
+    name: "Ala Minuta A Milanesa",
+    description: "Bife, Arroz, Feijão, Ovo e Batatas ou Polemta ou Aipin. Serve 2 pessoa.",
+    price: "R$ 43,50",
+    image: "https://i.postimg.cc/J0JXqCnM/IMG-20250515-WA0067.jpg",
+    category: "Pratos",
+    ifoodUrl:"https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOoqSqJ9Ljo9DXYUuINHpJt6E2maNZ8wkgLXgh8-dDb5VM3DEsrNt&prato=fd337db4-6c4e-4f57-ad60-89b9f8985b21"
+  },
+   {
+    name: "Ala Minuta De Strogonoff",
+    description: "Bife, Arroz, Feijão, Ovo e Batatas ou Polemta ou Aipin. Serve 2 pessoa.",
     price: "R$ 43,50",
     image: "https://i.postimg.cc/J0JXqCnM/IMG-20250515-WA0067.jpg",
     category: "Pratos",
