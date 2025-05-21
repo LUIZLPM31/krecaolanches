@@ -99,3 +99,15 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .menu-item-image {
+    @apply w-full aspect-square object-cover rounded-lg;
+    max-width: 300px;
+    height: 300px;
+  }
+  
+  .menu-item-container {
+    @apply flex flex-col items-center;
+  }
+}
