@@ -14,7 +14,7 @@ export const homeMenuItems: HomeMenuItem[] = [
     name: "Xis Salada",
     description: "Hamburguer Artesanal, Maionese, Tomate, Alface, Milho, Mostarda, Catchup, Queijo, Ovo",
     price: "R$ 31,00",
-    image: "/lovable-uploads/c7c76be9-f6aa-4af8-9787-3ba84363461b.png",
+    image: "https://i.postimg.cc/Sscdw893/IMG-20250512-223131179.jpg",
     category: "Lanches",
     ifoodUrl: "https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?prato=5eb6dfbb-e4c3-461a-ad19-ee6e04be31c3"
   },
@@ -62,7 +62,7 @@ export const homeMenuItems: HomeMenuItem[] = [
     name: "Xis K-recão",
     description: "Acompanha frango,coração, calabresa, bacon, carne, maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo.",
     price: "R$ 36,90",
-    image: "/lovable-uploads/6d4d9c64-03db-4cb5-a0d4-598ba5b8f318.png",
+    image: "https://i.postimg.cc/pTCkBZ2W/IMG-20250516-215617052-1.jpg",
     category: "Lanches",
     ifoodUrl: "https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?prato=47e56877-8690-4573-b568-0a45da6ffbfc"
   },
@@ -151,7 +151,7 @@ export const homeMenuItems: HomeMenuItem[] = [
     name: "Ala Minuta De Frango",
     description: "Bife, Arroz, Ovo e Batatas ou Polemta ou Aipin. Serve 2 pessoa.",
     price: "R$ 41,00",
-    image: "https://i.postimg.cc/PxnjVx1L/Screenshot-20250516-124402-851.png",
+    image: "https://i.postimg.cc/cLdpTxpd/IMG-20250520-204133939-2.jpg",
     category: "Pratos",
     ifoodUrl:"https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOoqSqJ9Ljo9DXYUuINHpJt6E2maNZ8wkgLXgh8-dDb5VM3DEsrNt&prato=e8c81d3f-0201-492a-9da0-ff5aa643a2fc"
   },
@@ -207,7 +207,7 @@ export const homeMenuItems: HomeMenuItem[] = [
     name: "Batata Frita G",
     description: "Porção de batata frita crocante com queijo cheddar e bacon.",
     price: "R$ 37,00",
-    image: "https://images.unsplash.com/photo-1585109649139-366815a0d713?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80",
+    image: "https://i.postimg.cc/yNgvy28V/IMG-20250516-220453082-3.jpg",
     category: "Porções",
     ifoodUrl: "https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?prato=3612fbe3-44cf-4bd6-b0e1-e0d538828057"
   },
