@@ -54,7 +54,7 @@ export const homeMenuItems: HomeMenuItem[] = [
   },
   {
     name: "Xis Acebolado",
-    description: "Acompanha maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo.",
+    description: "Hamburguer Artesanal, Cebola, Acompanha Maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo.",
     price: "R$ 31,90",
     image: "https://i.postimg.cc/9FSLpMVq/201902262302-03008.jpg",
     category: "Lanches",
@@ -64,7 +64,7 @@ export const homeMenuItems: HomeMenuItem[] = [
     name: "Xis Strogonoff",
     description: "Iscas De Carne, Creme De Leite, Molho, Champignon, maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo.",
     price: "R$ 42,50",
-    image: "https://i.postimg.cc/9FSLpMVq/201902262302-03008.jpg",
+    image: "https://i.postimg.cc/tCth57CB/IMG-20250521-204112614-PORTRAIT-2.jpg",
     category: "Lanches",
     ifoodUrl: "https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOopL7eS9ZrMiPBp6zmEZNcRExevkXAjYa9BMc6nmXxslNXSueTNX&prato=1181331c-1ef6-4c29-94b5-986899a592c0"
   },
@@ -96,7 +96,7 @@ export const homeMenuItems: HomeMenuItem[] = [
     name: "Xis K-recão",
     description: "Acompanha frango,coração, calabresa, bacon, carne, maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo.",
     price: "R$ 36,90",
-    image: "https://i.postimg.cc/MZcmThzs/IMG-20250515-WA0064-1.jpg",
+    image: "https://i.postimg.cc/Mpv8DJZF/IMG-20250521-194748565-PORTRAIT-3.jpg",
     category: "Lanches",
     ifoodUrl: "https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?prato=47e56877-8690-4573-b568-0a45da6ffbfc"
   },

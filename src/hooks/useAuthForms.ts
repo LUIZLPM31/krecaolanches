@@ -36,23 +36,18 @@ export function useAuthForms() {
     }
   };
 
-  // Fixed the type instantiation issue by using a simpler approach
+  // Corrigido para evitar o erro TS2589
   const checkEmailExists = async (email: string): Promise<boolean> => {
     try {
-      const { count, error } = await supabase
+      const { data, error, count } = await supabase
         .from('profiles')
         .select('*', { count: 'exact', head: true })
         .eq('email', email);
       
-      if (error) {
-        console.error("Erro ao verificar email:", error);
-        return false;
-      }
-      
-      return Boolean(count && count > 0);
+      return !!count && count > 0;
     } catch (err) {
       console.error("Erro ao verificar email:", err);
-      return false; // Allow registration in case of error
+      return false; // Permitir registro em caso de erro
     }
   };
 
@@ -60,8 +55,7 @@ export function useAuthForms() {
     setLoading(true);
 
     try {
-      // Temporarily disabled email verification to allow registration
-      // const emailExists = await checkEmailExists(email);
+      // Email verification temporarily disabled
       const emailExists = false;
       
       if (emailExists) {

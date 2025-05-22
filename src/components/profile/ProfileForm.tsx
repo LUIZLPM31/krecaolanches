@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,14 +15,18 @@ interface ProfileFormProps {
   onProfileUpdate: () => Promise<void>;
 }
 
-export function ProfileForm({ user, initialProfile, onProfileUpdate }: ProfileFormProps) {
+export function ProfileForm({
+  user,
+  initialProfile,
+  onProfileUpdate
+}: ProfileFormProps) {
   const [loading, setLoading] = useState(false);
   const [profile, setProfile] = useState(initialProfile);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setProfile({
       ...profile,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value
     });
   };
 
@@ -32,29 +35,40 @@ export function ProfileForm({ user, initialProfile, onProfileUpdate }: ProfileFo
     setLoading(true);
     
     try {
-      const { error } = await supabase
+      // Update profile in the profiles table
+      const { error: profileError } = await supabase
         .from("profiles")
         .update({
           name: profile.name,
           phone: profile.phone,
-          updated_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
         })
         .eq("id", user.id);
+        
+      if (profileError) throw profileError;
 
-      if (error) throw error;
+      // Update user metadata to keep consistent data
+      const { error: metadataError } = await supabase.auth.updateUser({
+        data: { 
+          name: profile.name,
+          phone: profile.phone 
+        }
+      });
       
+      if (metadataError) throw metadataError;
+
       // Update session user metadata
       await onProfileUpdate();
       
       toast({
         title: "Perfil atualizado",
-        description: "Suas informações foram atualizadas com sucesso.",
+        description: "Suas informações foram atualizadas com sucesso."
       });
     } catch (error: any) {
       toast({
         title: "Erro",
         description: "Falha ao atualizar o perfil: " + error.message,
-        variant: "destructive",
+        variant: "destructive"
       });
     } finally {
       setLoading(false);
@@ -68,13 +82,13 @@ export function ProfileForm({ user, initialProfile, onProfileUpdate }: ProfileFo
           <label htmlFor="name" className="text-sm font-medium text-gray-300">
             Nome
           </label>
-          <Input
-            id="name"
-            name="name"
-            value={profile.name || ""}
-            onChange={handleChange}
-            className="bg-gray-800 border-gray-700"
-            placeholder="Seu nome"
+          <Input 
+            id="name" 
+            name="name" 
+            value={profile.name || ""} 
+            onChange={handleChange} 
+            placeholder="Seu nome" 
+            className="border-red-700 bg-gray-600" 
           />
         </div>
         
@@ -82,13 +96,13 @@ export function ProfileForm({ user, initialProfile, onProfileUpdate }: ProfileFo
           <label htmlFor="phone" className="text-sm font-medium text-gray-300">
             Telefone
           </label>
-          <Input
-            id="phone"
-            name="phone"
-            value={profile.phone || ""}
-            onChange={handleChange}
-            className="bg-gray-800 border-gray-700"
-            placeholder="Seu telefone"
+          <Input 
+            id="phone" 
+            name="phone" 
+            value={profile.phone || ""} 
+            onChange={handleChange} 
+            placeholder="Seu telefone" 
+            className="border-red-700 bg-gray-600" 
           />
         </div>
       </div>
@@ -96,7 +110,7 @@ export function ProfileForm({ user, initialProfile, onProfileUpdate }: ProfileFo
       <div className="pt-6 pb-0 flex justify-end">
         <Button 
           type="submit" 
-          disabled={loading}
+          disabled={loading} 
           className="bg-krecao-yellow text-black hover:bg-amber-500"
         >
           {loading ? (
@@ -104,7 +118,9 @@ export function ProfileForm({ user, initialProfile, onProfileUpdate }: ProfileFo
               <Loader2 size={16} className="animate-spin mr-2" />
               Salvando...
             </>
-          ) : "Salvar Alterações"}
+          ) : (
+            "Salvar Alterações"
+          )}
         </Button>
       </div>
     </form>
