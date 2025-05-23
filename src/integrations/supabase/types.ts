@@ -39,6 +39,41 @@ export type Database = {
         }
         Relationships: []
       }
+      order_customizations: {
+        Row: {
+          created_at: string
+          customization_type: string
+          id: string
+          item_description: string
+          order_item_id: string
+          price_adjustment: number | null
+        }
+        Insert: {
+          created_at?: string
+          customization_type: string
+          id?: string
+          item_description: string
+          order_item_id: string
+          price_adjustment?: number | null
+        }
+        Update: {
+          created_at?: string
+          customization_type?: string
+          id?: string
+          item_description?: string
+          order_item_id?: string
+          price_adjustment?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "order_customizations_order_item_id_fkey"
+            columns: ["order_item_id"]
+            isOneToOne: false
+            referencedRelation: "order_items"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       order_items: {
         Row: {
           created_at: string
@@ -123,6 +158,41 @@ export type Database = {
         }
         Relationships: []
       }
+      product_reviews: {
+        Row: {
+          comment: string | null
+          created_at: string
+          id: string
+          product_id: string
+          rating: number
+          user_id: string
+        }
+        Insert: {
+          comment?: string | null
+          created_at?: string
+          id?: string
+          product_id: string
+          rating: number
+          user_id: string
+        }
+        Update: {
+          comment?: string | null
+          created_at?: string
+          id?: string
+          product_id?: string
+          rating?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "product_reviews_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       products: {
         Row: {
           category: string | null
@@ -172,6 +242,7 @@ export type Database = {
           address: string | null
           avatar_url: string | null
           created_at: string
+          first_order_completed: boolean | null
           id: string
           name: string | null
           phone: string | null
@@ -181,6 +252,7 @@ export type Database = {
           address?: string | null
           avatar_url?: string | null
           created_at?: string
+          first_order_completed?: boolean | null
           id: string
           name?: string | null
           phone?: string | null
@@ -190,6 +262,7 @@ export type Database = {
           address?: string | null
           avatar_url?: string | null
           created_at?: string
+          first_order_completed?: boolean | null
           id?: string
           name?: string | null
           phone?: string | null

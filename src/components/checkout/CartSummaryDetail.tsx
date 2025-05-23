@@ -1,9 +1,14 @@
 
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
+import React from "react";
 import { CartItem } from "@/hooks/useCart";
-import { Plus, Minus, Trash } from "lucide-react";
-import { useAuth } from "@/hooks/useAuth";
+import { Card } from "@/components/ui/card";
+import { Trash2, Minus, Plus } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { ProductCustomization } from "@/components/menu/ProductCustomization";
 
 interface CartSummaryDetailProps {
   cart: CartItem[];
@@ -12,78 +17,163 @@ interface CartSummaryDetailProps {
   updateNotes: (productId: string, notes: string) => void;
   getTotalPrice: () => number;
 }
-const CartSummaryDetail = ({
+
+const CartSummaryDetail: React.FC<CartSummaryDetailProps> = ({
   cart,
   updateQuantity,
   removeFromCart,
   updateNotes,
-  getTotalPrice
-}: CartSummaryDetailProps) => {
-  const { user } = useAuth();
-  
-  // Calculate the original total price
-  const originalTotal = getTotalPrice();
-  
-  // Calculate the discounted total based on user authentication status
-  const discountPercentage = user ? 0.13 : 0.10; // 13% for registered users, 10% for guests
-  const discountedTotal = originalTotal * (1 - discountPercentage);
-  
-  // Calculate the discount amount
-  const discountAmount = originalTotal - discountedTotal;
-  
-  return <div className="bg-gray-900 p-6 rounded-lg border border-gray-800">
-      <h2 className="text-xl font-bold mb-4 flex items-center">Seu Carrinho</h2>
+  getTotalPrice,
+}) => {
+  // Calculate item price including customizations
+  const calculateItemPrice = (item: CartItem) => {
+    const basePrice = item.product.price * item.quantity;
+    // Add safety check to ensure customizations exists and is an array before using reduce
+    const customizationsPrice = Array.isArray(item.customizations) 
+      ? item.customizations.reduce(
+          (total, cust) => total + cust.price * item.quantity,
+          0
+        )
+      : 0;
+    return basePrice + customizationsPrice;
+  };
 
-      <div className="space-y-4 mb-6">
-        {cart.map(item => <div key={item.product.id} className="flex flex-col md:flex-row gap-4 border-b border-gray-800 pb-4">
-            <div className="md:w-1/4">
-              <img src={item.product.image_url} alt={item.product.name} className="w-full h-24 object-cover rounded" />
-            </div>
-            <div className="flex-1">
-              <div className="flex justify-between">
-                <h3 className="font-bold">{item.product.name}</h3>
-                <Button variant="ghost" size="icon" onClick={() => removeFromCart(item.product.id)} className="h-8 w-8 text-red-500 hover:text-red-600 hover:bg-transparent p-0">
-                  <Trash className="h-4 w-4" />
-                </Button>
-              </div>
-              <p className="text-sm text-gray-400 mb-2">
-                R$ {item.product.price.toFixed(2)}
-              </p>
-              <div className="flex items-center gap-2 mb-2">
-                <Button variant="outline" size="icon" onClick={() => updateQuantity(item.product.id, item.quantity - 1)} className="h-6 w-6 p-0 border-gray-700">
-                  <Minus className="h-3 w-3" />
-                </Button>
-                <span className="w-8 text-center">{item.quantity}</span>
-                <Button variant="outline" size="icon" onClick={() => updateQuantity(item.product.id, item.quantity + 1)} className="h-6 w-6 p-0 border-gray-700">
-                  <Plus className="h-3 w-3" />
-                </Button>
-                <span className="ml-auto font-bold">
-                  R$ {(item.product.price * item.quantity).toFixed(2)}
-                </span>
-              </div>
-              <Textarea placeholder="Observações (opcional)" value={item.notes} onChange={e => updateNotes(item.product.id, e.target.value)} className="h-20 text-sm bg-gray-800 border-gray-700" />
-            </div>
-          </div>)}
-      </div>
+  return (
+    <div className="space-y-6">
+      <h2 className="text-2xl font-bold mb-4">Seu Pedido</h2>
 
-      <div className="border-t border-gray-800 pt-4">
-        <div className="flex justify-between mb-2">
-          <span>Subtotal:</span>
-          <span>R$ {originalTotal.toFixed(2)}</span>
+      {cart.length === 0 ? (
+        <Card className="p-6 text-center bg-gray-800 border-gray-700 dark:bg-gray-800 dark:border-gray-700">
+          <p className="text-gray-400 dark:text-gray-400">Seu carrinho está vazio</p>
+        </Card>
+      ) : (
+        <div className="space-y-4">
+          {cart.map((item) => (
+            <Card key={item.product.id} className="bg-gray-800 border-gray-700 dark:bg-gray-800 dark:border-gray-700">
+              <div className="p-4">
+                <div className="flex gap-4">
+                  <div className="w-20 h-20 relative rounded-md overflow-hidden">
+                    <img
+                      src={item.product.image_url}
+                      alt={item.product.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+
+                  <div className="flex-1">
+                    <div className="flex justify-between">
+                      <h3 className="font-medium text-lg">{item.product.name}</h3>
+                      <button
+                        onClick={() => removeFromCart(item.product.id)}
+                        className="text-red-500 hover:text-red-400"
+                      >
+                        <Trash2 size={18} />
+                      </button>
+                    </div>
+
+                    <p className="text-gray-400 text-sm mb-2">
+                      {item.product.price.toFixed(2).replace(".", ",")} / unidade
+                    </p>
+
+                    <div className="flex items-center gap-2 mt-1">
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="h-7 w-7 p-0 border-gray-600 dark:border-gray-600"
+                        onClick={() =>
+                          updateQuantity(
+                            item.product.id,
+                            Math.max(1, item.quantity - 1)
+                          )
+                        }
+                      >
+                        <Minus size={14} />
+                      </Button>
+                      <span className="w-8 text-center">{item.quantity}</span>
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="h-7 w-7 p-0 border-gray-600 dark:border-gray-600"
+                        onClick={() =>
+                          updateQuantity(item.product.id, item.quantity + 1)
+                        }
+                      >
+                        <Plus size={14} />
+                      </Button>
+                      <span className="ml-auto font-medium">
+                        R$ {calculateItemPrice(item).toFixed(2).replace(".", ",")}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Exibir personalizações */}
+                {Array.isArray(item.customizations) && item.customizations.length > 0 && (
+                  <div className="mt-3 pl-24 space-y-1">
+                    <p className="text-sm text-gray-400">Personalizações:</p>
+                    {item.customizations.map((customization, index) => (
+                      <div key={index} className="flex justify-between text-sm">
+                        <span className={customization.type === 'adicionar' ? "text-green-400" : "text-red-400"}>
+                          {customization.type === 'adicionar' ? '+ ' : '- '}
+                          {customization.description}
+                        </span>
+                        {customization.price > 0 && (
+                          <span>
+                            +R$ {(customization.price * item.quantity).toFixed(2).replace('.', ',')}
+                          </span>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* Observações do item */}
+                <div className="mt-4">
+                  <Label
+                    htmlFor={`notes-${item.product.id}`}
+                    className="text-sm text-gray-300 dark:text-gray-300"
+                  >
+                    Observações
+                  </Label>
+                  <Textarea
+                    id={`notes-${item.product.id}`}
+                    placeholder="Ex: Sem cebola, mal passado, etc."
+                    value={item.notes}
+                    onChange={(e) =>
+                      updateNotes(item.product.id, e.target.value)
+                    }
+                    className="mt-1 bg-gray-700 border-gray-600 dark:bg-gray-700 dark:border-gray-600"
+                  />
+                </div>
+              </div>
+            </Card>
+          ))}
+
+          <div className="bg-gray-800 p-4 rounded-lg border border-gray-700 dark:bg-gray-800 dark:border-gray-700">
+            <div className="flex justify-between py-2">
+              <span>Subtotal</span>
+              <span>R$ {getTotalPrice().toFixed(2).replace(".", ",")}</span>
+            </div>
+            <div className="flex justify-between py-2 text-gray-400 dark:text-gray-400">
+              <span>Taxa de entrega</span>
+              <span>Grátis</span>
+            </div>
+            <div className="flex justify-between py-2 text-krecao-yellow">
+              <span>Desconto promocional (13%)</span>
+              <span>-R$ {(getTotalPrice() * 0.13).toFixed(2).replace(".", ",")}</span>
+            </div>
+            <Separator className="my-2 bg-gray-700 dark:bg-gray-700" />
+            <div className="flex justify-between py-2 font-bold text-lg">
+              <span>Total</span>
+              <span>
+                R$ {(getTotalPrice() * 0.87).toFixed(2).replace(".", ",")}
+              </span>
+            </div>
+          </div>
         </div>
-        <div className="flex justify-between mb-2 text-green-500">
-          <span>Desconto ({user ? '13%' : '10%'}):</span>
-          <span>- R$ {discountAmount.toFixed(2)}</span>
-        </div>
-        <div className="flex justify-between mb-2">
-          <span>Taxa de entrega:</span>
-          <span>Consulte</span>
-        </div>
-        <div className="flex justify-between font-bold text-xl text-krecao-yellow mt-4">
-          <span>Total com desconto:</span>
-          <span>R$ {discountedTotal.toFixed(2)}</span>
-        </div>
-      </div>
-    </div>;
+      )}
+    </div>
+  );
 };
+
 export default CartSummaryDetail;

@@ -8,11 +8,15 @@ import { Card } from "@/components/ui/card";
 import { toast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 import { ProfileCard } from "@/components/profile/ProfileCard";
+import { OrderHistory } from "@/components/profile/OrderHistory";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { UserIcon, PackageIcon } from "lucide-react";
 
 const UserProfile = () => {
   const { user, refreshSession } = useAuth();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [activeTab, setActiveTab] = useState<"profile" | "orders">("profile");
   const [profile, setProfile] = useState<{
     name: string | null;
     phone: string | null;
@@ -87,14 +91,37 @@ const UserProfile = () => {
       <div className="flex-grow container mx-auto px-4 py-20">
         <h1 className="text-3xl font-bold mb-8 text-center">Perfil do Usuário</h1>
         
-        <Card className="bg-gray-900 border-gray-800">
-          <ProfileCard 
-            user={user} 
-            profile={profile}
-            onProfileUpdate={refreshSession}
-            onAvatarUpdate={handleAvatarUpdate}
-          />
-        </Card>
+        <Tabs 
+          value={activeTab} 
+          onValueChange={(value) => setActiveTab(value as "profile" | "orders")}
+          className="w-full"
+        >
+          <TabsList className="grid w-full grid-cols-2 mb-8">
+            <TabsTrigger value="profile" className="flex items-center gap-2">
+              <UserIcon className="h-4 w-4" />
+              Perfil
+            </TabsTrigger>
+            <TabsTrigger value="orders" className="flex items-center gap-2">
+              <PackageIcon className="h-4 w-4" />
+              Pedidos
+            </TabsTrigger>
+          </TabsList>
+          
+          <TabsContent value="profile">
+            <Card className="bg-gray-900 border-gray-800">
+              <ProfileCard 
+                user={user} 
+                profile={profile}
+                onProfileUpdate={refreshSession}
+                onAvatarUpdate={handleAvatarUpdate}
+              />
+            </Card>
+          </TabsContent>
+          
+          <TabsContent value="orders">
+            <OrderHistory />
+          </TabsContent>
+        </Tabs>
       </div>
       
       <Footer />

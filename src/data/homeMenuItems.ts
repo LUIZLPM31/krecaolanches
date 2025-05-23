@@ -16,7 +16,7 @@ export const homeMenuItems: HomeMenuItem[] = [
     name: "Xis Salada",
     description: "Hamburguer Artesanal, Maionese, Tomate, Alface, Milho, Mostarda, Catchup, Queijo, Ovo",
     price: "R$ 31,00",
-    image: "",
+    image: "https://i.postimg.cc/hv7Chrcp/IMG-20250522-221835385-PORTRAIT-2.jpg",
     category: "Lanches",
     ifoodUrl: "https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?prato=5eb6dfbb-e4c3-461a-ad19-ee6e04be31c3"
   },
@@ -32,7 +32,7 @@ export const homeMenuItems: HomeMenuItem[] = [
     name: "Xis Calabresa",
     description: " Acompanha maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo.",
     price: "R$ 32,90",
-    image: "/lovable-uploads/e8979a79-1dfc-4ed6-ae36-59940dc39802.png",
+    image: "https://i.postimg.cc/gk5q7RyK/IMG-20250522-201140159-PORTRAIT-2.jpg",
     category: "Lanches",
     ifoodUrl: "https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?prato=5a73aae8-1a96-4b0f-948d-cca9c082fd5c"
   },

@@ -1,9 +1,7 @@
-
 import React from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
-
 interface Product {
   id: string;
   name: string;
@@ -12,24 +10,18 @@ interface Product {
   image_url: string;
   category: string;
 }
-
 interface ProductCardProps {
   product: Product;
   onAddToCart: (product: Product) => void;
 }
-
-const ProductCard = ({ product, onAddToCart }: ProductCardProps) => {
-  return (
-    <Card
-      className="bg-gray-900 border border-gray-800 overflow-hidden hover:border-krecao-yellow transition-all duration-300 group"
-    >
+const ProductCard = ({
+  product,
+  onAddToCart
+}: ProductCardProps) => {
+  return <Card className="bg-gray-900 border border-gray-800 overflow-hidden hover:border-krecao-yellow transition-all duration-300 group">
       <div className="flex flex-col md:flex-row h-full">
         <div className="md:w-1/3 relative">
-          <img
-            src={product.image_url}
-            alt={product.name}
-            className="w-full h-48 md:h-full object-cover group-hover:scale-105 transition-transform duration-300"
-          />
+          <img src={product.image_url} alt={product.name} className="w-full h-48 md:h-full object-cover group-hover:scale-105 transition-transform duration-300" />
           <div className="absolute top-0 left-0 bg-krecao-red px-2 py-1 text-xs font-bold">
             {product.category}
           </div>
@@ -46,16 +38,11 @@ const ProductCard = ({ product, onAddToCart }: ProductCardProps) => {
             </div>
             <p className="text-gray-400 mb-4">{product.description}</p>
           </div>
-          <Button
-            onClick={() => onAddToCart(product)}
-            className="bg-krecao-red hover:bg-krecao-red/90 group-hover:bg-krecao-yellow group-hover:text-black transition-all duration-300 transform hover:scale-105 rounded-full shadow-lg hover:shadow-krecao-yellow/30"
-          >
+          <Button onClick={() => onAddToCart(product)} className="bg-krecao-red hover:bg-krecao-red/90 group-hover:bg-krecao-yellow transition-all duration-300 transform hover:scale-105 rounded-full shadow-lg hover:shadow-krecao-yellow/30 text-slate-100">
             <Plus className="mr-2 h-4 w-4" /> Adicionar ao Carrinho
           </Button>
         </div>
       </div>
-    </Card>
-  );
+    </Card>;
 };
-
 export default ProductCard;

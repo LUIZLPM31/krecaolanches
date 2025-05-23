@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -110,4 +111,70 @@
   .menu-item-container {
     @apply flex flex-col items-center;
   }
+
+  /* Melhorias para dispositivos móveis */
+  @media (max-width: 640px) {
+    .menu-item-image {
+      max-width: 100%;
+      height: auto;
+      min-height: 200px;
+      max-height: 250px;
+    }
+
+    .container {
+      @apply px-4;
+    }
+
+    h1, .h1 {
+      @apply text-3xl;
+    }
+
+    h2, .h2 {
+      @apply text-2xl;
+    }
+  }
+
+  /* Transições para troca de tema */
+  .theme-transition {
+    @apply transition-all duration-200 ease-in-out;
+  }
+  
+  /* Animações para quando o tema muda */
+  html.transitioning * {
+    @apply transition-colors duration-200;
+  }
+}
+
+/* Estilos para transição de tema */
+html, body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Melhorias de acessibilidade para toque em dispositivos móveis */
+@media (max-width: 768px) {
+  button, a {
+    @apply min-h-11 min-w-11;
+  }
+  
+  .touch-target {
+    @apply min-h-11 min-w-11;
+  }
+}
+
+/* Ajuste para barras de rolagem estilizadas */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100 dark:bg-gray-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-400 dark:bg-gray-600 rounded;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-500 dark:bg-gray-500;
 }

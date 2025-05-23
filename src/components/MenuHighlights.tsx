@@ -1,4 +1,3 @@
-
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
@@ -39,7 +38,7 @@ export function MenuHighlights() {
                     <p className="text-gray-400 mb-4">{item.description}</p>
                   </div>
                   <div className="flex items-center justify-between mt-4">
-                    <Button onClick={() => window.open(item.ifoodUrl || 'https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOoqBB8HG_-HUE2-8McvH9CSGuQ2QuLsGlnnVCPGkDYm0kNCNCdZi', '_blank')} className="bg-krecao-red hover:bg-krecao-red/90 group-hover:bg-krecao-yellow group-hover:text-black transition-all duration-300 transform hover:scale-105 rounded-full shadow-lg hover:shadow-krecao-yellow/30 flex items-center gap-1.5">
+                    <Button onClick={() => window.open(item.ifoodUrl || 'https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?srsltid=AfmBOoqBB8HG_-HUE2-8McvH9CSGuQ2QuLsGlnnVCPGkDYm0kNCNCdZi', '_blank')} className="bg-krecao-red hover:bg-krecao-red/90 group-hover:bg-krecao-yellow transition-all duration-300 transform hover:scale-105 rounded-full shadow-lg hover:shadow-krecao-yellow/30 flex items-center gap-1.5 text-zinc-100">
                       <Plus className="h-4 w-4" /> Pedir <ExternalLink className="h-4 w-4 ml-1" />
                     </Button>
                   </div>

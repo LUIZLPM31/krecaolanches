@@ -1,4 +1,3 @@
-
 import { createContext, useState, useContext, useEffect } from "react";
 
 interface Product {
@@ -10,10 +9,17 @@ interface Product {
   category: string;
 }
 
+interface CustomizationItem {
+  type: 'adicionar' | 'remover';
+  description: string;
+  price: number;
+}
+
 export interface CartItem {
   product: Product;
   quantity: number;
   notes: string;
+  customizations: CustomizationItem[];
 }
 
 interface CartContextType {
@@ -22,32 +28,46 @@ interface CartContextType {
   removeFromCart: (productId: string) => void;
   updateQuantity: (productId: string, quantity: number) => void;
   updateNotes: (productId: string, notes: string) => void;
+  addCustomization: (productId: string, customization: CustomizationItem) => void;
+  removeCustomization: (productId: string, index: number) => void;
   clearCart: () => void;
   getTotalPrice: () => number;
   getTotalItems: () => number;
 }
 
+const CART_STORAGE_KEY = 'krecao_cart';
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
+  const [isInitialized, setIsInitialized] = useState(false);
 
   // Load cart from localStorage on initial render
   useEffect(() => {
-    const savedCart = localStorage.getItem("cart");
-    if (savedCart) {
-      try {
-        setCart(JSON.parse(savedCart));
-      } catch (e) {
-        console.error("Failed to parse cart from localStorage");
+    const loadCart = () => {
+      const savedCart = localStorage.getItem(CART_STORAGE_KEY);
+      if (savedCart) {
+        try {
+          setCart(JSON.parse(savedCart));
+        } catch (e) {
+          console.error("Failed to parse cart from localStorage:", e);
+          // Reset cart if there's an error
+          localStorage.removeItem(CART_STORAGE_KEY);
+        }
       }
-    }
+      setIsInitialized(true);
+    };
+    
+    loadCart();
   }, []);
 
   // Save cart to localStorage whenever it changes
+  // But only after initial load to prevent overwriting with empty cart
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }, [cart]);
+    if (isInitialized) {
+      localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+    }
+  }, [cart, isInitialized]);
 
   const addToCart = (product: Product) => {
     setCart((prevCart) => {
@@ -62,7 +82,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
             : item
         );
       } else {
-        return [...prevCart, { product, quantity: 1, notes: "" }];
+        return [...prevCart, { product, quantity: 1, notes: "", customizations: [] }];
       }
     });
   };
@@ -102,15 +122,49 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
       )
     );
   };
+  
+  const addCustomization = (productId: string, customization: CustomizationItem) => {
+    setCart((prevCart) =>
+      prevCart.map((item) =>
+        item.product.id === productId
+          ? { ...item, customizations: [...item.customizations, customization] }
+          : item
+      )
+    );
+  };
+  
+  const removeCustomization = (productId: string, index: number) => {
+    setCart((prevCart) =>
+      prevCart.map((item) =>
+        item.product.id === productId
+          ? { 
+              ...item, 
+              customizations: item.customizations.filter((_, i) => i !== index) 
+            }
+          : item
+      )
+    );
+  };
 
   const clearCart = () => {
     setCart([]);
-    localStorage.removeItem("cart");
+    localStorage.removeItem(CART_STORAGE_KEY);
   };
 
+  // Fix: Add safety check for item.customizations before calling reduce
   const getTotalPrice = () => {
     return cart.reduce(
-      (total, item) => total + item.product.price * item.quantity,
+      (total, item) => {
+        const itemBasePrice = item.product.price * item.quantity;
+        // Add safety check to ensure customizations exists and is an array before using reduce
+        const customizationsPrice = Array.isArray(item.customizations) 
+          ? item.customizations.reduce(
+              (custTotal, cust) => custTotal + cust.price * item.quantity, 
+              0
+            )
+          : 0;
+        return total + itemBasePrice + customizationsPrice;
+      },
       0
     );
   };
@@ -127,6 +181,8 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         removeFromCart,
         updateQuantity,
         updateNotes,
+        addCustomization,
+        removeCustomization,
         clearCart,
         getTotalPrice,
         getTotalItems,

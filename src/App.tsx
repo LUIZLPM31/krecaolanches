@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/hooks/useAuth";
 import { CartProvider } from "@/hooks/useCart";
+import { ThemeProvider } from "@/hooks/useTheme";
 import Index from "./pages/Index";
 import Menu from "./pages/Menu";
 import Checkout from "./pages/Checkout";
@@ -15,32 +16,37 @@ import Admin from "./pages/Admin";
 import UserProfile from "./pages/UserProfile";
 import NotFound from "./pages/NotFound";
 
+// Criar o queryClient fora do componente para evitar recriação
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <AuthProvider>
-        <CartProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/menu" element={<Menu />} />
-              <Route path="/checkout" element={<Checkout />} />
-              <Route path="/confirmation" element={<Confirmation />} />
-              <Route path="/auth" element={<Auth />} />
-              <Route path="/admin" element={<Admin />} />
-              <Route path="/profile" element={<UserProfile />} />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
-        </CartProvider>
-      </AuthProvider>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+const App = () => {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <ThemeProvider>
+          <AuthProvider>
+            <CartProvider>
+              <Toaster />
+              <Sonner />
+              <BrowserRouter>
+                <Routes>
+                  <Route path="/" element={<Index />} />
+                  <Route path="/menu" element={<Menu />} />
+                  <Route path="/checkout" element={<Checkout />} />
+                  <Route path="/confirmation" element={<Confirmation />} />
+                  <Route path="/auth" element={<Auth />} />
+                  <Route path="/admin" element={<Admin />} />
+                  <Route path="/profile" element={<UserProfile />} />
+                  {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </BrowserRouter>
+            </CartProvider>
+          </AuthProvider>
+        </ThemeProvider>
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;
