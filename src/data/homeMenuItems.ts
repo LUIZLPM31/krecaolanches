@@ -54,11 +54,19 @@ export const homeMenuItems: HomeMenuItem[] = [
   },
   {
     name: "Xis Acebolado",
-    description: "Hamburguer Artesanal, Cebola, Acompanha Maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo.",
+    description: "Hamburguer Artesanal, Cebola, Maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo.",
     price: "R$ 31,90",
     image: "https://i.postimg.cc/9FSLpMVq/201902262302-03008.jpg",
     category: "Lanches",
     ifoodUrl: "https://www.ifood.com.br/delivery/porto-alegre-rs/k-recao-lanches--grelhados-e-porcoes-cristal/6275accc-4883-446b-8359-d98bcc367615?prato=b6176dfe-814d-44ab-81be-6fd75c5ceefb"
+  },
+   {
+    name: "Xis Picanha",
+    description: " Acompanha Maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo.",
+    price: "R$ 31,90",
+    image: " https://i.postimg.cc/43C19gCD/IMG-20250523-212531398-PORTRAIT-2.jpg",
+    category: "Lanches",
+    ifoodUrl: ""
   },
    {
     name: "Xis Strogonoff",
@@ -102,7 +110,7 @@ export const homeMenuItems: HomeMenuItem[] = [
   },
   {
     name: "Stogonoff especial ",
-    description: "Acompanha maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo. Serve 2 pessoas (1100g).",
+    description: "Iscas De Carne, Creme De Leite, Molho, Champignon, maionese, tomate, alface, milho, mostarda, catchup, ovo e queijo. pessoas (1100g).",
     price: "R$ 68,00",
     image: "/lovable-uploads/f4ef723c-4098-49f8-a54c-ad4af8303f1f.png",
     category: "Lanches",

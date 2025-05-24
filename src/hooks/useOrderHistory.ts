@@ -103,6 +103,51 @@ export const useOrderHistory = () => {
     }
   };
 
+  const cancelOrder = async (orderId: string) => {
+    if (!user) return;
+    
+    try {
+      const { error } = await supabase
+        .from('orders')
+        .update({ status: 'cancelled' })
+        .eq('id', orderId)
+        .eq('user_id', user.id);
+
+      if (error) throw error;
+
+      // Atualizar o estado local
+      setOrders(prevOrders => 
+        prevOrders.map(order => 
+          order.id === orderId 
+            ? { ...order, status: 'cancelled' }
+            : order
+        )
+      );
+
+      toast({
+        title: "Pedido cancelado",
+        description: "Seu pedido foi cancelado com sucesso",
+      });
+    } catch (error: any) {
+      toast({
+        title: "Erro",
+        description: `Falha ao cancelar pedido: ${error.message}`,
+        variant: "destructive",
+      });
+    }
+  };
+
+  // Verificar se um pedido pode ser cancelado
+  const canCancelOrder = (order: Order): boolean => {
+    const orderDate = new Date(order.created_at);
+    const now = new Date();
+    const timeDiff = now.getTime() - orderDate.getTime();
+    const minutesDiff = timeDiff / (1000 * 60);
+    
+    // Pode cancelar se estiver pendente e foi feito há menos de 15 minutos
+    return order.status === 'pending' && minutesDiff <= 15;
+  };
+
   // Buscar pedidos quando o componente for montado
   useEffect(() => {
     if (user) {
@@ -113,6 +158,8 @@ export const useOrderHistory = () => {
   return {
     orders,
     loading,
-    fetchOrders
+    fetchOrders,
+    cancelOrder,
+    canCancelOrder
   };
 };

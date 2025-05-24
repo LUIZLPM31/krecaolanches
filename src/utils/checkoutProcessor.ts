@@ -16,6 +16,7 @@ interface ProcessPaymentAndOrderParams {
   changeAmount: string;
   sodaFlavor: string;
   isFirstPurchase: boolean;
+  cardType?: string;
   getTotalPrice: () => number;
   clearCart: () => void;
 }
@@ -33,6 +34,7 @@ export const processPaymentAndOrder = async ({
   getTotalPrice,
   sodaFlavor,
   isFirstPurchase,
+  cardType,
   clearCart
 }: ProcessPaymentAndOrderParams) => {
   // Save user profile if logged in
@@ -55,6 +57,7 @@ export const processPaymentAndOrder = async ({
     needChange: needChange && paymentMethod === "dinheiro",
     changeAmount: needChange ? changeAmount : "",
     sodaFlavor: user && isFirstPurchase ? sodaFlavor : undefined,
+    cardType: paymentMethod === "cartao" ? cardType : undefined,
     isLoggedIn: !!user,
     isFirstPurchase
   });

@@ -6,10 +6,21 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { useOrderHistory } from "@/hooks/useOrderHistory";
-import { CalendarIcon, PackageIcon, PackageCheck } from "lucide-react";
+import { CalendarIcon, PackageIcon, PackageCheck, Clock, X } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 export function OrderHistory() {
-  const { orders, loading, fetchOrders } = useOrderHistory();
+  const { orders, loading, fetchOrders, cancelOrder, canCancelOrder } = useOrderHistory();
 
   useEffect(() => {
     fetchOrders();
@@ -19,17 +30,17 @@ export function OrderHistory() {
   const formatStatus = (status: string) => {
     switch (status) {
       case 'pending':
-        return { label: 'Pendente', color: 'bg-yellow-500' };
+        return { label: 'Pendente', color: 'bg-yellow-500', icon: Clock };
       case 'processing':
-        return { label: 'Em preparo', color: 'bg-blue-500' };
+        return { label: 'Em preparo', color: 'bg-blue-500', icon: PackageIcon };
       case 'delivering':
-        return { label: 'Em entrega', color: 'bg-purple-500' };
+        return { label: 'Em entrega', color: 'bg-purple-500', icon: PackageIcon };
       case 'completed':
-        return { label: 'Entregue', color: 'bg-green-500' };
+        return { label: 'Entregue', color: 'bg-green-500', icon: PackageCheck };
       case 'cancelled':
-        return { label: 'Cancelado', color: 'bg-red-500' };
+        return { label: 'Cancelado', color: 'bg-red-500', icon: X };
       default:
-        return { label: 'Desconhecido', color: 'bg-gray-500' };
+        return { label: 'Desconhecido', color: 'bg-gray-500', icon: PackageIcon };
     }
   };
 
@@ -40,6 +51,22 @@ export function OrderHistory() {
       hour: '2-digit',
       minute: '2-digit'
     });
+  };
+
+  // Função para calcular tempo restante para cancelamento
+  const getCancelTimeRemaining = (orderDate: string): string => {
+    const orderTime = new Date(orderDate);
+    const now = new Date();
+    const timeDiff = now.getTime() - orderTime.getTime();
+    const minutesPassed = Math.floor(timeDiff / (1000 * 60));
+    const minutesRemaining = 15 - minutesPassed;
+    
+    if (minutesRemaining <= 0) return '';
+    return `${minutesRemaining} min restantes para cancelar`;
+  };
+
+  const handleCancelOrder = async (orderId: string) => {
+    await cancelOrder(orderId);
   };
 
   return (
@@ -60,7 +87,10 @@ export function OrderHistory() {
           <Accordion type="single" collapsible className="space-y-4">
             {orders.map((order) => {
               const status = formatStatus(order.status);
+              const StatusIcon = status.icon;
               const totalItems = order.items.reduce((sum, item) => sum + item.quantity, 0);
+              const canCancel = canCancelOrder(order);
+              const timeRemaining = getCancelTimeRemaining(order.created_at);
               
               return (
                 <AccordionItem
@@ -78,9 +108,16 @@ export function OrderHistory() {
                           <CalendarIcon className="h-3 w-3 mr-1" />
                           {formatDate(order.created_at)}
                         </div>
+                        {canCancel && timeRemaining && (
+                          <div className="flex items-center text-xs text-yellow-400 mt-1">
+                            <Clock className="h-3 w-3 mr-1" />
+                            {timeRemaining}
+                          </div>
+                        )}
                       </div>
                       <div className="flex items-center gap-2">
-                        <Badge className={`${status.color} text-white`}>
+                        <Badge className={`${status.color} text-white flex items-center gap-1`}>
+                          <StatusIcon className="h-3 w-3" />
                           {status.label}
                         </Badge>
                         <span className="text-sm">
@@ -169,10 +206,48 @@ export function OrderHistory() {
                         </span>
                       </div>
                       
-                      {order.status === 'pending' && (
-                        <Button variant="destructive" className="w-full">
-                          Cancelar Pedido
-                        </Button>
+                      {canCancel && (
+                        <AlertDialog>
+                          <AlertDialogTrigger asChild>
+                            <Button variant="destructive" className="w-full">
+                              <X className="h-4 w-4 mr-2" />
+                              Cancelar Pedido
+                            </Button>
+                          </AlertDialogTrigger>
+                          <AlertDialogContent className="bg-gray-900 border-gray-700">
+                            <AlertDialogHeader>
+                              <AlertDialogTitle className="text-white">
+                                Cancelar Pedido
+                              </AlertDialogTitle>
+                              <AlertDialogDescription className="text-gray-400">
+                                Tem certeza que deseja cancelar este pedido? Esta ação não pode ser desfeita.
+                                {timeRemaining && (
+                                  <span className="block mt-2 text-yellow-400">
+                                    Tempo restante para cancelamento: {timeRemaining}
+                                  </span>
+                                )}
+                              </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                              <AlertDialogCancel className="bg-gray-800 text-white border-gray-700">
+                                Manter Pedido
+                              </AlertDialogCancel>
+                              <AlertDialogAction 
+                                onClick={() => handleCancelOrder(order.id)}
+                                className="bg-red-600 hover:bg-red-700"
+                              >
+                                Sim, Cancelar
+                              </AlertDialogAction>
+                            </AlertDialogFooter>
+                          </AlertDialogContent>
+                        </AlertDialog>
+                      )}
+                      
+                      {order.status === 'pending' && !canCancel && (
+                        <div className="text-center text-sm text-gray-400 p-2 bg-gray-800 rounded">
+                          <Clock className="h-4 w-4 inline mr-1" />
+                          Tempo para cancelamento expirado (15 minutos)
+                        </div>
                       )}
                     </div>
                   </AccordionContent>

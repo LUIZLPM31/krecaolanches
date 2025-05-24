@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -33,6 +32,7 @@ const CheckoutContainer = () => {
   const [changeAmount, setChangeAmount] = useState("");
   const [sodaFlavor, setSodaFlavor] = useState("");
   const [isFirstPurchase, setIsFirstPurchase] = useState(false);
+  const [cardType, setCardType] = useState("");
   
   useEffect(() => {
     // Redirect to menu if cart is empty
@@ -112,6 +112,16 @@ const CheckoutContainer = () => {
         return;
       }
     }
+
+    // Validate card type when payment method is card
+    if (paymentMethod === "cartao" && !cardType) {
+      toast({
+        title: "Tipo de cartão obrigatório",
+        description: "Por favor, selecione o tipo de cartão",
+        variant: "destructive"
+      });
+      return;
+    }
     
     setLoading(true);
     try {
@@ -128,6 +138,7 @@ const CheckoutContainer = () => {
         getTotalPrice,
         sodaFlavor,
         isFirstPurchase,
+        cardType,
         clearCart
       });
 
@@ -185,6 +196,8 @@ const CheckoutContainer = () => {
             sodaFlavor={sodaFlavor}
             setSodaFlavor={setSodaFlavor}
             isFirstPurchase={isFirstPurchase}
+            cardType={cardType}
+            setCardType={setCardType}
           />
         </div>
       </div>

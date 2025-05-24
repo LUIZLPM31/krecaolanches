@@ -19,6 +19,7 @@ interface MenuCategoryTabsProps {
   setSelectedCategory: (category: string) => void;
   filteredProducts: Product[];
   onAddToCart: (product: Product) => void;
+  onViewDetails: (product: Product) => void;
   loading: boolean;
 }
 
@@ -28,6 +29,7 @@ const MenuCategoryTabs = ({
   setSelectedCategory,
   filteredProducts,
   onAddToCart,
+  onViewDetails,
   loading
 }: MenuCategoryTabsProps) => {
   // Get icon for category
@@ -74,7 +76,8 @@ const MenuCategoryTabs = ({
                 <ProductCard 
                   key={product.id} 
                   product={product} 
-                  onAddToCart={onAddToCart} 
+                  onAddToCart={onAddToCart}
+                  onViewDetails={onViewDetails}
                 />
               ))}
             </div>

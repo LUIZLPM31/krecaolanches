@@ -1,10 +1,10 @@
 
 import { Button } from "@/components/ui/button";
+import { Toggle } from "@/components/ui/toggle";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "@/hooks/useTheme";
-import { cn } from "@/lib/utils";
-import { Toggle } from "@/components/ui/toggle";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { cn } from "@/lib/utils";
 
 interface ThemeToggleProps {
   className?: string;
@@ -16,6 +16,15 @@ export function ThemeToggle({ className, variant = "button" }: ThemeToggleProps)
   const isMobile = useIsMobile();
   const isLight = theme === "light";
   
+  const icon = isLight ? (
+    <Sun className="h-5 w-5" />
+  ) : (
+    <Moon className="h-5 w-5" />
+  );
+  
+  const ariaLabel = `Mudar para modo ${isLight ? "escuro" : "claro"}`;
+  const iconColor = isLight ? "text-yellow-500" : "text-blue-400";
+  
   if (variant === "toggle" || isMobile) {
     return (
       <Toggle
@@ -23,16 +32,12 @@ export function ThemeToggle({ className, variant = "button" }: ThemeToggleProps)
         onPressedChange={toggleTheme}
         className={cn(
           "border-0 hover:bg-transparent hover:text-current",
-          isLight ? "text-yellow-500" : "text-blue-400",
+          iconColor,
           className
         )}
-        aria-label={`Mudar para modo ${isLight ? "escuro" : "claro"}`}
+        aria-label={ariaLabel}
       >
-        {isLight ? (
-          <Sun className="h-5 w-5" />
-        ) : (
-          <Moon className="h-5 w-5" />
-        )}
+        {icon}
       </Toggle>
     );
   }
@@ -43,13 +48,11 @@ export function ThemeToggle({ className, variant = "button" }: ThemeToggleProps)
       size="icon"
       onClick={toggleTheme}
       className={cn("rounded-full", className)}
-      aria-label={`Mudar para modo ${isLight ? "escuro" : "claro"}`}
+      aria-label={ariaLabel}
     >
-      {isLight ? (
-        <Sun className="h-5 w-5 text-yellow-500" />
-      ) : (
-        <Moon className="h-5 w-5 text-blue-400" />
-      )}
+      <span className={iconColor}>
+        {icon}
+      </span>
     </Button>
   );
 }

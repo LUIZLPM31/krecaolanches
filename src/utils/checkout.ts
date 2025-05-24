@@ -12,6 +12,7 @@ interface OrderData {
   needChange?: boolean;
   changeAmount?: string;
   sodaFlavor?: string;
+  cardType?: string;
   isLoggedIn?: boolean;
   isFirstPurchase?: boolean;
 }
@@ -35,6 +36,7 @@ export const processWhatsAppOrder = (orderData: OrderData): void => {
     needChange,
     changeAmount,
     sodaFlavor,
+    cardType,
     isLoggedIn = false,
     isFirstPurchase = false
   } = orderData;
@@ -53,7 +55,13 @@ export const processWhatsAppOrder = (orderData: OrderData): void => {
   message += `*Cliente:* ${customerName}\n`;
   message += `*Telefone:* ${customerPhone}\n`;
   message += `*Endereço:* ${deliveryAddress}\n`;
-  message += `*Forma de Pagamento:* ${paymentMethod === 'dinheiro' ? 'Dinheiro' : (paymentMethod === 'cartao' ? 'Cartão' : 'PIX')}\n`;
+  
+  // Format payment method with card type if applicable
+  let paymentText = paymentMethod === 'dinheiro' ? 'Dinheiro' : (paymentMethod === 'cartao' ? 'Cartão' : 'PIX');
+  if (paymentMethod === 'cartao' && cardType) {
+    paymentText += ` (${cardType})`;
+  }
+  message += `*Forma de Pagamento:* ${paymentText}\n`;
   
   // Add change information if needed
   if (paymentMethod === 'dinheiro' && needChange && changeAmount) {

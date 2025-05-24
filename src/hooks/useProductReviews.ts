@@ -1,141 +1,163 @@
 
-import { useState } from "react";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
-import { useAuth } from "./useAuth";
+import { useState, useEffect } from 'react';
+import { supabase } from '@/integrations/supabase/client';
+import { useAuth } from './useAuth';
+import { toast } from '@/hooks/use-toast';
 
-interface Review {
+export interface ProductReview {
   id: string;
-  user_id: string;
   product_id: string;
+  user_id: string;
   rating: number;
   comment: string;
-  helpful_count: number;
-  unhelpful_count: number;
-  verified_purchase: boolean;
   created_at: string;
   user_name: string;
-  avatar_url: string;
+  avatar_url?: string;
+  helpful_count?: number;
+  unhelpful_count?: number;
+  verified_purchase?: boolean;
 }
 
-interface AddReviewParams {
-  rating: number;
-  comment: string;
-}
-
-export const useProductReviews = (productId: string) => {
+export function useProductReviews(productId: string) {
+  const [reviews, setReviews] = useState<ProductReview[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
   const { user } = useAuth();
-  const queryClient = useQueryClient();
 
-  // Query para buscar avaliações
-  const { data, isLoading, isError, refetch } = useQuery({
-    queryKey: ["reviews", productId],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from("product_reviews")
-        .select(`
-          *,
-          profiles:user_id(name, avatar_url)
-        `)
-        .eq("product_id", productId)
-        .order("created_at", { ascending: false });
+  const fetchReviews = async () => {
+    try {
+      // First get the reviews
+      const { data: reviewsData, error: reviewsError } = await supabase
+        .from('product_reviews')
+        .select('*')
+        .eq('product_id', productId)
+        .order('created_at', { ascending: false });
 
-      if (error) throw new Error(error.message);
+      if (reviewsError) {
+        console.error('Error fetching reviews:', reviewsError);
+        return;
+      }
 
-      const formattedData = data.map((review) => ({
-        ...review,
-        user_name: review.profiles?.name || "Usuário Anônimo",
-        avatar_url: review.profiles?.avatar_url || "",
-      }));
+      if (!reviewsData || reviewsData.length === 0) {
+        setReviews([]);
+        return;
+      }
 
-      return formattedData;
-    },
-  });
+      // Get unique user IDs from reviews
+      const userIds = [...new Set(reviewsData.map(review => review.user_id))];
 
-  // Mutation para adicionar uma avaliação
-  const addReviewMutation = useMutation({
-    mutationFn: async (reviewData: AddReviewParams) => {
-      if (!user) throw new Error("Usuário não autenticado");
+      // Fetch profiles for these users
+      const { data: profilesData, error: profilesError } = await supabase
+        .from('profiles')
+        .select('id, name, avatar_url')
+        .in('id', userIds);
 
-      const newReview = {
-        user_id: user.id,
-        product_id: productId,
-        rating: reviewData.rating,
-        comment: reviewData.comment,
-        helpful_count: 0,
-        unhelpful_count: 0,
-        verified_purchase: false,
-      };
+      if (profilesError) {
+        console.error('Error fetching profiles:', profilesError);
+      }
 
-      const { data, error } = await supabase
-        .from("product_reviews")
-        .insert(newReview)
-        .select()
-        .single();
+      // Create a map of user profiles for quick lookup
+      const profilesMap = new Map();
+      if (profilesData) {
+        profilesData.forEach(profile => {
+          profilesMap.set(profile.id, profile);
+        });
+      }
 
-      if (error) throw new Error(error.message);
-      return data;
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["reviews", productId] });
-    },
-  });
-
-  // Mutation para marcar avaliação como útil
-  const addHelpfulMutation = useMutation({
-    mutationFn: async (reviewId: string) => {
-      const { data, error } = await supabase.rpc("increment_review_helpful", {
-        review_id: reviewId,
+      // Combine reviews with profile data
+      const formattedReviews: ProductReview[] = reviewsData.map(review => {
+        const profile = profilesMap.get(review.user_id);
+        return {
+          id: review.id,
+          product_id: review.product_id,
+          user_id: review.user_id,
+          rating: review.rating,
+          comment: review.comment || '',
+          created_at: review.created_at,
+          user_name: profile?.name || 'Usuário',
+          avatar_url: profile?.avatar_url || undefined,
+          helpful_count: 0,
+          unhelpful_count: 0,
+          verified_purchase: false
+        };
       });
 
-      if (error) throw new Error(error.message);
-      return data;
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["reviews", productId] });
-    },
-  });
+      setReviews(formattedReviews);
+    } catch (error) {
+      console.error('Error in fetchReviews:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  // Mutation para marcar avaliação como não útil
-  const addUnhelpfulMutation = useMutation({
-    mutationFn: async (reviewId: string) => {
-      const { data, error } = await supabase.rpc("increment_review_unhelpful", {
-        review_id: reviewId,
+  useEffect(() => {
+    if (productId) {
+      fetchReviews();
+    }
+  }, [productId]);
+
+  const submitReview = async (rating: number, comment: string) => {
+    if (!user) {
+      toast({
+        title: "Login necessário",
+        description: "Você precisa estar logado para avaliar produtos",
+        variant: "destructive"
       });
+      return;
+    }
 
-      if (error) throw new Error(error.message);
-      return data;
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["reviews", productId] });
-    },
-  });
-
-  // Mutation para excluir uma avaliação
-  const deleteReviewMutation = useMutation({
-    mutationFn: async (reviewId: string) => {
+    setSubmitting(true);
+    try {
       const { error } = await supabase
-        .from("product_reviews")
-        .delete()
-        .eq("id", reviewId)
-        .eq("user_id", user?.id || "");
+        .from('product_reviews')
+        .insert({
+          product_id: productId,
+          user_id: user.id,
+          rating,
+          comment
+        });
 
-      if (error) throw new Error(error.message);
-      return reviewId;
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["reviews", productId] });
-    },
-  });
+      if (error) {
+        console.error('Error submitting review:', error);
+        toast({
+          title: "Erro ao enviar avaliação",
+          description: "Tente novamente mais tarde",
+          variant: "destructive"
+        });
+        return;
+      }
+
+      toast({
+        title: "Avaliação enviada!",
+        description: "Obrigado por sua avaliação"
+      });
+
+      // Refresh reviews
+      await fetchReviews();
+    } catch (error) {
+      console.error('Error in submitReview:', error);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const markHelpful = async (reviewId: string) => {
+    // Placeholder implementation - would need helpfulness tracking table
+    console.log('Mark helpful:', reviewId);
+  };
+
+  const markUnhelpful = async (reviewId: string) => {
+    // Placeholder implementation - would need helpfulness tracking table
+    console.log('Mark unhelpful:', reviewId);
+  };
 
   return {
-    reviews: data || [],
-    isLoading,
-    isError,
-    refetch,
-    addReview: addReviewMutation.mutate,
-    addReviewHelpful: addHelpfulMutation.mutate,
-    addReviewUnhelpful: addUnhelpfulMutation.mutate,
-    deleteReview: deleteReviewMutation.mutate,
+    reviews,
+    loading,
+    submitting,
+    submitReview,
+    markHelpful,
+    markUnhelpful,
+    refreshReviews: fetchReviews
   };
-};
+}

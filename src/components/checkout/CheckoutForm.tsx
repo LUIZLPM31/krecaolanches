@@ -27,6 +27,8 @@ interface CheckoutFormProps {
   sodaFlavor?: string;
   setSodaFlavor?: (flavor: string) => void;
   isFirstPurchase?: boolean;
+  cardType?: string;
+  setCardType?: (type: string) => void;
 }
 
 const CheckoutForm = ({
@@ -46,7 +48,9 @@ const CheckoutForm = ({
   setChangeAmount,
   sodaFlavor,
   setSodaFlavor,
-  isFirstPurchase = false
+  isFirstPurchase = false,
+  cardType,
+  setCardType
 }: CheckoutFormProps) => {
   const { user } = useAuth();
   
@@ -59,6 +63,12 @@ const CheckoutForm = ({
     "Fanta Uva",
     "Pepsi",
     "Outro (especificar nos detalhes do pedido)"
+  ];
+
+  // Card type options
+  const cardTypeOptions = [
+    "Crédito",
+    "Débito"
   ];
 
   return (
@@ -145,6 +155,25 @@ const CheckoutForm = ({
             </div>
           </RadioGroup>
         </div>
+
+        {/* Card type selection */}
+        {paymentMethod === 'cartao' && setCardType && (
+          <div className="space-y-2">
+            <Label htmlFor="card-type">Tipo de Cartão</Label>
+            <Select value={cardType} onValueChange={setCardType}>
+              <SelectTrigger className="bg-gray-800 border-gray-700">
+                <SelectValue placeholder="Selecione o tipo de cartão" />
+              </SelectTrigger>
+              <SelectContent>
+                {cardTypeOptions.map((type) => (
+                  <SelectItem key={type} value={type}>
+                    {type}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+        )}
         
         {/* Change section */}
         {paymentMethod === 'dinheiro' && (

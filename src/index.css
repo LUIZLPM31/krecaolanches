@@ -36,19 +36,12 @@
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
@@ -103,7 +96,7 @@
 
 @layer components {
   .menu-item-image {
-    @apply w-full aspect-square object-cover rounded-lg;
+    @apply w-full aspect-square object-cover rounded-lg transition-transform duration-300 hover:scale-105;
     max-width: 300px;
     height: 300px;
   }
@@ -143,6 +136,157 @@
   html.transitioning * {
     @apply transition-colors duration-200;
   }
+
+  /* Animações de entrada suaves */
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out forwards;
+  }
+
+  .animate-slide-down {
+    animation: slideDown 0.5s ease-out forwards;
+  }
+
+  .animate-slide-left {
+    animation: slideLeft 0.5s ease-out forwards;
+  }
+
+  .animate-slide-right {
+    animation: slideRight 0.5s ease-out forwards;
+  }
+
+  .animate-bounce-in {
+    animation: bounceIn 0.6s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.3s ease-out forwards;
+  }
+
+  .animate-scale-out {
+    animation: scaleOut 0.3s ease-in forwards;
+  }
+
+  .animate-rotate-in {
+    animation: rotateIn 0.5s ease-out forwards;
+  }
+
+  .animate-shake {
+    animation: shake 0.5s ease-in-out;
+  }
+
+  .animate-pulse-once {
+    animation: pulseOnce 1s ease-in-out;
+  }
+
+  /* Efeitos de hover melhorados */
+  .hover-lift {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  .hover-lift:hover {
+    @apply transform -translate-y-2 shadow-lg;
+  }
+
+  .hover-glow {
+    @apply transition-all duration-300;
+  }
+
+  .hover-glow:hover {
+    @apply shadow-lg;
+    box-shadow: 0 0 20px rgba(253, 212, 15, 0.3);
+  }
+
+  .hover-scale {
+    @apply transition-transform duration-200 ease-out;
+  }
+
+  .hover-scale:hover {
+    @apply transform scale-105;
+  }
+
+  .hover-rotate {
+    @apply transition-transform duration-300 ease-out;
+  }
+
+  .hover-rotate:hover {
+    @apply transform rotate-3;
+  }
+
+  /* Efeitos de botão melhorados */
+  .btn-bounce {
+    @apply transition-all duration-150 ease-out;
+  }
+
+  .btn-bounce:active {
+    @apply transform scale-95;
+  }
+
+  .btn-ripple {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-ripple:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transition: width 0.6s, height 0.6s;
+    transform: translate(-50%, -50%);
+  }
+
+  .btn-ripple:active:before {
+    width: 300px;
+    height: 300px;
+  }
+
+  /* Animações de loading melhoradas */
+  .loading-dots {
+    display: inline-flex;
+    gap: 4px;
+  }
+
+  .loading-dots span {
+    width: 8px;
+    height: 8px;
+    background: currentColor;
+    border-radius: 50%;
+    animation: loadingDots 1.4s infinite ease-in-out;
+  }
+
+  .loading-dots span:nth-child(1) {
+    animation-delay: -0.32s;
+  }
+
+  .loading-dots span:nth-child(2) {
+    animation-delay: -0.16s;
+  }
+
+  .loading-spinner {
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-left: 2px solid currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  /* Efeitos de texto melhorados */
+  .text-gradient {
+    background: linear-gradient(45deg, #FDD40F, #EB0101);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-typing {
+    border-right: 2px solid;
+    animation: typing 3.5s steps(40, end), blink 0.75s step-end infinite;
+    white-space: nowrap;
+    overflow: hidden;
+  }
 }
 
 /* Estilos para transição de tema */
@@ -173,8 +317,201 @@ html, body {
 
 ::-webkit-scrollbar-thumb {
   @apply bg-gray-400 dark:bg-gray-600 rounded;
+  transition: background-color 0.2s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-gray-500 dark:bg-gray-500;
+}
+
+/* Definição das animações */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideLeft {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideRight {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes scaleOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}
+
+@keyframes rotateIn {
+  from {
+    opacity: 0;
+    transform: rotate(-180deg) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-5px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(5px);
+  }
+}
+
+@keyframes pulseOnce {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes loadingDots {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink {
+  from, to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: currentColor;
+  }
+}
+
+/* Animações para elementos interativos */
+.interactive-element {
+  @apply transition-all duration-200 ease-out;
+}
+
+.interactive-element:hover {
+  @apply transform -translate-y-1;
+}
+
+.interactive-element:active {
+  @apply transform translate-y-0 scale-95;
+}
+
+/* Melhorias para cards */
+.card-hover {
+  @apply transition-all duration-300 ease-out;
+}
+
+.card-hover:hover {
+  @apply transform -translate-y-1 shadow-xl;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Efeitos de foco melhorados */
+.focus-ring {
+  @apply transition-all duration-200;
+}
+
+.focus-ring:focus {
+  @apply outline-none ring-2 ring-krecao-yellow ring-opacity-50;
+}
+
+.focus-ring:focus-visible {
+  @apply outline-none ring-2 ring-krecao-yellow ring-opacity-50;
 }

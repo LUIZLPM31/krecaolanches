@@ -10,6 +10,7 @@ import { ArrowLeft, Percent } from "lucide-react";
 import SearchBar from "@/components/menu/SearchBar";
 import MenuCategoryTabs from "@/components/menu/MenuCategoryTabs";
 import CartSummary from "@/components/menu/CartSummary";
+import { ProductDetail } from "@/components/menu/ProductDetail";
 import { Badge } from "@/components/ui/badge";
 
 const Menu = () => {
@@ -22,6 +23,8 @@ const Menu = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("Todos");
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearchVisible, setIsSearchVisible] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [isProductDetailOpen, setIsProductDetailOpen] = useState(false);
 
   useEffect(() => {
     loadProducts();
@@ -85,6 +88,11 @@ const Menu = () => {
     });
   };
 
+  const handleViewDetails = (product: Product) => {
+    setSelectedProduct(product);
+    setIsProductDetailOpen(true);
+  };
+
   const proceedToCheckout = () => {
     if (cart.length === 0) {
       toast({
@@ -127,7 +135,8 @@ const Menu = () => {
   // Discount information
   const discountPercentage = user ? 13 : 10;
 
-  return <div className="min-h-screen bg-black text-white py-16">
+  return (
+    <div className="min-h-screen bg-black text-white py-16">
       <div className="container mx-auto px-4">
         <Button 
           variant="ghost" 
@@ -164,12 +173,36 @@ const Menu = () => {
           
           <SearchBar isSearchVisible={isSearchVisible} searchQuery={searchQuery} setSearchQuery={setSearchQuery} setIsSearchVisible={setIsSearchVisible} />
 
-          <MenuCategoryTabs categories={categories} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} filteredProducts={filteredProducts} onAddToCart={handleAddToCart} loading={loading} />
+          <MenuCategoryTabs 
+            categories={categories} 
+            selectedCategory={selectedCategory} 
+            setSelectedCategory={setSelectedCategory} 
+            filteredProducts={filteredProducts} 
+            onAddToCart={handleAddToCart} 
+            onViewDetails={handleViewDetails}
+            loading={loading} 
+          />
         </div>
       </div>
 
-      {cart.length > 0 && <CartSummary totalItems={getTotalItems()} totalPrice={getTotalPrice()} onCheckout={proceedToCheckout} />}
-    </div>;
+      {cart.length > 0 && (
+        <CartSummary 
+          totalItems={getTotalItems()} 
+          totalPrice={getTotalPrice()} 
+          onCheckout={proceedToCheckout} 
+        />
+      )}
+
+      <ProductDetail
+        product={selectedProduct}
+        isOpen={isProductDetailOpen}
+        onClose={() => {
+          setIsProductDetailOpen(false);
+          setSelectedProduct(null);
+        }}
+      />
+    </div>
+  );
 };
 
 export default Menu;
